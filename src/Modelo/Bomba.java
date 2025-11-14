@@ -8,7 +8,7 @@ import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.ControleDeJogo;
 import Controler.Tela;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
@@ -22,23 +22,24 @@ import javax.swing.JPanel;
  */
 public class Bomba extends Personagem implements Serializable {
 
-  private int contador = 0;
-    private int tamanhoBomba;
+    private int contador = 0;
+    private int tempoDetonacao = 10;
     private Hero bomberman;
+    private int tamanhoBomba;
+    private char codigo;
     
-    public Bomba(String sNomeImagePNG, int linha, int coluna, Hero bomberman,int tipo){
+    public Bomba(String sNomeImagePNG, int linha, int coluna, Hero bomberman){
         super(sNomeImagePNG, linha, coluna);
+        this.bTransponivel = true;
+        this.bMortal = false;
         this.bomberman = bomberman;
         this.tamanhoBomba = bomberman.getTamanhoBomba();
-        if(tipo==0){
-            this.vida = 3;
-        }
     }
 
     @Override
     public void autoDesenho() {
         super.autoDesenho();
-        if(contador == 10){
+        if(contador == tempoDetonacao){
             estouraBomba();
         }
         contador++;
@@ -51,45 +52,63 @@ public class Bomba extends Personagem implements Serializable {
     }
 
     private boolean validaPosicao(int linhaOffset, int colunaOffset){
-        
-       
-        // Desenho.acessoATelaDoJogo().getFaseAtual().getMapaFase().getMapa().get((pPosicao.getLinha()+linhaOffset)*13+pPosicao.getColuna()+colunaOffset) instanceof BlocoVazio )
-        return(Desenho.acessoATelaDoJogo().ehPosicaoValida(new Posicao(pPosicao.getLinha() + linhaOffset, pPosicao.getColuna() + colunaOffset)));
-        
-        //return false;
+        if ((pPosicao.getLinha()+linhaOffset) < 0 || (pPosicao.getLinha()+linhaOffset) >= Auxiliar.Consts.MUNDO_ALTURA)return false;
+        if ((pPosicao.getColuna()+colunaOffset) < 0 || (pPosicao.getColuna()+colunaOffset) >= Auxiliar.Consts.MUNDO_LARGURA)return false;
+        if((143 > (pPosicao.getLinha() + linhaOffset)*13 + pPosicao.getColuna() + colunaOffset && (pPosicao.getLinha() + linhaOffset)*13 + pPosicao.getColuna() + colunaOffset >= 0)){
+        if(Desenho.acessoATelaDoJogo().getFaseAtual().getMapaFase().getMapa().get((pPosicao.getLinha() + linhaOffset)*13 + pPosicao.getColuna() + colunaOffset) instanceof BlocoMetal){
+            return false;
+            }
+        }
+        return true;
     }
 
     public void criaExplosoes(){
         int danoBomba = this.vida;
-        int flagcima=1;
-        int flagbaixo=1;
-        int flagesquerda=1;
-        int flagdireita=1;
-        Explosao meio = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna(),danoBomba);
+        boolean flagCima=true;
+        boolean flagBaixo=true;
+        boolean flagEsquerda=true;
+        boolean flagDireita=true;
+        
+        Explosao meio = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna(), danoBomba);
         //Desenho.acessoATelaDoJogo().addPersonagem(meio);
         Desenho.acessoATelaDoJogo().adicionaModelo(meio);
         for(int i=0; i<tamanhoBomba; i++){
             //Pra cima
-            if(validaPosicao(-1-i, 0)){
-                Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
-                Desenho.acessoATelaDoJogo().adicionaModelo(cima);
+            if(flagCima){
+   
+                if(validaPosicao(-1-i, 0)){
+                    System.out.println("valido acima");
+                    Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
+                    Desenho.acessoATelaDoJogo().adicionaModelo(cima);
+                }
+                else flagCima = false;
             }
             //Pra direita
-            if(validaPosicao(0, 1+i)){
-                Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
-                Desenho.acessoATelaDoJogo().adicionaModelo(direita);
+            if(flagDireita){
+                if(validaPosicao(0, 1+i)){
+                    Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
+                    Desenho.acessoATelaDoJogo().adicionaModelo(direita);
+                }
+                else flagDireita = false;
             }
             //Pra baixo
-            if(validaPosicao(1+i, 0)){
-                Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
-                Desenho.acessoATelaDoJogo().adicionaModelo(baixo);
+            if(flagBaixo){
+                if(validaPosicao(1+i, 0)){
+                    Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
+                    Desenho.acessoATelaDoJogo().adicionaModelo(baixo);
+                }
+                else flagBaixo = false;
             }
             //Pra esquerda
-            if(validaPosicao(0, -1-i)){
-                Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
-                Desenho.acessoATelaDoJogo().adicionaModelo(esquerda);
+            if(flagEsquerda){
+                if(validaPosicao(0, -1-i)){
+                    Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
+                    Desenho.acessoATelaDoJogo().adicionaModelo(esquerda);
+                }
+                else flagEsquerda = false;
             }
         }
+        
     }
 }
 

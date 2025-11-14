@@ -1,4 +1,4 @@
-package auxiliar;
+package Auxiliar;
 
 import java.io.Serializable;
 
@@ -27,12 +27,12 @@ public class Posicao implements Serializable {
         return true;
     }
 
-    public int getLinha() {
-        return linha;
-    }
-
     public boolean volta() {
         return this.setPosicao(linhaAnterior, colunaAnterior);
+    }
+
+    public int getLinha() {
+        return linha;
     }
 
     public int getColuna() {

@@ -20,12 +20,12 @@ import Controler.ControleDeJogo;
 import Modelo.BichinhoVaiVemVertical;
 import Modelo.Esfera;
 import Modelo.ZigueZague;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.io.Serializable;
  
 public class Fase implements Serializable{
    
-    private ArrayList<Model> fase;
+    private ArrayList<Personagem> fase;
     private Hero hero;
     private Mapa mapaFase;
     public Fase() {
@@ -33,12 +33,12 @@ public class Fase implements Serializable{
         
     }
     
-    public ArrayList<Model> getPersonagens() {
+    public ArrayList<Personagem> getPersonagens() {
         return fase;
     }
        
-    public void addModelo(Model umModelo) {
-        fase.add(umModelo);
+    public void addPersonagem(Personagem umPersonagem) {
+        fase.add(umPersonagem);
     }
 
     public void removerPersonagem(Personagem umPersonagem) {
@@ -73,31 +73,29 @@ public class Fase implements Serializable{
                          +"0101010101010");
         
         hero = new Hero("heroDireita.png", 0, 7);
-        this.addModelo(hero);
+        this.addPersonagem(hero);
         //this.atualizaCamera();
 
         ZigueZague zz = new ZigueZague("bomba.png", 5, 6);
-        this.addModelo(zz);
+        this.addPersonagem(zz);
 
         BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("roboPink.png", 3, 4);
-        this.addModelo(bBichinhoH);
+        this.addPersonagem(bBichinhoH);
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("roboPink.png", 6,6);
-        this.addModelo(bBichinhoH2);
+        this.addPersonagem(bBichinhoH2);
 
         BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Caveira.png", 10,10);
-        this.addModelo(bVv);
+        this.addPersonagem(bVv);
 
         Caveira bV = new Caveira("caveira.png", 9, 0);
-        this.addModelo(bV);
+        this.addPersonagem(bV);
 
         Chaser chase = new Chaser("chaser.png", 9, 12);
-        this.addModelo(chase);
+        this.addPersonagem(chase);
 
         Esfera es = new Esfera("esfera.png", 10, 12);
-        this.addModelo(es);
-   
-        
+        this.addPersonagem(es);     
     }
 
 

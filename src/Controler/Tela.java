@@ -15,7 +15,7 @@ import Auxiliar.Desenho;
 import Modelo.BichinhoVaiVemVertical;
 import Modelo.Esfera;
 import Modelo.ZigueZague;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import Auxiliar.Fase;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -65,11 +65,6 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         faseAtual = new Fase();
         faseAtual.fase1();
         hero = faseAtual.getHero();
-       
-   
-    
-   
-    
     }
 
     public int getCameraLinha() {
@@ -85,7 +80,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     }
 
     public void adicionaModelo(Personagem umPersonagem) {
-        faseAtual.addModelo(umPersonagem);
+        faseAtual.addPersonagem(umPersonagem);
     }
 
     public void removePersonagem(Personagem umPersonagem) {
@@ -123,7 +118,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         }*/
         if (!this.faseAtual.getPersonagens().isEmpty()) {
             this.cj.desenhaTudo(faseAtual);
-            this.cj.processaTudo(faseAtual.getPersonagens());
+            this.cj.processaTudo(faseAtual);
         }
 
         g.dispose();
@@ -134,8 +129,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     }
 
     private void atualizaCamera() {
-        int linha = hero.getPosicao().getLinha();
-        int coluna = hero.getPosicao().getColuna();
+        int linha = hero.getpPosicao().getLinha();
+        int coluna = hero.getpPosicao().getColuna();
 
         cameraLinha = Math.max(0, Math.min(linha - Consts.RES / 2, Consts.MUNDO_ALTURA - Consts.RES));
         cameraColuna = Math.max(0, Math.min(coluna - Consts.RES / 2, Consts.MUNDO_LARGURA - Consts.RES));
@@ -205,7 +200,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
 
             this.atualizaCamera();
-            this.setTitle("-> Cell: " + (hero.getPosicao().getLinha()) + ", " + (hero.getPosicao().getColuna()));
+            this.setTitle("-> Cell: " + (hero.getpPosicao().getLinha()) + ", " + (hero.getpPosicao().getColuna()));
 
             //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
         } catch (Exception ee) {
@@ -224,7 +219,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.setTitle("X: " + x + ", Y: " + y
                 + " -> Cell: " + (y / Consts.CELL_SIDE) + ", " + (x / Consts.CELL_SIDE));
 
-        this.hero.getPosicao().setPosicao(y / Consts.CELL_SIDE, x / Consts.CELL_SIDE);
+        this.hero.getpPosicao().setPosicao(y / Consts.CELL_SIDE, x / Consts.CELL_SIDE);
 
         repaint();
     }
@@ -285,7 +280,4 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     public Fase getFaseAtual() {
         return faseAtual;
     }
-    
-    
-
 }

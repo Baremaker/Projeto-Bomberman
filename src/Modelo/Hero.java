@@ -2,6 +2,8 @@ package Modelo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Auxiliar.Fase;
+import Auxiliar.Mapa;
 import Controler.ControleDeJogo;
 import Controler.Tela;
 import java.awt.Graphics;
@@ -12,62 +14,52 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Hero extends Personagem implements Serializable{
-    private int numeroBombas = 3;
-    private int tamanhoBomba = 2;
+//Clase heroi: estende a classe mãe personagem e outra classe mãe Model
+//Possui os atributos:
+//numeroBombas, tamanhoBomba, tipoBomba, velocidade
+public class Hero extends Personagem implements Serializable {
+    private int numeroBombas = 1;
+    private int tamanhoBomba = 1;
+    private int tipoBomba = 1;
+    private int velocidade;
     
     public Hero(String sNomeImagePNG, int linha, int coluna) {
-        super(sNomeImagePNG,linha, coluna);
-        vida = 1000000000;
+        super(sNomeImagePNG, linha, coluna);
+        vida = 100;
     }
-
-    public void voltaAUltimaPosicao(){
-        this.pPosicao.volta();
-    }
-    
     
     public boolean setPosicao(int linha, int coluna){
         if(this.pPosicao.setPosicao(linha, coluna)){
-            if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
-                this.voltaAUltimaPosicao();
-            }
-            return true;
+            return validaPosicao();
         }
         return false;       
     }
 
-    /*TO-DO: este metodo pode ser interessante a todos os personagens que se movem*/
-    private boolean validaPosicao(){
-        if (!Desenho.acessoATelaDoJogo().ehPosicaoValida(this.getPosicao())) {
-            this.voltaAUltimaPosicao();
-            return false;
+    //Essa função valida as posições do heroi considerando o mapa e os personagens
+    public boolean validaPosicao(){
+        if(super.validaPosicao()){
+            Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+            Mapa mapa = fase.getMapaFase();
+            for(Personagem p : fase.getPersonagens()){
+                if(this.pPosicao.igual(p.getpPosicao())){
+                    if(!p.isbTransponivel()){
+                        voltaAUltimaPosicao();
+                        return false;
+                    }
+                }
+            }
+            for(Blocos b : mapa.getMapa()){
+                if(this.pPosicao.igual(b.getpPosicao())){
+                    if(!b.isbTransponivel()){
+                        voltaAUltimaPosicao();
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
-        return true;       
-    }
-    
-    public boolean moveUp() {
-        if(super.moveUp())
-            return validaPosicao();
         return false;
     }
-
-    public boolean moveDown() {
-        if(super.moveDown())
-            return validaPosicao();
-        return false;
-    }
-
-    public boolean moveRight() {
-        if(super.moveRight())
-            return validaPosicao();
-        return false;
-    }
-
-    public boolean moveLeft() {
-        if(super.moveLeft())
-            return validaPosicao();
-        return false;
-    }    
 
     public int getNumeroBombas() {
         return numeroBombas;
@@ -84,9 +76,10 @@ public class Hero extends Personagem implements Serializable{
     public void setTamanhoBomba(int tamanhoBomba) {
         this.tamanhoBomba = tamanhoBomba;
     }
+    
     public void colocaBomba(){
         if(numeroBombas > 0){
-            Bomba b = new Bomba("bombaNormal.png", pPosicao.getLinha(), pPosicao.getColuna(), this,3);
+            Bomba b = new Bomba("bombaNormal.png", this.pPosicao.getLinha(), this.pPosicao.getColuna(), this);
             Desenho.acessoATelaDoJogo().adicionaModelo(b);
             numeroBombas--;
         }

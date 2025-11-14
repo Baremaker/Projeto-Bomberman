@@ -7,7 +7,7 @@ package Modelo;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -26,8 +26,10 @@ public class BlocoMetal extends Blocos implements Serializable {
 
     public BlocoMetal(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
-        this.codigo = 1;
-        this.bMortal=false;
+        this.bTransponivel = false;
+        this.codigo = '1';
+        this.vida = 1;
+        this.bDestrutivel = false;
     }
     
 }

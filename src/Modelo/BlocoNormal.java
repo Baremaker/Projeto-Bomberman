@@ -10,14 +10,14 @@ import java.io.Serializable;
  *
  * @author aserr
  */
-public class BlocoVazio extends Blocos implements Serializable {
-   
-    public BlocoVazio(String sNomeImagePNG, int linha, int coluna) {
+public class BlocoNormal extends Blocos implements Serializable{
+
+    public BlocoNormal(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
-        this.bTransponivel = true;
-        this.codigo = '0';
+        this.bTransponivel = false;
+        this.codigo = '2';
         this.vida = 1;
-        this.bDestrutivel = false;
+        this.bDestrutivel = true;
     }
-   
+    
 }

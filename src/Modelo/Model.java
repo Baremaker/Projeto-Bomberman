@@ -9,7 +9,7 @@ import Modelo.Explosao;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,19 +19,23 @@ import java.io.Serializable;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-/**
- *
- * @author aserr
- */
-public abstract class Model implements Serializable{
-    protected boolean bMortal;
-    protected ImageIcon iImage;
-    protected Posicao pPosicao;
-    protected boolean bTransponivel; /*Pode passar por cima?*/
+
+
+//Essa classe é a mãe de Personagem e Blocos, possuindo atributos:
+//Imagem: iImage, Posicao: pPosicao, Transponivel? bTransponivel
+public abstract class Model implements Serializable {
+    protected ImageIcon iImage; //Imagem do modelo
+    protected Posicao pPosicao; //Posicao do modelo
+    protected boolean bTransponivel; //É transponivel?
 
     protected Model(String sNomeImagePNG, int linha, int coluna) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
+        setiImage(sNomeImagePNG);
+        this.setPosicao(linha, coluna);
+    }
+
+    public void setiImage(String sNomeImagePNG) {
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
             Image img = iImage.getImage();
@@ -42,36 +46,25 @@ public abstract class Model implements Serializable{
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        this.setPosicao(linha, coluna);
     }
-    
-    
 
-     public boolean isbMortal() {
-        return bMortal;
-    }
-    
-    
-    public Posicao getPosicao() {
-        /*TODO: Retirar este método para que objetos externos nao possam operar
-         diretamente sobre a posição do Personagem*/
+    public Posicao getpPosicao() {
         return pPosicao;
+    }
+
+    public boolean setPosicao(int linha, int coluna) {
+        return pPosicao.setPosicao(linha, coluna);
     }
 
     public boolean isbTransponivel() {
         return bTransponivel;
     }
 
-    public  void setbTransponivel(boolean bTransponivel) {
+    public void setbTransponivel(boolean bTransponivel) {
         this.bTransponivel = bTransponivel;
     }
 
-    public void autoDesenho(){
+    public void autoDesenho() {
         Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());
     }
-
-    public boolean setPosicao(int linha, int coluna) {
-        return pPosicao.setPosicao(linha, coluna);
-    }
-   
 }

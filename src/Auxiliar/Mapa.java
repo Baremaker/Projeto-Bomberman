@@ -20,7 +20,7 @@ import Modelo.BichinhoVaiVemVertical;
 import Modelo.BlocoVazio;
 import Modelo.Esfera;
 import Modelo.ZigueZague;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.io.Serializable;
 /**
  *
@@ -29,23 +29,14 @@ import java.io.Serializable;
 public class Mapa {
    
    private ArrayList<Blocos> mapa;
+   private GeraBlocoProMapa geradorBlocos;
 
     public Mapa(String mapeado) {
-        mapa = new ArrayList<>();    
-        for(int i =0;i<11;i++){
-            for(int j =0;j<13;j++){
-                if(mapeado.charAt(i*13+j)=='1'){
-                    BlocoMetal bm = new BlocoMetal("coracao.png", i, j);
-                    mapa.add(bm);
-                
-                }
-                if(mapeado.charAt(i*13+j)=='0'){
-                    BlocoVazio bv = new BlocoVazio("background.png", i, j);
-                    mapa.add(bv);
-                
-                }
-        
-        
+        mapa = new ArrayList<>();
+        geradorBlocos = new GeraBlocoProMapa();
+        for(int i=0; i<11; i++){
+            for(int j=0; j<13; j++){
+                geradorBlocos.geraBloco(this, mapeado, i, j);
             }
         }
     }

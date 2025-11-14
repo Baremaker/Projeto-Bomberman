@@ -6,7 +6,7 @@ package Modelo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.io.Serializable;
 
 /**
@@ -28,14 +28,14 @@ public class Chaser extends Personagem implements Serializable {
     }
 
     public void computeDirection(Posicao heroPos) {
-        if (heroPos.getColuna() < this.getPosicao().getColuna()) {
+        if (heroPos.getColuna() < this.getpPosicao().getColuna()) {
             iDirectionH = true;
-        } else if (heroPos.getColuna() > this.getPosicao().getColuna()) {
+        } else if (heroPos.getColuna() > this.getpPosicao().getColuna()) {
             iDirectionH = false;
         }
-        if (heroPos.getLinha() < this.getPosicao().getLinha()) {
+        if (heroPos.getLinha() < this.getpPosicao().getLinha()) {
             iDirectionV = true;
-        } else if (heroPos.getLinha() > this.getPosicao().getLinha()) {
+        } else if (heroPos.getLinha() > this.getpPosicao().getLinha()) {
             iDirectionV = false;
         }
     }

@@ -6,7 +6,7 @@ package Modelo;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
-import auxiliar.Posicao;
+import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,17 +21,36 @@ import javax.swing.JPanel;
  * @author aserr
  */
 public class Blocos extends Model implements Serializable {
-    protected int codigo;
+    protected char codigo;
+    protected int vida;
+    protected boolean bDestrutivel;
 
     public Blocos(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
-        this.bTransponivel=false;
     }
 
-    public int getCodigo() {
+    public boolean danifica(int dano){
+        this.vida -= dano;
+        return true;
+    }
+
+    public char getCodigo() {
         return codigo;
     }
-    
-    
-    
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setCodigo(char codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public boolean isbDestrutivel() {
+        return bDestrutivel;
+    }
 }
