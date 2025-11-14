@@ -51,11 +51,20 @@ public class Bomba extends Personagem implements Serializable {
     }
 
     private boolean validaPosicao(int linhaOffset, int colunaOffset){
-        return Desenho.acessoATelaDoJogo().ehPosicaoValida(new Posicao(pPosicao.getLinha() + linhaOffset, pPosicao.getColuna() + colunaOffset));
+        
+       
+        // Desenho.acessoATelaDoJogo().getFaseAtual().getMapaFase().getMapa().get((pPosicao.getLinha()+linhaOffset)*13+pPosicao.getColuna()+colunaOffset) instanceof BlocoVazio )
+        return(Desenho.acessoATelaDoJogo().ehPosicaoValida(new Posicao(pPosicao.getLinha() + linhaOffset, pPosicao.getColuna() + colunaOffset)));
+        
+        //return false;
     }
 
     public void criaExplosoes(){
         int danoBomba = this.vida;
+        int flagcima=1;
+        int flagbaixo=1;
+        int flagesquerda=1;
+        int flagdireita=1;
         Explosao meio = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna(),danoBomba);
         //Desenho.acessoATelaDoJogo().addPersonagem(meio);
         Desenho.acessoATelaDoJogo().adicionaModelo(meio);

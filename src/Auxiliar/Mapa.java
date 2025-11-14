@@ -17,6 +17,7 @@ import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.ControleDeJogo;
 import Modelo.BichinhoVaiVemVertical;
+import Modelo.BlocoVazio;
 import Modelo.Esfera;
 import Modelo.ZigueZague;
 import auxiliar.Posicao;
@@ -38,7 +39,11 @@ public class Mapa {
                     mapa.add(bm);
                 
                 }
+                if(mapeado.charAt(i*13+j)=='0'){
+                    BlocoVazio bv = new BlocoVazio("background.png", i, j);
+                    mapa.add(bv);
                 
+                }
         
         
             }

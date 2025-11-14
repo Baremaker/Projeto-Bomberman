@@ -9,6 +9,7 @@ import Auxiliar.Fase;
 import Auxiliar.Mapa;
 import Modelo.Blocos;
 import Modelo.BlocoMetal;
+import Modelo.BlocoVazio;
 import Modelo.Bomba;
 import Modelo.Explosao;
 public class ControleDeJogo {
@@ -66,7 +67,7 @@ public class ControleDeJogo {
                         if (!(alvo instanceof Bomba)) {
                         
                         // Inimigos e Hero devem ser alvos:
-                            if (alvo != hero) { // Se for um inimigo ou outro personagem
+                             // Se for um inimigo ou outro personagem
                                 alvo.levaDano(dano); 
                             
                             // Remove o alvo se a vida acabar
@@ -74,7 +75,7 @@ public class ControleDeJogo {
                                     umaFase.remove(alvo);
                                     j--; // Ajusta o índice após a remoção
                                 }
-                            }
+                            
         
                         }    
                     }
@@ -94,7 +95,7 @@ public class ControleDeJogo {
         
         for (int i = 0; i < map.getMapa().size(); i++){  
             Blocos bloco = map.getMapa().get(i);
-            if(!bloco.isbTransponivel()){
+            if(!bloco.isbTransponivel()&& !(bloco instanceof BlocoVazio)){
                 if (bloco.getPosicao().igual(p)) {
                     return false;
                 }

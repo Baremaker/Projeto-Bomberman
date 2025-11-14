@@ -1,4 +1,5 @@
 package Controler;
+import Modelo.BlocoVazio;
 import Modelo.Bomba;
 import Modelo.Explosao;
 import Modelo.Model;
@@ -102,7 +103,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         /**
          * ***********Desenha cenário de fundo*************
          */
-        for (int i = 0; i < Consts.RES; i++) {
+        /*for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
                 int mapaLinha = cameraLinha + i;
                 int mapaColuna = cameraColuna + j;
@@ -119,7 +120,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
                     }
                 }
             }
-        }
+        }*/
         if (!this.faseAtual.getPersonagens().isEmpty()) {
             this.cj.desenhaTudo(faseAtual);
             this.cj.processaTudo(faseAtual.getPersonagens());
@@ -279,6 +280,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     }
 
     public void keyTyped(KeyEvent e) {
+    }
+
+    public Fase getFaseAtual() {
+        return faseAtual;
     }
     
     

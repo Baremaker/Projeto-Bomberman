@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 
 public class Hero extends Personagem implements Serializable{
     private int numeroBombas = 3;
-    private int tamanhoBomba = 5;   
+    private int tamanhoBomba = 2;
+    
     public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG,linha, coluna);
+        vida = 1000000000;
     }
 
     public void voltaAUltimaPosicao(){
