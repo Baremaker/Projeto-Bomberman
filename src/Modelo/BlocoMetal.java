@@ -31,5 +31,17 @@ public class BlocoMetal extends Blocos implements Serializable {
         this.vida = 1;
         this.bDestrutivel = false;
     }
+
+    public char getCodigo() {
+        return codigo;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public boolean isbDestrutivel() {
+        return bDestrutivel;
+    }
     
 }

@@ -6,6 +6,9 @@ package Modelo;
 import java.io.Serializable;
 
 import Auxiliar.Desenho;
+import Auxiliar.Fase;
+import Auxiliar.Mapa;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,7 +31,63 @@ public class Explosao extends Personagem implements Serializable {
         }
         contador++;
     }
-
+    
+    public boolean validaPosicao(){
+        if ((this.pPosicao.getLinha()) < 0 || (this.pPosicao.getLinha()) >= Auxiliar.Consts.MUNDO_ALTURA)return false;
+        if ((this.pPosicao.getColuna()) < 0 || (this.pPosicao.getColuna()) >= Auxiliar.Consts.MUNDO_LARGURA)return false;
+        Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+        Blocos blocoAlvo= fase.getMapaFase().getBlocoNaPosicao(this.pPosicao);
+        ArrayList<Personagem> listaPersonagens = fase.getPersonagens();
+    // 2. Busca o bloco na posição da Explosão.
+        for (int i = listaPersonagens.size() - 1; i >= 0; i--) {
+            Personagem alvo = listaPersonagens.get(i);
+        // Colisão com o alvo: Posição igual e não é a própria explosão
+            if (alvo != this && alvo.getpPosicao().igual(this.pPosicao)) {
+            // Aplica dano a qualquer coisa que não seja a Bomba (que já estourou)
+                if (!(alvo instanceof Bomba)) {
+                    if(alvo.isbMortal()){
+                        alvo.levaDano(this.vida); // Aplica o dano da explosão (valor vindo da Bomba)
+                
+                        if (alvo.getVida() <= 0) {
+                    // Remove o personagem se a vida zerar
+                            fase.removerPersonagem(alvo); // Usa o método de Fase para remoção
+                    
+                        // Se o Hero morrer, a lógica de Game Over deve ser implementada aqui
+                            if (alvo instanceof Hero) {
+                       // LOGICA DE GAME OVER AQUI
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        // para destruir blocos
+        if(blocoAlvo != null){
+            if(!blocoAlvo.isbTransponivel()){
+            // Colidiu com um bloco que não é vazio.
+                if(blocoAlvo.isbDestrutivel()){
+                // O bloco é destrutível (BlocoNormal '2'). Aplica dano.
+                    blocoAlvo.danifica(); 
+                    if(blocoAlvo.getVida() <= 0){
+                    // Se a vida zerou, remove o bloco e substitui por BlocoVazio
+                    fase.getMapaFase().removerBloco(blocoAlvo); // NOVO MÉTODO NECESSÁRIO NO MAPA
+                    
+                    BlocoVazio bv = new BlocoVazio("background.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
+                    fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA
+                }
+                // Permite que a explosão avance (já que destruiu o alvo)
+                return true; 
+                } else {
+                // Colidiu com BlocoMetal ('1') - Não é destrutível
+                    return false; // A explosão não avança
+                }
+            }
+        }
+        
+    
+        return true;
+    }
    
 
 }

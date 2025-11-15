@@ -46,7 +46,21 @@ public class Mapa {
     }
     
    
-   
-   
-    
+   public void removerBloco(Blocos bloco) {
+        // Remove o bloco do ArrayList do mapa
+        mapa.remove(bloco);
+    }
+   public void adicionarBloco(Blocos bloco) {
+        // Adiciona um novo bloco (usado para BlocoVazio após destruição)
+        mapa.add(bloco);
+    }
+    public Blocos getBlocoNaPosicao(Posicao p) {
+        // Encontra e retorna o bloco que está na posição de grade P
+        for (Blocos bloco : mapa) {
+            if (bloco.getpPosicao().igual(p)) {
+                return bloco;
+            }
+        }
+        return null;
+    }
 }

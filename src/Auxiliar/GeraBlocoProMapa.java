@@ -1,5 +1,6 @@
 package Auxiliar;
 
+import Modelo.BlocoForte;
 import Modelo.BlocoMetal;
 import Modelo.BlocoNormal;
 import Modelo.BlocoVazio;
@@ -21,9 +22,18 @@ public class GeraBlocoProMapa {
                 BlocoNormal bn = new BlocoNormal("blacktile.png", i, j);
                 mapa.getMapa().add(bn);
                 break;
-        
+            case '3':
+                BlocoForte bf = new BlocoForte("bricks.png", i, j);
+                mapa.getMapa().add(bf);
+                break;
+            
+            
             default:
                 break;
         }
     }
+    
+    
+    
+    
 }

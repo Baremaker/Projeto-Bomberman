@@ -249,8 +249,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         setTitle("POO2023-1 - Bomber man");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
-        setMaximumSize(new java.awt.Dimension(800, 800));
-        setMinimumSize(new java.awt.Dimension(800, 800));
+        setMaximumSize(new java.awt.Dimension(800, 700));
+        setMinimumSize(new java.awt.Dimension(800, 700));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

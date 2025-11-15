@@ -29,8 +29,8 @@ public class Blocos extends Model implements Serializable {
         super(sNomeImagePNG, linha, coluna);
     }
 
-    public boolean danifica(int dano){
-        this.vida -= dano;
+    public boolean danifica(){
+        this.vida --;
         return true;
     }
 

@@ -21,6 +21,7 @@ import Modelo.BichinhoVaiVemVertical;
 import Modelo.Esfera;
 import Modelo.ZigueZague;
 import Auxiliar.Posicao;
+import Modelo.Powerup;
 import java.io.Serializable;
  
 public class Fase implements Serializable{
@@ -28,6 +29,7 @@ public class Fase implements Serializable{
     private ArrayList<Personagem> fase;
     private Hero hero;
     private Mapa mapaFase;
+    //private ArrayList<Powerup> powerup;
     public Fase() {
         this.fase = new ArrayList<>();
         
@@ -61,8 +63,8 @@ public class Fase implements Serializable{
     
     public void fase1(){
          mapaFase = new Mapa("0000000000001"
-                            +"0101010101010"
-                            +"0101010101010"   
+                            +"0101220101010"
+                            +"0101030301010"   
                             +"0101010101010"
                             +"0101010101010"
                             +"0101010101010"

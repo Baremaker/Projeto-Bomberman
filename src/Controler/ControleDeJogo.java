@@ -23,6 +23,8 @@ public class ControleDeJogo {
             // Chamada do autoDesenho para renderização
             mapa.get(i).autoDesenho(); 
         }
+        
+        
         ArrayList<Personagem> listaPersonagens = faseAtual.getPersonagens();
         for (int i = 0; i < listaPersonagens.size(); i++) {
             // Chamada do autoDesenho para renderização
