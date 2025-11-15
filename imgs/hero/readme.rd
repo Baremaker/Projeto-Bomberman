@@ -1,1 +1,1 @@
-
+sprites do protagonista
