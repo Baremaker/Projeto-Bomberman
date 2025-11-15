@@ -4,11 +4,13 @@
  */
 package Auxiliar;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aserr
  */
-public class EscolheBloco {
+public class EscolheBloco implements Serializable {
       
     
     
