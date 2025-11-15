@@ -34,7 +34,7 @@ public class Bomba extends Personagem implements Serializable {
         this.bMortal = false;
         this.bomberman = bomberman;
         this.tamanhoBomba = bomberman.getTamanhoBomba();
-        this.vida = 4;
+        this.vida = 3;
     }
 
     @Override
