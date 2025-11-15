@@ -12,6 +12,7 @@ import Controler.Tela;
 import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -25,7 +26,7 @@ import javax.swing.JPanel;
 //Imagem: iImage, Posicao: pPosicao, Transponivel? bTransponivel
 public abstract class Model implements Serializable {
     protected ImageIcon iImage; //Imagem do modelo
-    protected Posicao pPosicao; //Posicao do modelo
+    public Posicao pPosicao; //Posicao do modelo
     protected boolean bTransponivel; //É transponivel?
 
     protected Model(String sNomeImagePNG, int linha, int coluna) {
@@ -67,4 +68,12 @@ public abstract class Model implements Serializable {
     public void autoDesenho() {
         Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());
     }
+    
+    public Rectangle getHitbox() {
+        // Usa as coordenadas de pixel (float x, y) da Posicao para a checagem AABB
+        return new Rectangle((int)pPosicao.getX(), (int)pPosicao.getY(), Consts.CELL_SIDE, Consts.CELL_SIDE);
+    }
+    
+    
+    
 }

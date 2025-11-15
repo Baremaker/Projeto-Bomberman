@@ -95,28 +95,43 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         /*Criamos um contexto gráfico*/
         g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
-        /**
-         * ***********Desenha cenário de fundo*************
-         */
-        /*for (int i = 0; i < Consts.RES; i++) {
-            for (int j = 0; j < Consts.RES; j++) {
-                int mapaLinha = cameraLinha + i;
-                int mapaColuna = cameraColuna + j;
-
-                if (mapaLinha < Consts.MUNDO_ALTURA && mapaColuna < Consts.MUNDO_LARGURA) {
-                    try {
-                        Image tijolos = Toolkit.getDefaultToolkit().getImage(
-                                new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png");//define piso
-                        g2.drawImage(tijolos,
-                                j * Consts.CELL_SIDE, i * Consts.CELL_SIDE,
-                                Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }*/
+            
         if (!this.faseAtual.getPersonagens().isEmpty()) {
+           /* float velocidade = Consts.HERO_SPEED_PIXELS;
+    
+    // Zera a velocidade X/Y para o Hero, pois apenas as teclas ativas irão redefini-la
+            hero.pPosicao.velocidadeX = 0;
+            hero.pPosicao.velocidadeY = 0;
+
+    // APLICA VELOCIDADE se a tecla estiver no HashSet
+            if (teclasPressionadas.contains(KeyEvent.VK_UP)) {
+                hero.moveUp(); // moveUp agora define: hero.pPosicao.velocidadeY = -velocidade;
+            }
+            if (teclasPressionadas.contains(KeyEvent.VK_DOWN)) {
+                hero.moveDown();
+            }
+            if (teclasPressionadas.contains(KeyEvent.VK_LEFT)) {
+                hero.moveLeft();
+            }
+            if (teclasPressionadas.contains(KeyEvent.VK_RIGHT)) {
+                hero.moveRight();
+            }
+    
+            // 2. Colisão AABB e Atualização da Posição
+            float nextX = hero.pPosicao.getX() + hero.pPosicao.velocidadeX;
+            float nextY = hero.pPosicao.getY() + hero.pPosicao.velocidadeY;
+    
+            if (cj.checarColisaoAABB(this.getFaseAtual(), hero, nextX, nextY)) {
+            // Se for válido, move para a nova posição de pixel e sincroniza a grade
+                hero.pPosicao.setX(nextX); 
+                hero.pPosicao.setY(nextY);
+                hero.pPosicao.updatePixelPosition(); 
+            } else {
+                // Se colidir, zera a velocidade para parar imediatamente
+                hero.pPosicao.velocidadeX = 0;
+                hero.pPosicao.velocidadeY = 0;
+            }
+            */
             this.cj.desenhaTudo(faseAtual);
             this.cj.processaTudo(faseAtual);
         }

@@ -1,4 +1,4 @@
-package Modelo;
+ package Modelo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
@@ -30,7 +30,8 @@ public class Hero extends Personagem implements Serializable {
     
     public boolean setPosicao(int linha, int coluna){
         if(this.pPosicao.setPosicao(linha, coluna)){
-            return validaPosicao();
+            //return validaPosicao();
+            return true;
         }
         return false;       
     }
@@ -59,6 +60,7 @@ public class Hero extends Personagem implements Serializable {
             return true;
         }
         return false;
+        
     }
 
     public int getNumeroBombas() {
@@ -84,4 +86,32 @@ public class Hero extends Personagem implements Serializable {
             numeroBombas--;
         }
     }
+    /*
+    public boolean moveUp() {
+        this.pPosicao.velocidadeY = -Consts.HERO_SPEED_PIXELS;
+        //this.pPosicao.velocidadeX = 0; 
+        return true; 
+    }
+
+    public boolean moveDown() {
+        this.pPosicao.velocidadeY = Consts.HERO_SPEED_PIXELS;
+        //this.pPosicao.velocidadeX = 0;
+        return true;
+    }
+
+    public boolean moveRight() {
+        this.pPosicao.velocidadeX = Consts.HERO_SPEED_PIXELS;
+        //this.pPosicao.velocidadeY = 0;
+        return true;
+    }
+
+    public boolean moveLeft() {
+        this.pPosicao.velocidadeX = -Consts.HERO_SPEED_PIXELS;
+        //this.pPosicao.velocidadeY = 0;
+        return true;
+    }
+    */
+    
+    
+    
 }
