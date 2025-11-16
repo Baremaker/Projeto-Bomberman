@@ -6,12 +6,15 @@ import Auxiliar.Fase;
 import Auxiliar.Mapa;
 import Controler.ControleDeJogo;
 import Controler.Tela;
+import Modelo.Power.MaisVida;
+import Modelo.Power.Powerup;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,11 +27,13 @@ public class Hero extends Personagem implements Serializable {
     private int tamanhoBomba = 1;
     private int tipoBomba = 1;
     private int velocidade;
+    private ArrayList<Powerup> powerups;
     
     public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
-        vida = 100;
+        vida = 1;
         setiImage(sNomeImagePNG);
+        this.powerups = new ArrayList<>();
     }
     
     
@@ -44,7 +49,22 @@ public class Hero extends Personagem implements Serializable {
             System.out.println(ex.getMessage());
         }
     }
+    public void coletarPowerup(Powerup pow) {
+        // Verifica se o powerup já existe (ex: se só pode ter um MaisVida)
+        
+            this.powerups.add(pow);
+            pow.aplicarEfeito(this); // O MaisVida não faz nada, mas outros podem fazer
+        
+    }
     
+    public boolean possuiPowerup(Class<? extends Powerup> tipo) {
+        for (Powerup p : powerups) {
+            if (tipo.isInstance(p)) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     
     
@@ -109,6 +129,48 @@ public class Hero extends Personagem implements Serializable {
             numeroBombas--;
         }
     }
+    public void levaDano(int dano) {
+        this.vida -= dano; // Reduz a vida
+
+        if (this.vida <= 0) {
+            if (this.possuiPowerup(MaisVida.class)) {
+                // LÓGICA: PERDER POWERUP AO INVÉS DE MORRER
+                System.out.println("tenho powerup");
+                // Encontra e remove o powerup MaisVida (só o primeiro)
+                Powerup powerupPerdido = null;
+                for (Powerup p : powerups) {
+                    if (p instanceof MaisVida) {
+                        powerupPerdido = p;
+                        break;
+                    }
+                }
+                
+                if (powerupPerdido != null) {
+                    this.powerups.remove(powerupPerdido);
+                    powerupPerdido.reverterEfeito(this); // Reverte o efeito (aqui não faz nada)
+                    
+                    // Retorna a vida ao máximo
+                    this.vida = 1;
+                    System.out.println("Powerup MaisVida consumido. Vida restaurada.");
+                    return; // Sai da função sem remover o personagem
+                }
+            }
+            System.out.println("vida:"+this.vida);
+            // LÓGICA DE MORTE FINAL (GAME OVER)
+            //Desenho.acessoATelaDoJogo().removePersonagem(this); 
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
     public boolean moveUp() {
         this.pPosicao.velocidadeY = -Consts.HERO_SPEED_PIXELS;

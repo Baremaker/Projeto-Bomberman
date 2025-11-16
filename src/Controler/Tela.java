@@ -75,9 +75,9 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         return cameraColuna;
     }
 
-    public boolean ehPosicaoValida(Posicao p) {
-        return cj.ehPosicaoValida(this.faseAtual, p);
-    }
+    //public void ehPosicaoValida(Posicao p) {
+        //return cj.ehPosicaoValida(this.faseAtual, p);
+    //}
 
     public void adicionaModelo(Personagem umPersonagem) {
         faseAtual.addPersonagem(umPersonagem);

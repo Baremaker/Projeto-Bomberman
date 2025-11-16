@@ -37,7 +37,7 @@ public class Bomba extends Personagem implements Serializable {
         this.bMortal = false;
         this.bomberman = bomberman;
         this.tamanhoBomba = bomberman.getTamanhoBomba();
-        this.vida = 4;
+        
     }
 
     public void setiImage(String sNomeImagePNG) {
@@ -88,6 +88,7 @@ public class Bomba extends Personagem implements Serializable {
         
         Explosao meio = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna(), danoBomba);
         //Desenho.acessoATelaDoJogo().addPersonagem(meio);
+        meio.validaPosicao();
         Desenho.acessoATelaDoJogo().adicionaModelo(meio);
         for(int i=0; i<tamanhoBomba; i++){
             //Pra cima
@@ -102,7 +103,9 @@ public class Bomba extends Personagem implements Serializable {
             }
             //Pra direita
             if(flagDireita){
+                
                 Explosao direita = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
+                System.out.println("resul"+direita.validaPosicao());
                 if(direita.validaPosicao()){
                     //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(direita);
@@ -111,6 +114,7 @@ public class Bomba extends Personagem implements Serializable {
             }
             //Pra baixo
             if(flagBaixo){
+                
                 Explosao baixo = new Explosao("explosãoTipo1.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
                 if(baixo.validaPosicao()){
                     //Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
@@ -120,6 +124,7 @@ public class Bomba extends Personagem implements Serializable {
             }
             //Pra esquerda
             if(flagEsquerda){
+                
                 Explosao esquerda = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
                 if(esquerda.validaPosicao()){
                     //Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);

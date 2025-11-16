@@ -6,6 +6,7 @@ package Modelo.Power;
 
 //import Modelo.Model;
 import Auxiliar.Consts;
+import Modelo.Hero;
 import Modelo.Model;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -22,11 +23,12 @@ public class Powerup extends Model implements Serializable {
 
     public Powerup(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
+        setiImage(sNomeImagePNG);
         
     }
     public void setiImage(String sNomeImagePNG) {
         try {
-            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH +Consts.PATHBLOCO+ sNomeImagePNG);
+            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
             Image img = iImage.getImage();
             BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();
@@ -35,5 +37,13 @@ public class Powerup extends Model implements Serializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+    
+    public void aplicarEfeito(Hero h) {
+        // Nenhuma ação imediata. O efeito é passivo (checado em Hero.levaDano)
+    }
+
+    public void reverterEfeito(Hero aThis) {
+        
     }
 }

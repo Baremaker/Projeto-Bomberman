@@ -27,12 +27,17 @@ import java.io.Serializable;
 public class Fase implements Serializable{
    
     private ArrayList<Personagem> fase;
+    private ArrayList<Powerup> powerups;
     private Hero hero;
     private Mapa mapaFase;
     //private ArrayList<Powerup> powerup;
     public Fase() {
         this.fase = new ArrayList<>();
-        
+        this.powerups = new ArrayList<>();
+    }
+
+    public ArrayList<Powerup> getPowerups() {
+        return powerups;
     }
     
     public ArrayList<Personagem> getPersonagens() {
@@ -47,6 +52,16 @@ public class Fase implements Serializable{
         fase.remove(umPersonagem);
     }
    
+    public void addPowerUp(Powerup power) {
+        powerups.add(power);
+    }
+
+    public void removerPowerUp(Powerup power) {
+        powerups.remove(power);
+    }
+    
+    
+    
     public Hero getHero() {
         return this.hero;
     }
@@ -63,8 +78,8 @@ public class Fase implements Serializable{
     
     public void fase1(){
          mapaFase = new Mapa("0000000000001"
-                            +"0101220101010"
-                            +"0101030301010"   
+                            +"0000000000000"
+                            +"0000030300000"   
                             +"0101010101010"
                             +"0101010101010"
                             +"0101010101010"
@@ -77,7 +92,7 @@ public class Fase implements Serializable{
         hero = new Hero("heroDireita.png", 0, 7);
         this.addPersonagem(hero);
         //this.atualizaCamera();
-
+        
         ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
         this.addPersonagem(zz);
 
@@ -97,7 +112,7 @@ public class Fase implements Serializable{
         this.addPersonagem(chase);
 
         Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);     
+        this.addPersonagem(es);    
     }
 
 

@@ -9,7 +9,7 @@ public class GeraBlocoProMapa {
     public void geraBloco(Mapa mapa, String mapeado, int i, int j){
         switch (mapeado.charAt(13*i + j)) {
             case '0':
-                BlocoVazio bv = new BlocoVazio("background"+"1Grama "+".png", i, j);
+                BlocoVazio bv = new BlocoVazio("background"+"1Grama"+".png", i, j);
                 mapa.getMapa().add(bv);
                 break;
             

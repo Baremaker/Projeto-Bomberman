@@ -14,5 +14,6 @@ public class Consts {
     public static final String PATHINIMIGOS = File.separator+"inimigo"+File.separator;
     public static final String PATHBOMBA = File.separator+"bombas"+File.separator;
     public static final int TIMER = 20;
-    public static final float HERO_SPEED_PIXELS = 4.0f; // NOVO: Velocidade em pixels/frame
+    //public static final float HERO_SPEED_PIXELS = 4.0f; // NOVO: Velocidade em pixels/frame
+    public static final double CHANCE_POWERUP = 0.15; // 15% de chance de spawn
 }

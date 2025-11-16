@@ -20,19 +20,19 @@ public class Posicao implements Serializable {
     }
 
     public boolean setPosicao(int linha, int coluna) {
-        if (linha < 0 || linha >= Auxiliar.Consts.MUNDO_ALTURA)
-            return false;
+        //if (linha < 0 || linha >= Auxiliar.Consts.MUNDO_ALTURA)
+            //return false;
         linhaAnterior = this.linha;
         this.linha = linha;
 
-        if (coluna < 0 || coluna >= Auxiliar.Consts.MUNDO_LARGURA)
-            return false;
+        //if (coluna < 0 || coluna >= Auxiliar.Consts.MUNDO_LARGURA)
+            //return false;
         colunaAnterior = this.coluna;
         this.coluna = coluna;
         
         //this.pixel_x=coluna*Auxiliar.Consts.CELL_SIDE;
         //this.pixel_y=linha*Auxiliar.Consts.CELL_SIDE;
-        return true;
+        return true ;
     }
         
     

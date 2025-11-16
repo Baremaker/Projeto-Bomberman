@@ -24,7 +24,7 @@ public abstract class Personagem extends Model implements Serializable {
     protected Personagem(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
         setiImage(sNomeImagePNG);
-        this.bMortal = false;
+        this.bMortal = true;
         this.vida = 3;
     }
 
@@ -52,6 +52,7 @@ public abstract class Personagem extends Model implements Serializable {
 
     public void levaDano(int dano) {
         this.vida -= dano;
+        System.out.println("vida perdidaPersonagem:"+this.vida);
     }
 
     //Essa função valida a posição APÓS a movimentação: se a posição não for válida ele retorna para a posição anterior
