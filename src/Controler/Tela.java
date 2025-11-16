@@ -44,6 +44,7 @@ import javax.swing.JButton;
 
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
+    private static final int HUD_ALTURA = 80;
     private Hero hero;
     private Fase faseAtual;
     private ControleDeJogo cj = new ControleDeJogo();
@@ -91,57 +92,67 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         return g2;
     }
 
-    public void paint(Graphics gOld) {
-        Graphics g = this.getBufferStrategy().getDrawGraphics();
-        /*Criamos um contexto gráfico*/
-        g2 = g.create(getInsets().left, getInsets().top, getWidth() - getInsets().right, getHeight() - getInsets().top);
-            
-        if (!this.faseAtual.getPersonagens().isEmpty()) {
-           /* float velocidade = Consts.HERO_SPEED_PIXELS;
-    
-    // Zera a velocidade X/Y para o Hero, pois apenas as teclas ativas irão redefini-la
-            hero.pPosicao.velocidadeX = 0;
-            hero.pPosicao.velocidadeY = 0;
+    @Override
+public void paint(Graphics gOld) {
+    // obtém o Graphics do BufferStrategy
+    Graphics g = this.getBufferStrategy().getDrawGraphics();
 
-    // APLICA VELOCIDADE se a tecla estiver no HashSet
-            if (teclasPressionadas.contains(KeyEvent.VK_UP)) {
-                hero.moveUp(); // moveUp agora define: hero.pPosicao.velocidadeY = -velocidade;
-            }
-            if (teclasPressionadas.contains(KeyEvent.VK_DOWN)) {
-                hero.moveDown();
-            }
-            if (teclasPressionadas.contains(KeyEvent.VK_LEFT)) {
-                hero.moveLeft();
-            }
-            if (teclasPressionadas.contains(KeyEvent.VK_RIGHT)) {
-                hero.moveRight();
-            }
-    
-            // 2. Colisão AABB e Atualização da Posição
-            float nextX = hero.pPosicao.getX() + hero.pPosicao.velocidadeX;
-            float nextY = hero.pPosicao.getY() + hero.pPosicao.velocidadeY;
-    
-            if (cj.checarColisaoAABB(this.getFaseAtual(), hero, nextX, nextY)) {
-            // Se for válido, move para a nova posição de pixel e sincroniza a grade
-                hero.pPosicao.setX(nextX); 
-                hero.pPosicao.setY(nextY);
-                hero.pPosicao.updatePixelPosition(); 
-            } else {
-                // Se colidir, zera a velocidade para parar imediatamente
-                hero.pPosicao.velocidadeX = 0;
-                hero.pPosicao.velocidadeY = 0;
-            }
-            */
+    // cria um contexto considerando os insets (bordas) da janela
+    g2 = g.create(
+        getInsets().left,
+        getInsets().top,
+        getWidth() - getInsets().left - getInsets().right,
+        getHeight() - getInsets().top - getInsets().bottom
+    );
+
+    final int HUD_ALTURA = 80; // altura da barra superior
+
+    /* -------------------- DESENHA HUD -------------------- */
+    try {
+        g2.setColor(java.awt.Color.DARK_GRAY);
+        g2.fillRect(0, 0, getWidth(), HUD_ALTURA);
+
+        g2.setColor(java.awt.Color.WHITE);
+        g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
+
+        String vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
+        String faseTxt = "FASE: " + (faseAtual != null ? faseAtual.getNumeroDaFase() : 1);
+
+        g2.drawString(vidasTxt, 16, 28);
+        g2.drawString(faseTxt, 16, 52);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    /* -------------------- ÁREA DO JOGO -------------------- */
+    Graphics gGame = g2.create(0, HUD_ALTURA, getWidth(), getHeight() - HUD_ALTURA);
+
+    // passa o graphics do jogo para o Desenho
+    Desenho.setGraphics(gGame);
+
+    try {
+        if (!this.faseAtual.getPersonagens().isEmpty()) {
             this.cj.desenhaTudo(faseAtual);
             this.cj.processaTudo(faseAtual);
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (gGame != null)
+            gGame.dispose();
 
-        g.dispose();
-        g2.dispose();
-        if (!getBufferStrategy().contentsLost()) {
-            getBufferStrategy().show();
-        }
+        Desenho.clearGraphics();
     }
+
+    g.dispose();
+    g2.dispose();
+
+    if (!getBufferStrategy().contentsLost()) {
+        getBufferStrategy().show();
+    }
+}
+
 
     private void atualizaCamera() {
         int linha = hero.getpPosicao().getLinha();
@@ -249,8 +260,8 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         setTitle("POO2023-1 - Bomber man");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
-        setMaximumSize(new java.awt.Dimension(800, 700));
-        setMinimumSize(new java.awt.Dimension(800, 700));
+        setMaximumSize(new java.awt.Dimension(800, 780));
+        setMinimumSize(new java.awt.Dimension(800, 780));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

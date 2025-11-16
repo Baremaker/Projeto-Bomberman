@@ -166,6 +166,10 @@ public class Hero extends Personagem implements Serializable {
         return true;
     }
     */
+
+    public String getVidas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
     

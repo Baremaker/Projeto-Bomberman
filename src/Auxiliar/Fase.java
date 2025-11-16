@@ -115,6 +115,10 @@ public class Fase implements Serializable{
         this.addPersonagem(es);    
     }
 
+    public String getNumeroDaFase() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
     
     

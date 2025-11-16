@@ -9,6 +9,9 @@ public class Desenho implements Serializable {
 
     static Tela jCenario;
 
+    // gráfico usado para desenhar o jogo (com offset aplicado)
+    private static Graphics gGame = null;
+
     public static void setCenario(Tela umJCenario) {
         jCenario = umJCenario;
     }
@@ -17,37 +20,44 @@ public class Desenho implements Serializable {
         return jCenario;
     }
 
+    /**
+     * Retorna o Graphics que deve ser usado pelas chamadas de desenho.
+     * Se setGraphics foi chamado, retorna esse gráfico (com offset HUD).
+     * Caso contrário, cai para o comportamento antigo (retorna o buffer da tela).
+     */
     public static Graphics getGraphicsDaTela() {
+        if (gGame != null) return gGame;
         return jCenario.getGraphicsBuffer();
+    }
+
+    /**
+     * Permite ao código externo (Tela.paint) fornecer o Graphics que deve ser usado
+     * para desenhar o jogo. Esse Graphics normalmente já tem o offset (y) aplicado.
+     */
+    public static void setGraphics(Graphics g) {
+        gGame = g;
+    }
+
+    /**
+     * Limpa a referência ao Graphics (usar quando terminar de desenhar).
+     */
+    public static void clearGraphics() {
+        gGame = null;
     }
 
     public static void desenhar(ImageIcon iImage, int iColuna, int iLinha) {
         int telaX = (iColuna - jCenario.getCameraColuna()) * Consts.CELL_SIDE;
         int telaY = (iLinha - jCenario.getCameraLinha()) * Consts.CELL_SIDE;
 
-      
-        
+        Graphics g = getGraphicsDaTela();
+        if (g == null) return;
+
         if (telaX >= 0 && telaX < Consts.RES * Consts.CELL_SIDE
                 && telaY >= 0 && telaY < Consts.RES * Consts.CELL_SIDE) {
-            iImage.paintIcon(jCenario, getGraphicsDaTela(), telaX, telaY);
+            iImage.paintIcon(jCenario, g, telaX, telaY);
         }
     }
-    /*public static void desenhar(ImageIcon iImage, float pixelX, float pixelY) {
-    
-    // NOVO: Converte a posição da câmera (que está em grade) para um offset de pixel
-        float cameraPixelX = jCenario.getCameraColuna() * Consts.CELL_SIDE;
-        float cameraPixelY = jCenario.getCameraLinha() * Consts.CELL_SIDE;
-    
-    // Calcula a posição na tela (em pixels) subtraindo o offset da câmera
-    // O resultado é a posição que o sprite deve ter na janela.
-        int telaX = (int)(pixelX - cameraPixelX);
-        int telaY = (int)(pixelY - cameraPixelY);
 
-    // Condição de visibilidade: o sprite é desenhado se estiver *dentro* da área
-    // visível (Consts.RES * Consts.CELL_SIDE)
-        if (telaX >= -Consts.CELL_SIDE && telaX < Consts.RES * Consts.CELL_SIDE
-            && telaY >= -Consts.CELL_SIDE && telaY < Consts.RES * Consts.CELL_SIDE) {
-            iImage.paintIcon(jCenario, getGraphicsDaTela(), telaX, telaY);
-        }
-    }*/
+    /* Se você tiver outras versões de desenhar que usam posições em pixels,
+       pode adaptar para usar getGraphicsDaTela() da mesma forma. */
 }
