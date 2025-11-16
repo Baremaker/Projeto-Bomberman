@@ -26,14 +26,14 @@ public class Hero extends Personagem implements Serializable {
     private int numeroBombas = 1;
     private int velocidade;
     private ArrayList<Powerup> powerups;
-    private String tipoBomba;
+    private TipoBomba tipoBomba;
     
-    public Hero(String sNomeImagePNG, int linha, int coluna, String tipoBomba) {
+    public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
         vida = 1;
         setiImage(sNomeImagePNG);
         this.powerups = new ArrayList<>();
-        this.tipoBomba = tipoBomba;
+        this.tipoBomba = new BombaNormal();
     }
     
     
@@ -82,17 +82,19 @@ public class Hero extends Personagem implements Serializable {
         this.numeroBombas = numeroBombas;
     }
 
-    public String getTipoBomba() {
+    public TipoBomba getTipoBomba() {
         return tipoBomba;
     }
 
-    public void setTipoBomba(String tipoBomba) {
+    public void setTipoBomba(TipoBomba tipoBomba) {
         this.tipoBomba = tipoBomba;
     }
     
     public void colocaBomba(){
         if(numeroBombas > 0){
-            Bomba b = new Bomba(tipoBomba, this.pPosicao.getLinha(), this.pPosicao.getColuna(), this);
+            String nomeSpriteBomba = this.tipoBomba.getImagemBomba();
+            
+            Bomba b = new Bomba(nomeSpriteBomba, this.pPosicao.getLinha(), this.pPosicao.getColuna(), this,this.tipoBomba);
             Desenho.acessoATelaDoJogo().adicionaModelo(b);
             numeroBombas--;
         }
@@ -115,7 +117,7 @@ public class Hero extends Personagem implements Serializable {
                 
                 if (powerupPerdido != null) {
                     this.powerups.remove(powerupPerdido);
-                    powerupPerdido.reverterEfeito(this); // Reverte o efeito (aqui não faz nada)
+                    //powerupPerdido.reverterEfeito(this); // Reverte o efeito (aqui não faz nada)
                     
                     // Retorna a vida ao máximo
                     this.vida = 1;

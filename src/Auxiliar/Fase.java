@@ -89,7 +89,7 @@ public class Fase implements Serializable{
                             +"0101010101010"
                             +"0101010101010");
         
-        hero = new Hero("heroDireita.png", 0, 7, "Basica");
+        hero = new Hero("heroDireita.png", 0, 7);
         this.addPersonagem(hero);
         //this.atualizaCamera();
         

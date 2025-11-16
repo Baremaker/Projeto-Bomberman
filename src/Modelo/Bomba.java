@@ -28,14 +28,14 @@ public class Bomba extends Personagem implements Serializable {
     private int tempoDetonacao = 10;
     private Hero bomberman;
     private char codigo;
-    private String tipoExplosao;
+    //private String tipoExplosao;
     private int tamanhoBomba;
+    private TipoBomba tipoEstrategia; 
     
-    
-    public Bomba(String tipoBomba, int linha, int coluna, Hero bomberman){
-        super(decodificaTipo(tipoBomba), linha, coluna);
-        String sNomeImagePNG;
-        switch(tipoBomba){
+    public Bomba(String sNomeImagePNG, int linha, int coluna, Hero bomberman,TipoBomba tipo){
+        //super(decodificaTipo(tipoBomba), linha, coluna);
+        super(sNomeImagePNG, linha, coluna);
+        /*switch(tipoBomba){
                 case "Basica": 
                     sNomeImagePNG = "bombaNormal.png";
                     this.tamanhoBomba = 3;
@@ -44,22 +44,24 @@ public class Bomba extends Personagem implements Serializable {
                     sNomeImagePNG = "bombaNormal.png";
                     tamanhoBomba = 1;
                     
-            }
+            }*/
         setiImage(sNomeImagePNG);
         this.bTransponivel = true;
         this.bMortal = false;
         this.bomberman = bomberman;
-        this.tipoExplosao = tipoBomba;
+        //this.tipoExplosao = tipoBomba;
+        this.tipoEstrategia = tipo;
+        this.tamanhoBomba=1;
     }
     
-    private static String decodificaTipo(String tipoBomba){
+    /*private static String decodificaTipo(String tipoBomba){
         switch(tipoBomba){
                 case "Basica": 
                     return "bombaNormal.png";
                 default:
                     return "bombaNormal.png";
         }
-    }
+    }*/
 
     public void setiImage(String sNomeImagePNG) {
         try {
@@ -90,58 +92,9 @@ public class Bomba extends Personagem implements Serializable {
     }
 
     public void criaExplosoes(){
-        boolean flagCima=true;
-        boolean flagBaixo=true;
-        boolean flagEsquerda=true;
-        boolean flagDireita=true;
+        this.tipoEstrategia.criaExplosoes(bomberman, pPosicao, tamanhoBomba);
         
-        Explosao meio = new Explosao(tipoExplosao, pPosicao.getLinha(), pPosicao.getColuna());
-        //Desenho.acessoATelaDoJogo().addPersonagem(meio);
-        meio.validaPosicao();
-        Desenho.acessoATelaDoJogo().adicionaModelo(meio);
-        for(int i=0; i<tamanhoBomba; i++){
-            //Pra cima
-            if(flagCima){
-                Explosao cima = new Explosao(tipoExplosao, pPosicao.getLinha()-1-i, pPosicao.getColuna());
-                if(cima.validaPosicao()){
-                    //System.out.println("valido acima");
-                    //Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
-                    Desenho.acessoATelaDoJogo().adicionaModelo(cima);
-                }
-                else flagCima = false;
-            }
-            //Pra direita
-            if(flagDireita){
-                
-                Explosao direita = new Explosao(tipoExplosao, pPosicao.getLinha(), pPosicao.getColuna()+1+i);
-            
-                if(direita.validaPosicao()){
-                    //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
-                    Desenho.acessoATelaDoJogo().adicionaModelo(direita);
-                }
-                else flagDireita = false;
-            }
-            //Pra baixo
-            if(flagBaixo){
-                
-                Explosao baixo = new Explosao(tipoExplosao, pPosicao.getLinha()+1+i, pPosicao.getColuna());
-                if(baixo.validaPosicao()){
-                    //Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
-                    Desenho.acessoATelaDoJogo().adicionaModelo(baixo);
-                }
-                else flagBaixo = false;
-            }
-            //Pra esquerda
-            if(flagEsquerda){
-                
-                Explosao esquerda = new Explosao(tipoExplosao, pPosicao.getLinha(), pPosicao.getColuna()-1-i);
-                if(esquerda.validaPosicao()){
-                    //Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
-                    Desenho.acessoATelaDoJogo().adicionaModelo(esquerda);
-                }
-                else flagEsquerda = false;
-            }
-        }
+       
         
     }
 }

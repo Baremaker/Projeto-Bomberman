@@ -9,6 +9,7 @@ import java.io.Serializable;
 import Auxiliar.Desenho;
 import Auxiliar.Fase;
 import Auxiliar.Mapa;
+import Modelo.Power.BombaDarkPower;
 import Modelo.Power.MaisVida;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -24,12 +25,13 @@ import javax.swing.ImageIcon;
 public class Explosao extends Personagem implements Serializable {
     private int contador = 0;
     private int duracaoExplosao;
-    private int dano;
+    private int dano=3;
     
-    public Explosao(String tipoExplosao, int linha, int coluna){
-        super(decodificaTipo(tipoExplosao), linha, coluna);
-        String sNomeImagePNG;
-        switch(tipoExplosao){
+    public Explosao(String sNomeImagePNG, int linha, int coluna){
+        //super(decodificaTipo(tipoExplosao), linha, coluna);
+        super(sNomeImagePNG, linha, coluna);
+//String sNomeImagePNG;
+        /*switch(tipoExplosao){
                 case "Basica": 
                     sNomeImagePNG = "explosãoTipo1.png";
                     this.duracaoExplosao = 1;
@@ -39,19 +41,19 @@ public class Explosao extends Personagem implements Serializable {
                     sNomeImagePNG = "explosãoTipo1.png";
                     this.duracaoExplosao = 1;
                     this.dano = 3;
-        }
+        }*/
         
         setiImage(sNomeImagePNG);
         this.bMortal = false;
     }
-    private static String decodificaTipo(String tipoExplosao){
+    /*private static String decodificaTipo(String tipoExplosao){
         switch(tipoExplosao){
                 case "Basica": 
                     return "explosãoTipo1.png";
                 default:
                     return "explosãoTipo1.png";
         }
-    }
+    }*/
     
     public void setiImage(String sNomeImagePNG) {
         try {
@@ -76,38 +78,15 @@ public class Explosao extends Personagem implements Serializable {
     }
     
     public boolean validaPosicao(){
-        System.out.println("linha:"+pPosicao.getLinha()+"coluna:"+pPosicao.getColuna());
+        //System.out.println("linha:"+pPosicao.getLinha()+"coluna:"+pPosicao.getColuna());
         if ((this.pPosicao.getLinha()) < 0 || (this.pPosicao.getLinha()) >= Auxiliar.Consts.MUNDO_ALTURA)return false;
         if ((this.pPosicao.getColuna()) < 0 || (this.pPosicao.getColuna()) >= Auxiliar.Consts.MUNDO_LARGURA)return false;
         Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
         Blocos blocoAlvo= fase.getMapaFase().getBlocoNaPosicao(this.pPosicao);
         ArrayList<Personagem> listaPersonagens = fase.getPersonagens();
     // 2. Busca o bloco na posição da Explosão.
-        for (int i =0;i< listaPersonagens.size(); i++) {
-            Personagem alvo = listaPersonagens.get(i);
-        // Colisão com o alvo: Posição igual e não é a própria explosão
-            if (alvo != this && alvo.getpPosicao().igual(this.pPosicao)) {
-                System.out.println("vai ter");
-            // Aplica dano a qualquer coisa que não seja a Bomba (que já estourou)
-                if (!(alvo instanceof Bomba) /*&& !(alvo instanceof Hero)*/) {
-                    if(alvo.isbMortal() ){
-                        //System.out.println("dano");
-                        alvo.levaDano(this.dano); // Aplica o dano da explosão (valor vindo da Bomba)
-                
-                        if (alvo.getVida() <= 0) {
-                    // Remove o personagem se a vida zerar
-                            fase.removerPersonagem(alvo); // Usa o método de Fase para remoção
-                    
-                        // Se o Hero morrer, a lógica de Game Over deve ser implementada aqui
-                            if (alvo instanceof Hero) {
-                       // LOGICA DE GAME OVER AQUI
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    
+        
+        aplicadano(listaPersonagens,fase);
         // para destruir blocos
         if(blocoAlvo != null){
             if(!blocoAlvo.isbTransponivel()){
@@ -123,18 +102,24 @@ public class Explosao extends Personagem implements Serializable {
                     fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA;
                     
                     if (Math.random() < Consts.CHANCE_POWERUP) {
-                        MaisVida novoPowerup = new MaisVida("coracao.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                        System.out.println("powerup");
-                        fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
+                        if(Math.random() < Consts.CHANCE_VIDA){
+                            MaisVida novoPowerup = new MaisVida("coracao.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            System.out.println("powerup vida");
+                            fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
+                        }else{
+                            
+                            BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            System.out.println("powerup bomba");
+                            fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)   
+                        
+                        }
                     }
                         // 3. Se não spawnar Powerup, substitui por BlocoVazio (lógica original)
-                        
-                    
                     //BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
                     //fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA
-                }
+                    return true;
+                }else{return false;}
                 // Permite que a explosão avance (já que destruiu o alvo)
-                return true; 
                 } else {
                 // Colidiu com BlocoMetal ('1') - Não é destrutível
                     System.out.println("metal");
@@ -147,5 +132,33 @@ public class Explosao extends Personagem implements Serializable {
         return true;
     }
    
+    public void aplicadano(ArrayList<Personagem> listaPersonagens, Fase fase){
+        for (int i =0;i< listaPersonagens.size(); i++) {
+            Personagem alvo = listaPersonagens.get(i);
+        // Colisão com o alvo: Posição igual e não é a própria explosão
+            if (alvo != this && alvo.getpPosicao().igual(this.pPosicao) && !(alvo instanceof Bomba)) {
+                //System.out.println("vai ter");
+            // Aplica dano a qualquer coisa que não seja a Bomba (que já estourou)
+                    if(alvo.isbMortal() ){
+                        //System.out.println("dano");
+                        alvo.levaDano(this.dano); // Aplica o dano da explosão (valor vindo da Bomba)
+                
+                        if (alvo.getVida() <= 0) {
+                    // Remove o personagem se a vida zerar
+                            fase.removerPersonagem(alvo); // Usa o método de Fase para remoção
+                    
+                        // Se o Hero morrer, a lógica de Game Over deve ser implementada aqui
+                            if (alvo instanceof Hero) {
+                       // LOGICA DE GAME OVER AQUI
+                            }
+                        }
+                    }
+                
+            }
+        }
+    
+    
+    
+    }
 
 }
