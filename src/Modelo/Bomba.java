@@ -95,7 +95,7 @@ public class Bomba extends Personagem implements Serializable {
             if(flagCima){
                 Explosao cima = new Explosao("explosãoTipo1.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
                 if(cima.validaPosicao()){
-                    System.out.println("valido acima");
+                    //System.out.println("valido acima");
                     //Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(cima);
                 }
@@ -105,7 +105,7 @@ public class Bomba extends Personagem implements Serializable {
             if(flagDireita){
                 
                 Explosao direita = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
-                System.out.println("resul"+direita.validaPosicao());
+            
                 if(direita.validaPosicao()){
                     //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(direita);
