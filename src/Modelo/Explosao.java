@@ -23,12 +23,34 @@ import javax.swing.ImageIcon;
  */
 public class Explosao extends Personagem implements Serializable {
     private int contador = 0;
+    private int duracaoExplosao;
+    private int dano;
     
-    public Explosao(String sNomeImagePNG, int linha, int coluna,int vida){
-        super(sNomeImagePNG, linha, coluna);
+    public Explosao(String tipoExplosao, int linha, int coluna){
+        super(decodificaTipo(tipoExplosao), linha, coluna);
+        String sNomeImagePNG;
+        switch(tipoExplosao){
+                case "Basica": 
+                    sNomeImagePNG = "explosãoTipo1.png";
+                    this.duracaoExplosao = 1;
+                    this.dano = 3;
+                    break;
+                default:
+                    sNomeImagePNG = "explosãoTipo1.png";
+                    this.duracaoExplosao = 1;
+                    this.dano = 3;
+        }
+        
         setiImage(sNomeImagePNG);
-        this.bMortal = true;
-        this.vida=vida;
+        this.bMortal = false;
+    }
+    private static String decodificaTipo(String tipoExplosao){
+        switch(tipoExplosao){
+                case "Basica": 
+                    return "explosãoTipo1.png";
+                default:
+                    return "explosãoTipo1.png";
+        }
     }
     
     public void setiImage(String sNomeImagePNG) {
@@ -44,18 +66,10 @@ public class Explosao extends Personagem implements Serializable {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     @Override
     public void autoDesenho() {
         super.autoDesenho();
-        if(contador == 1){
+        if(contador == duracaoExplosao){
             Desenho.acessoATelaDoJogo().removePersonagem(this);
         }
         contador++;
@@ -78,7 +92,7 @@ public class Explosao extends Personagem implements Serializable {
                 if (!(alvo instanceof Bomba) /*&& !(alvo instanceof Hero)*/) {
                     if(alvo.isbMortal() ){
                         //System.out.println("dano");
-                        alvo.levaDano(this.vida); // Aplica o dano da explosão (valor vindo da Bomba)
+                        alvo.levaDano(this.dano); // Aplica o dano da explosão (valor vindo da Bomba)
                 
                         if (alvo.getVida() <= 0) {
                     // Remove o personagem se a vida zerar
