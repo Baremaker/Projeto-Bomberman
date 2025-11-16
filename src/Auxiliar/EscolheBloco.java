@@ -12,7 +12,11 @@ import java.io.Serializable;
  */
 public class EscolheBloco implements Serializable {
       
+    public String geraImagem(int codigo){
+      String casa = "mano" ;
     
+    return casa;
+    }
     
     
 }

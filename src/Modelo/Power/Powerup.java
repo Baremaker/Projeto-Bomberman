@@ -2,35 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.Power;
+
+//import Modelo.Model;
 import Auxiliar.Consts;
-import Auxiliar.Desenho;
-import Controler.Tela;
-import Auxiliar.Posicao;
+import Modelo.Model;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 /**
  *
  * @author aserr
  */
-public class Blocos extends Model implements Serializable {
-    protected char codigo;
-    protected int vida;
-    protected boolean bDestrutivel;
+public class Powerup extends Model implements Serializable {
 
-    public Blocos(String sNomeImagePNG, int linha, int coluna) {
+    public Powerup(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
-        setiImage(sNomeImagePNG);
-    
+        
     }
-    
     public void setiImage(String sNomeImagePNG) {
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH +Consts.PATHBLOCO+ sNomeImagePNG);
@@ -42,29 +35,5 @@ public class Blocos extends Model implements Serializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-    }
-    public boolean danifica(){
-        this.vida --;
-        return true;
-    }
-
-    public char getCodigo() {
-        return codigo;
-    }
-
-    public int getVida() {
-        return vida;
-    }
-
-    public void setCodigo(char codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
-
-    public boolean isbDestrutivel() {
-        return bDestrutivel;
     }
 }

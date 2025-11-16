@@ -9,6 +9,10 @@ public class Consts {
     public static final int RES = 25; // visível na tela - câmera
     public static final int PERIOD = 100 ;
     public static final String PATH = File.separator+"imgs"+File.separator;
+    public static final String PATHBLOCO = File.separator+"background_parede"+File.separator;
+    public static final String PATHHEROI = File.separator+"hero"+File.separator;
+    public static final String PATHINIMIGOS = File.separator+"inimigo"+File.separator;
+    public static final String PATHBOMBA = File.separator+"bombas"+File.separator;
     public static final int TIMER = 20;
     public static final float HERO_SPEED_PIXELS = 4.0f; // NOVO: Velocidade em pixels/frame
 }

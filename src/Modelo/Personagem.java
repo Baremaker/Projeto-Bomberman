@@ -23,10 +23,25 @@ public abstract class Personagem extends Model implements Serializable {
    
     protected Personagem(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
+        setiImage(sNomeImagePNG);
         this.bMortal = false;
         this.vida = 3;
     }
 
+   
+    public void setiImage(String sNomeImagePNG) {
+        try {
+            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH +Consts.PATHINIMIGOS + sNomeImagePNG);
+            Image img = iImage.getImage();
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            iImage = new ImageIcon(bi);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public void setVida(int vida) {
         this.vida = vida;
     }

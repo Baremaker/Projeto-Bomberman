@@ -4,7 +4,9 @@ import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -18,6 +20,7 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
 
     public BichinhoVaiVemHorizontal(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
+        //setiImage(sNomeImagePNG);
         bRight = true;
         iContador = 0;
         this.bTransponivel = true;

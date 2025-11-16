@@ -8,6 +8,8 @@ import Controler.ControleDeJogo;
 import Controler.Tela;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -26,7 +28,28 @@ public class Hero extends Personagem implements Serializable {
     public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
         vida = 100;
+        setiImage(sNomeImagePNG);
     }
+    
+    
+    public void setiImage(String sNomeImagePNG) {
+        try {
+            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH +Consts.PATHHEROI+ sNomeImagePNG);
+            Image img = iImage.getImage();
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            iImage = new ImageIcon(bi);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     public boolean setPosicao(int linha, int coluna){
         if(this.pPosicao.setPosicao(linha, coluna)){

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Auxiliar;
-import Modelo.Powerup;
+import Modelo.Power.Powerup;
 /**
  *
  * @author aserr

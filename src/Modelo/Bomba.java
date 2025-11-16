@@ -11,6 +11,8 @@ import Controler.Tela;
 import Auxiliar.Posicao;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -30,6 +32,7 @@ public class Bomba extends Personagem implements Serializable {
     
     public Bomba(String sNomeImagePNG, int linha, int coluna, Hero bomberman){
         super(sNomeImagePNG, linha, coluna);
+        setiImage(sNomeImagePNG);
         this.bTransponivel = true;
         this.bMortal = false;
         this.bomberman = bomberman;
@@ -37,6 +40,19 @@ public class Bomba extends Personagem implements Serializable {
         this.vida = 4;
     }
 
+    public void setiImage(String sNomeImagePNG) {
+        try {
+            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH +Consts.PATHBOMBA+ sNomeImagePNG);
+            Image img = iImage.getImage();
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            iImage = new ImageIcon(bi);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     @Override
     public void autoDesenho() {
         super.autoDesenho();
@@ -70,13 +86,13 @@ public class Bomba extends Personagem implements Serializable {
         boolean flagEsquerda=true;
         boolean flagDireita=true;
         
-        Explosao meio = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna(), danoBomba);
+        Explosao meio = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna(), danoBomba);
         //Desenho.acessoATelaDoJogo().addPersonagem(meio);
         Desenho.acessoATelaDoJogo().adicionaModelo(meio);
         for(int i=0; i<tamanhoBomba; i++){
             //Pra cima
             if(flagCima){
-                Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
+                Explosao cima = new Explosao("explosãoTipo1.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
                 if(cima.validaPosicao()){
                     System.out.println("valido acima");
                     //Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
@@ -86,7 +102,7 @@ public class Bomba extends Personagem implements Serializable {
             }
             //Pra direita
             if(flagDireita){
-                Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
+                Explosao direita = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
                 if(direita.validaPosicao()){
                     //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(direita);
@@ -95,7 +111,7 @@ public class Bomba extends Personagem implements Serializable {
             }
             //Pra baixo
             if(flagBaixo){
-                Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
+                Explosao baixo = new Explosao("explosãoTipo1.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
                 if(baixo.validaPosicao()){
                     //Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(baixo);
@@ -104,7 +120,7 @@ public class Bomba extends Personagem implements Serializable {
             }
             //Pra esquerda
             if(flagEsquerda){
-                Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
+                Explosao esquerda = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
                 if(esquerda.validaPosicao()){
                     //Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(esquerda);

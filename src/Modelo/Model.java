@@ -32,11 +32,11 @@ public abstract class Model implements Serializable {
     protected Model(String sNomeImagePNG, int linha, int coluna) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
-        setiImage(sNomeImagePNG);
+        //setiImage(sNomeImagePNG);
         this.setPosicao(linha, coluna);
     }
 
-    public void setiImage(String sNomeImagePNG) {
+    public abstract void setiImage(String sNomeImagePNG);/*{
         try {
             iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
             Image img = iImage.getImage();
@@ -47,7 +47,7 @@ public abstract class Model implements Serializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-    }
+    }*/
 
     public Posicao getpPosicao() {
         return pPosicao;

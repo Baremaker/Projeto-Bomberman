@@ -3,12 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+import Auxiliar.Consts;
 import java.io.Serializable;
 
 import Auxiliar.Desenho;
 import Auxiliar.Fase;
 import Auxiliar.Mapa;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,10 +25,32 @@ public class Explosao extends Personagem implements Serializable {
     
     public Explosao(String sNomeImagePNG, int linha, int coluna,int vida){
         super(sNomeImagePNG, linha, coluna);
+        setiImage(sNomeImagePNG);
         this.bMortal = true;
         this.vida=vida;
     }
-
+    
+    public void setiImage(String sNomeImagePNG) {
+        try {
+            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH +Consts.PATHBOMBA+ sNomeImagePNG);
+            Image img = iImage.getImage();
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            iImage = new ImageIcon(bi);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @Override
     public void autoDesenho() {
         super.autoDesenho();
@@ -73,7 +101,7 @@ public class Explosao extends Personagem implements Serializable {
                     // Se a vida zerou, remove o bloco e substitui por BlocoVazio
                     fase.getMapaFase().removerBloco(blocoAlvo); // NOVO MÉTODO NECESSÁRIO NO MAPA
                     
-                    BlocoVazio bv = new BlocoVazio("background.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
+                    BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
                     fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA
                 }
                 // Permite que a explosão avance (já que destruiu o alvo)
