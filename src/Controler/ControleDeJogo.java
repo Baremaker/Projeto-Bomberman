@@ -57,13 +57,8 @@ public class ControleDeJogo {
             }*/
             //Lida com cada caso de instância do personagem
             if(p instanceof Chaser){
-                ((Chaser) p).computeDirection(hero.getpPosicao());
+                ((Chaser) p).atualizarPHeroi(hero.getpPosicao());
             }
-            if(p instanceof Bomba){
-                if(!p.getpPosicao().igual(hero.getpPosicao())){
-                    p.setbTransponivel(false);
-                }
-            } 
         }
         for(Powerup pow:power){
             if(hero.getpPosicao().igual(pow.getpPosicao())){

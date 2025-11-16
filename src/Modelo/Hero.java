@@ -24,16 +24,16 @@ import javax.swing.JPanel;
 //numeroBombas, tamanhoBomba, tipoBomba, velocidade
 public class Hero extends Personagem implements Serializable {
     private int numeroBombas = 1;
-    private int tamanhoBomba = 1;
-    private int tipoBomba = 1;
     private int velocidade;
     private ArrayList<Powerup> powerups;
+    private String tipoBomba;
     
-    public Hero(String sNomeImagePNG, int linha, int coluna) {
+    public Hero(String sNomeImagePNG, int linha, int coluna, String tipoBomba) {
         super(sNomeImagePNG, linha, coluna);
         vida = 1;
         setiImage(sNomeImagePNG);
         this.powerups = new ArrayList<>();
+        this.tipoBomba = tipoBomba;
     }
     
     
@@ -66,44 +66,12 @@ public class Hero extends Personagem implements Serializable {
         return false;
     }
     
-    
-    
-    
-    
-    
     public boolean setPosicao(int linha, int coluna){
-        if(this.pPosicao.setPosicao(linha, coluna)){
-            //return validaPosicao();
+        this.pPosicao.setPosicao(linha, coluna);
+        if(this.validaPosicao()){
             return true;
         }
         return false;       
-    }
-
-    //Essa função valida as posições do heroi considerando o mapa e os personagens
-    public boolean validaPosicao(){
-        if(super.validaPosicao()){
-            Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
-            Mapa mapa = fase.getMapaFase();
-            for(Personagem p : fase.getPersonagens()){
-                if(this.pPosicao.igual(p.getpPosicao())){
-                    if(!p.isbTransponivel()){
-                        voltaAUltimaPosicao();
-                        return false;
-                    }
-                }
-            }
-            for(Blocos b : mapa.getMapa()){
-                if(this.pPosicao.igual(b.getpPosicao())){
-                    if(!b.isbTransponivel()){
-                        voltaAUltimaPosicao();
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-        
     }
 
     public int getNumeroBombas() {
@@ -114,17 +82,17 @@ public class Hero extends Personagem implements Serializable {
         this.numeroBombas = numeroBombas;
     }
 
-    public int getTamanhoBomba() {
-        return tamanhoBomba;
+    public String getTipoBomba() {
+        return tipoBomba;
     }
 
-    public void setTamanhoBomba(int tamanhoBomba) {
-        this.tamanhoBomba = tamanhoBomba;
+    public void setTipoBomba(String tipoBomba) {
+        this.tipoBomba = tipoBomba;
     }
     
     public void colocaBomba(){
         if(numeroBombas > 0){
-            Bomba b = new Bomba("bombaNormal.png", this.pPosicao.getLinha(), this.pPosicao.getColuna(), this);
+            Bomba b = new Bomba(tipoBomba, this.pPosicao.getLinha(), this.pPosicao.getColuna(), this);
             Desenho.acessoATelaDoJogo().adicionaModelo(b);
             numeroBombas--;
         }

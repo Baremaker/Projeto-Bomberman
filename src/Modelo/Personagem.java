@@ -55,24 +55,6 @@ public abstract class Personagem extends Model implements Serializable {
         System.out.println("vida perdidaPersonagem:"+this.vida);
     }
 
-    //Essa função valida a posição APÓS a movimentação: se a posição não for válida ele retorna para a posição anterior
-    //Função geral para validar apenas se esta fora ou não da tela
-    protected boolean validaPosicao(){
-        if(this.pPosicao.getLinha() < 0 || this.pPosicao.getLinha() >= Auxiliar.Consts.MUNDO_ALTURA){
-            voltaAUltimaPosicao();
-            return false;
-        }
-        if(this.pPosicao.getColuna() < 0 || this.pPosicao.getColuna() >= Auxiliar.Consts.MUNDO_LARGURA){
-            voltaAUltimaPosicao();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean voltaAUltimaPosicao(){
-        return this.pPosicao.volta();
-    }
-
     public boolean moveUp() { 
         if(this.pPosicao.moveUp()){
             return validaPosicao();

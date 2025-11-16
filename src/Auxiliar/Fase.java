@@ -79,7 +79,7 @@ public class Fase implements Serializable{
     public void fase1(){
          mapaFase = new Mapa("0000000000001"
                             +"0000000000000"
-                            +"0000030300000"   
+                            +"0000030300002"   
                             +"0101010101010"
                             +"0101010101010"
                             +"0101010101010"
@@ -89,7 +89,7 @@ public class Fase implements Serializable{
                             +"0101010101010"
                             +"0101010101010");
         
-        hero = new Hero("heroDireita.png", 0, 7);
+        hero = new Hero("heroDireita.png", 0, 7, "Basica");
         this.addPersonagem(hero);
         //this.atualizaCamera();
         

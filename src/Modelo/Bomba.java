@@ -27,17 +27,38 @@ public class Bomba extends Personagem implements Serializable {
     private int contador = 0;
     private int tempoDetonacao = 10;
     private Hero bomberman;
-    private int tamanhoBomba;
     private char codigo;
+    private String tipoExplosao;
+    private int tamanhoBomba;
     
-    public Bomba(String sNomeImagePNG, int linha, int coluna, Hero bomberman){
-        super(sNomeImagePNG, linha, coluna);
+    
+    public Bomba(String tipoBomba, int linha, int coluna, Hero bomberman){
+        super(decodificaTipo(tipoBomba), linha, coluna);
+        String sNomeImagePNG;
+        switch(tipoBomba){
+                case "Basica": 
+                    sNomeImagePNG = "bombaNormal.png";
+                    this.tamanhoBomba = 3;
+                    break;
+                default: 
+                    sNomeImagePNG = "bombaNormal.png";
+                    tamanhoBomba = 1;
+                    
+            }
         setiImage(sNomeImagePNG);
         this.bTransponivel = true;
         this.bMortal = false;
         this.bomberman = bomberman;
-        this.tamanhoBomba = bomberman.getTamanhoBomba();
-        
+        this.tipoExplosao = tipoBomba;
+    }
+    
+    private static String decodificaTipo(String tipoBomba){
+        switch(tipoBomba){
+                case "Basica": 
+                    return "bombaNormal.png";
+                default:
+                    return "bombaNormal.png";
+        }
     }
 
     public void setiImage(String sNomeImagePNG) {
@@ -68,32 +89,20 @@ public class Bomba extends Personagem implements Serializable {
         Desenho.acessoATelaDoJogo().removePersonagem(this);
     }
 
-    private boolean validaPosicao(int linhaOffset, int colunaOffset){
-        if ((pPosicao.getLinha()+linhaOffset) < 0 || (pPosicao.getLinha()+linhaOffset) >= Auxiliar.Consts.MUNDO_ALTURA)return false;
-        if ((pPosicao.getColuna()+colunaOffset) < 0 || (pPosicao.getColuna()+colunaOffset) >= Auxiliar.Consts.MUNDO_LARGURA)return false;
-        if((143 > (pPosicao.getLinha() + linhaOffset)*13 + pPosicao.getColuna() + colunaOffset && (pPosicao.getLinha() + linhaOffset)*13 + pPosicao.getColuna() + colunaOffset >= 0)){
-        if(Desenho.acessoATelaDoJogo().getFaseAtual().getMapaFase().getMapa().get((pPosicao.getLinha() + linhaOffset)*13 + pPosicao.getColuna() + colunaOffset) instanceof BlocoMetal){
-            return false;
-            }
-        }
-        return true;
-    }
-
     public void criaExplosoes(){
-        int danoBomba = this.vida;
         boolean flagCima=true;
         boolean flagBaixo=true;
         boolean flagEsquerda=true;
         boolean flagDireita=true;
         
-        Explosao meio = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna(), danoBomba);
+        Explosao meio = new Explosao(tipoExplosao, pPosicao.getLinha(), pPosicao.getColuna());
         //Desenho.acessoATelaDoJogo().addPersonagem(meio);
         meio.validaPosicao();
         Desenho.acessoATelaDoJogo().adicionaModelo(meio);
         for(int i=0; i<tamanhoBomba; i++){
             //Pra cima
             if(flagCima){
-                Explosao cima = new Explosao("explosãoTipo1.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
+                Explosao cima = new Explosao(tipoExplosao, pPosicao.getLinha()-1-i, pPosicao.getColuna());
                 if(cima.validaPosicao()){
                     //System.out.println("valido acima");
                     //Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
@@ -104,7 +113,7 @@ public class Bomba extends Personagem implements Serializable {
             //Pra direita
             if(flagDireita){
                 
-                Explosao direita = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
+                Explosao direita = new Explosao(tipoExplosao, pPosicao.getLinha(), pPosicao.getColuna()+1+i);
             
                 if(direita.validaPosicao()){
                     //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
@@ -115,7 +124,7 @@ public class Bomba extends Personagem implements Serializable {
             //Pra baixo
             if(flagBaixo){
                 
-                Explosao baixo = new Explosao("explosãoTipo1.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
+                Explosao baixo = new Explosao(tipoExplosao, pPosicao.getLinha()+1+i, pPosicao.getColuna());
                 if(baixo.validaPosicao()){
                     //Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(baixo);
@@ -125,7 +134,7 @@ public class Bomba extends Personagem implements Serializable {
             //Pra esquerda
             if(flagEsquerda){
                 
-                Explosao esquerda = new Explosao("explosãoTipo1.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
+                Explosao esquerda = new Explosao(tipoExplosao, pPosicao.getLinha(), pPosicao.getColuna()-1-i);
                 if(esquerda.validaPosicao()){
                     //Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
                     Desenho.acessoATelaDoJogo().adicionaModelo(esquerda);

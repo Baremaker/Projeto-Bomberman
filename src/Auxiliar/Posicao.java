@@ -94,4 +94,22 @@ public class Posicao implements Serializable {
     public boolean moveLeft() {
         return this.setPosicao(this.getLinha(), this.getColuna() - 1);
     }
+    
+    public boolean equals(Object o) {
+        // Se for o mesmo objeto na memória, é igual
+        if (this == o) return true;
+        
+        // Se o outro for nulo ou de uma classe diferente, não é igual
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        // Converte o "Object" para "Posicao"
+        Posicao posicao = (Posicao) o;
+        
+        // Compara os valores de linha e coluna
+        return linha == posicao.linha && coluna == posicao.coluna;
+    }
+    public int hashCode() {
+        // Usa números primos para misturar a linha e a coluna num único int
+        return 31 * linha + coluna;
+    }
 }

@@ -5,7 +5,8 @@
 package Modelo;
 import Modelo.Bomba;
 import Modelo.Explosao;
-
+import Auxiliar.Mapa;
+import Auxiliar.Fase;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Controler.Tela;
@@ -73,7 +74,43 @@ public abstract class Model implements Serializable {
         // Usa as coordenadas de pixel (float x, y) da Posicao para a checagem AABB
         return new Rectangle((int)pPosicao.getX(), (int)pPosicao.getY(), Consts.CELL_SIDE, Consts.CELL_SIDE);
     }
-    
-    
+        //Essa função valida a posição APÓS a movimentação: se a posição não for válida ele retorna para a posição anterior
+    //Função para validar a posição do modelo considerando o mapa, os personagens e se esta fora ou não da tela
+    public boolean validaPosicao(){
+        if(!this.ehPosicaoValida(this.pPosicao)){
+            voltaAUltimaPosicao();
+            return false;
+        }else return true;        
+    }
+    public boolean ehPosicaoValida(Posicao p){
+        if(p.getLinha() < 0 || p.getLinha() >= Auxiliar.Consts.MUNDO_ALTURA){
+            return false;
+        }
+        if(p.getColuna() < 0 || p.getColuna() >= Auxiliar.Consts.MUNDO_LARGURA){
+            return false;
+        }
+        Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+        Mapa mapa = fase.getMapaFase();
+        for (Personagem personagem : fase.getPersonagens()) {
+            if (p.igual(personagem.getpPosicao())) {
+                if (!personagem.isbTransponivel()) {
+                    return false;
+                }
+            }
+        }
+        for (Blocos b : mapa.getMapa()) {
+            if (p.igual(b.getpPosicao())) {
+                if (!b.isbTransponivel()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+        
+    }
+
+    public boolean voltaAUltimaPosicao(){
+        return this.pPosicao.volta();
+    }    
     
 }
