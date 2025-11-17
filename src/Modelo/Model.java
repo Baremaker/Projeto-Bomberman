@@ -93,9 +93,6 @@ public abstract class Model implements Serializable {
         Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
         Mapa mapa = fase.getMapaFase();
         for (Personagem personagem : fase.getPersonagens()) {
-            if (personagem == this) {
-                continue; 
-            }
             if (p.igual(personagem.getpPosicao())) {
                 if (!personagem.isbTransponivel()) {
                     return false;

@@ -10,6 +10,8 @@ import Auxiliar.Fase;
 import Auxiliar.Mapa;
 import Controler.ControleDeJogo;
 import Controler.Tela;
+import Controler.Menu;
+ import Controler.GameOverScreen;
 import Modelo.BombaExplosao.BombaEletrica;
 import Modelo.Power.MaisVida;
 import Modelo.Power.Powerup;
@@ -90,6 +92,22 @@ public class Hero extends Personagem implements Serializable {
     public TipoBomba getTipoBomba() {
         return tipoBomba;
     }
+    
+    public String getNomeTipoBomba() {
+        switch(tipoBomba.getImagemBomba()){
+            case "bombaNormal.png":
+                return "Bomba Normal";
+            case "bombaDarknessTrevoso.png":
+                return "Bomba Darkness Trevosso do Mal";
+            case "bombaEletrizante.png":
+                return "Bomba Eletrizante";
+            case "megaBomba.png":
+                return "Mega Bomba";
+            case "minaExplosiva.png":
+                return "Mina Explosiva";
+            default: return "Tipo nao identificado";
+        }
+    }
 
     public void setTipoBomba(TipoBomba tipoBomba) {
         this.tipoBomba = tipoBomba;
@@ -152,21 +170,10 @@ public class Hero extends Personagem implements Serializable {
                     return; // Sai da função sem remover o personagem
                 }
             }
-            //System.out.println("vida:"+this.vida);
             // LÓGICA DE MORTE FINAL (GAME OVER)
-            //Desenho.acessoATelaDoJogo().removePersonagem(this); 
+            Desenho.acessoATelaDoJogo().mostrarGameOver(); 
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     /*
     public boolean moveUp() {
@@ -194,12 +201,12 @@ public class Hero extends Personagem implements Serializable {
     }
     */
 
-    /*public String getVidas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
-
     public ArrayList<Powerup> getPowerups() {
         return powerups;
+    }
+    
+    public int getVidas() {
+        return vida;
     }
 
     
