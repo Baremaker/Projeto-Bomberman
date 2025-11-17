@@ -10,6 +10,7 @@ import Auxiliar.Fase;
 import Auxiliar.Mapa;
 import Controler.ControleDeJogo;
 import Controler.Tela;
+import Modelo.BombaExplosao.BombaEletrica;
 import Modelo.Power.MaisVida;
 import Modelo.Power.Powerup;
 import java.awt.Graphics;
@@ -116,6 +117,13 @@ public class Hero extends Personagem implements Serializable {
                 ultimaBombaPlantada = null;
                 
             }
+            if (tipoBomba instanceof BombaEletrica) {
+            Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+            // Ativa o estado de paralisia na fase
+            fase.setIsEletricidadeAtiva(true);
+            
+            }
+            
         }
     }
     public void levaDano(int dano) {

@@ -30,6 +30,7 @@ public class Fase implements Serializable{
     private ArrayList<Powerup> powerups;
     private Hero hero;
     private Mapa mapaFase;
+    private boolean isEletricidadeAtiva = false;
     //private ArrayList<Powerup> powerup;
     public Fase() {
         this.fase = new ArrayList<>();
@@ -58,6 +59,17 @@ public class Fase implements Serializable{
 
     public void removerPowerUp(Powerup power) {
         powerups.remove(power);
+    }
+
+    public boolean isIsEletricidadeAtiva() {
+        
+        return isEletricidadeAtiva;
+    }
+
+    public void setIsEletricidadeAtiva(boolean isEletricidadeAtiva) {
+        
+        this.isEletricidadeAtiva = isEletricidadeAtiva;
+        
     }
     
     

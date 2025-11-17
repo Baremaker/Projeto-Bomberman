@@ -86,4 +86,7 @@ public abstract class Personagem extends Model implements Serializable {
     public boolean isbMortal() {
         return bMortal;
     }
+
+
+
 }

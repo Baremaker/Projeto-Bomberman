@@ -7,6 +7,7 @@ package Modelo.BombaExplosao;
 import Modelo.BombaExplosao.TipoBomba;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Auxiliar.Fase;
 import Controler.ControleDeJogo;
 import Controler.Tela;
 import Auxiliar.Posicao;
@@ -54,7 +55,9 @@ public class Bomba extends Personagem implements Serializable {
         this.bomberman = bomberman;
         //this.tipoExplosao = tipoBomba;
         this.tipoEstrategia = tipo;
+        
         this.tamanhoBomba=1;
+                
     }
     
     /*private static String decodificaTipo(String tipoBomba){
@@ -91,6 +94,12 @@ public class Bomba extends Personagem implements Serializable {
     }
 
     public void estouraBomba(){
+        if (tipoEstrategia instanceof BombaEletrica) {//para de paralisar personagens
+            Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+            // Desativa o estado de paralisia na fase
+            fase.setIsEletricidadeAtiva(false);
+            if(!fase.isIsEletricidadeAtiva())System.out.println("sem eletrico:");
+        }
         bomberman.setNumeroBombas(bomberman.getNumeroBombas() + 1);
         criaExplosoes();
         Desenho.acessoATelaDoJogo().removePersonagem(this);

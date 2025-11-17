@@ -43,7 +43,7 @@ public class BombaDark extends TipoBomba implements Serializable {
             //Pra cima
             
             if(flagSupDireito){
-                System.out.println("tenta em cima");
+                
                 Explosao supdireito = criarInstanciaExplosao(pPosicao.getLinha()-1-i, pPosicao.getColuna()+1+i);
                 if(supdireito.validaPosicao()){
                     //System.out.println("valido acima");

@@ -33,7 +33,7 @@ public abstract class TipoBomba {
             //Pra cima
             
             if(flagCima){
-                System.out.println("tenta em cima");
+                
                 Explosao cima = criarInstanciaExplosao(pPosicao.getLinha()-1-i, pPosicao.getColuna());
                 if(cima.validaPosicao()){
                     //System.out.println("valido acima");

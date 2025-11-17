@@ -16,6 +16,7 @@ public class BichinhoVaiVemVertical extends Personagem{
     }
 
     public void autoDesenho(){
+        if(!paralisia()){
         if(contadorDeFrames == 5){
             contadorDeFrames = 0;
             if(bUp)
@@ -25,6 +26,7 @@ public class BichinhoVaiVemVertical extends Personagem{
             bUp = !bUp;            
         }
         contadorDeFrames++;
+        }
         super.autoDesenho();
     }  
 }

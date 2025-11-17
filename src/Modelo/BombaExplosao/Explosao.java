@@ -15,6 +15,7 @@ import Modelo.Blocos;
 import Modelo.Hero;
 import Modelo.Personagem;
 import Modelo.Power.BombaDarkPower;
+import Modelo.Power.BombaEletricaPower;
 import Modelo.Power.BombaMinaPower;
 import Modelo.Power.MaisVida;
 import Modelo.Power.Powerup;
@@ -112,7 +113,7 @@ public class Explosao extends Personagem implements Serializable {
                     if (Math.random() < Consts.CHANCE_POWERUP) {
                         if(Math.random() < Consts.CHANCE_VIDA){
                             MaisVida novoPowerup = new MaisVida("coracao.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            System.out.println("powerup vida");
+                            
                             fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
                         }else{
                             
@@ -121,7 +122,9 @@ public class Explosao extends Personagem implements Serializable {
                             //fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
                             for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMinaPower)contador++;}
                             if(contador ==0){
-                            BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            BombaEletricaPower novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                             fase.addPowerUp(novoPowerup);
                             }
                         }
