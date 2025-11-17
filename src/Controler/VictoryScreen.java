@@ -116,12 +116,23 @@ public class VictoryScreen extends JFrame {
                 "<p>Bruno Baremaker Moraes</p>" +
                 "<p>Matheus Watanabe de Vilhena</p>" +
                 "<p>Rafael O. Oliveira</p>" +
-                "<p>Arte: Bruno Moraes</p>" +
-                "<p>Código: Bruno Moraes</p>" +
-                "<p>Design de fases: Bruno Moraes</p>" +
+                "<p>Arte:</p>" +
+                "<p>Alexandre Coura Serravite</p>" +
+                "<p>Bruno Baremaker Moraes</p>" +
+                "<p>Matheus Watanabe de Vilhena</p>" +
+                "<p>Rafael O. Oliveira</p>" +
+                "<p>Código:</p>" +
+                "<p>Alexandre Coura Serravite</p>" +
+                "<p>Bruno Baremaker Moraes</p>" +
+                "<p>Matheus Watanabe de Vilhena</p>" +
+                "<p>Rafael O. Oliveira</p>" +
+                "<p>Design de fases:</p>" +
+                "<p>Alexandre Coura Serravite</p>" +
+                "<p>Bruno Baremaker Moraes</p>" +
+                "<p>Matheus Watanabe de Vilhena</p>" +
+                "<p>Rafael O. Oliveira</p>" +
                 "<p>Agradecimentos especiais:</p>" +
-                "<p>- Família</p>" +
-                "<p>- Amigos</p>" +
+                "<P>Prof. José Fernando Rodrigues Júnior </P>" +
                 "<p>- Comunidade Java</p>" +
                 "<br><br><p>Obrigado por jogar!</p>" +
                 "</center></html>";
