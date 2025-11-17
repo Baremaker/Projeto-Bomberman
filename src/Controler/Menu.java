@@ -60,7 +60,7 @@ painel.add(painelBotoes, gbc);
         btnSair.addActionListener(e -> System.exit(0));
     }
 
-    private void iniciarJogo() {
+    public void iniciarJogo() {
         dispose();
         Tela tTela = new Tela();
         tTela.setVisible(true);

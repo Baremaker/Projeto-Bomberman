@@ -10,6 +10,8 @@ import Auxiliar.Fase;
 import Auxiliar.Mapa;
 import Controler.ControleDeJogo;
 import Controler.Tela;
+import Controler.Menu;
+ import Controler.GameOverScreen;
 import Modelo.BombaExplosao.BombaEletrica;
 import Modelo.Power.MaisVida;
 import Modelo.Power.Powerup;
@@ -170,6 +172,7 @@ public class Hero extends Personagem implements Serializable {
             }
             //System.out.println("vida:"+this.vida);
             // LÓGICA DE MORTE FINAL (GAME OVER)
+            Desenho.acessoATelaDoJogo().mostrarGameOver();
             //Desenho.acessoATelaDoJogo().removePersonagem(this); 
         }
     }

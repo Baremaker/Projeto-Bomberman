@@ -46,6 +46,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
     private Hero hero;
     private Fase faseAtual;
+    private Timer gameTimer;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     private int cameraLinha = 0;
@@ -67,6 +68,26 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         hero = faseAtual.getHero();
     }
 
+    public void mostrarGameOver() {
+    if (this.gameTimer != null) {
+        this.gameTimer.cancel(); // Para o loop do jogo (o repaint)
+    }
+    this.setVisible(false); // Esconde a janela do jogo
+
+    // Agora sim, cria a tela de Game Over, passando ESTA tela (this)
+    new GameOverScreen(this); 
+    }
+    
+    public void resetGame() {
+    // Lógica de reiniciar a fase (copiada da sua tecla 'T')
+    this.faseAtual.getPersonagens().clear();
+    Fase novaFase = new Fase();
+    novaFase.fase1();
+    faseAtual = novaFase;
+    hero = faseAtual.getHero();
+    this.atualizaCamera();
+    }
+    
     public int getCameraLinha() {
         return cameraLinha;
     }
