@@ -201,6 +201,8 @@ public class Hero extends Personagem implements Serializable {
     public ArrayList<Powerup> getPowerups() {
         return powerups;
     }
+
+    
     
     
     

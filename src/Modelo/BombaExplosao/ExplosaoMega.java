@@ -4,10 +4,16 @@
  */
 package Modelo.BombaExplosao;
 
+import java.io.Serializable;
+
 /**
  *
  * @author aserr
  */
-public class ExplosaoMega {
+public class ExplosaoMega extends Explosao implements Serializable {
+    
+    public ExplosaoMega(String sNomeImagePNG, int linha, int coluna) {
+        super(sNomeImagePNG, linha, coluna);
+    }
     
 }

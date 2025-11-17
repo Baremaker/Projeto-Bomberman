@@ -55,8 +55,8 @@ public class Bomba extends Personagem implements Serializable {
         this.bomberman = bomberman;
         //this.tipoExplosao = tipoBomba;
         this.tipoEstrategia = tipo;
-        
         this.tamanhoBomba=1;
+        if(tipoEstrategia instanceof BombaMega)this.tamanhoBomba=4;
                 
     }
     
