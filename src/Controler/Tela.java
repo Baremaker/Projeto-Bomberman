@@ -114,7 +114,7 @@ public void paint(Graphics gOld) {
         g2.setColor(java.awt.Color.WHITE);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-        g2.drawString("Vida: " + hero.getVida(), 16, 28);
+        g2.drawString("Vida: " + hero.getVidas(), 16, 28);
         g2.drawString("Nro de Bombas: " + hero.getNumeroBombas(), 16, 52);
         g2.drawString("Bomba: " + hero.getNomeTipoBomba(), 16, 76);
 

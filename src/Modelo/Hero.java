@@ -174,16 +174,6 @@ public class Hero extends Personagem implements Serializable {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*
     public boolean moveUp() {
         this.pPosicao.velocidadeY = -Consts.HERO_SPEED_PIXELS;
@@ -210,12 +200,10 @@ public class Hero extends Personagem implements Serializable {
     }
     */
 
-    /*public String getVidas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
-
     public ArrayList<Powerup> getPowerups() {
         return powerups;
+    }
+    
     public int getVidas() {
         return vida;
     }
