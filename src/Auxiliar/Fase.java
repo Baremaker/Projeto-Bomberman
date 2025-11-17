@@ -108,23 +108,21 @@ public class Fase implements Serializable{
         ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
         this.addPersonagem(zz);
 
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 3, 4);
+        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 1, 4);
         this.addPersonagem(bBichinhoH);
 
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 6,6);
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("inimigoTipo2Frente.png", 10,10);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Frente_inimigoTipo1.png", 10,10);
         this.addPersonagem(bVv);
 
-        Caveira bV = new Caveira("inimigoTipo2Dead.png", 9, 0);
+        Caveira bV = new Caveira("inimigoTipo2.png", 0, 0, "Vertical", "Direita", 20);
         this.addPersonagem(bV);
 
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
         this.addPersonagem(chase);
-
-        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);    
+        
     }
 
     public String getNumeroDaFase() {
