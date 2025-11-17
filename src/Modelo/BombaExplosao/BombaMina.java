@@ -2,31 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.BombaExplosao;
 
-import Auxiliar.Posicao;
+import Modelo.BombaExplosao.TipoBomba;
 import java.io.Serializable;
 
 /**
  *
  * @author aserr
  */
-public class BombaNormal extends TipoBomba implements Serializable {
-        String IMAGEM_NOME_EXPLOSAO = "explosaoTipo3.png";
-        String IMAGEM_NOME_BOMBA = "bombaNormal.png";
-   
-    
+public class BombaMina extends TipoBomba implements Serializable{
+    private  String IMAGEM_NOME_EXPLOSAO = "explosaoMina1.png"; 
+    private  String IMAGEM_NOME_BOMBA = "minaExplosiva.png";
+
     public String getImagemExplosao() {
-        System.out.println("nome:"+IMAGEM_NOME_EXPLOSAO);
         return IMAGEM_NOME_EXPLOSAO;
     }
 
+    @Override
     public String getImagemBomba() {
         return IMAGEM_NOME_BOMBA;
     }
 
     @Override
     public Explosao criarInstanciaExplosao(int linha, int coluna) {
-        return new Explosao(IMAGEM_NOME_EXPLOSAO, linha, coluna);
+        return new ExplosaoMina(IMAGEM_NOME_EXPLOSAO,linha,coluna);
     }
+
+    
+
+    
+
+
+
+
+
+
 }

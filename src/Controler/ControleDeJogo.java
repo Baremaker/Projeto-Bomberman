@@ -11,8 +11,8 @@ import Auxiliar.Mapa;
 import Modelo.Blocos;
 import Modelo.BlocoMetal;
 import Modelo.BlocoVazio;
-import Modelo.Bomba;
-import Modelo.Explosao;
+import Modelo.BombaExplosao.Bomba;
+import Modelo.BombaExplosao.Explosao;
 import Modelo.Power.Powerup;
 import java.awt.Rectangle;
 public class ControleDeJogo {

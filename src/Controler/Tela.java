@@ -1,7 +1,7 @@
 package Controler;
 import Modelo.BlocoVazio;
-import Modelo.Bomba;
-import Modelo.Explosao;
+import Modelo.BombaExplosao.Bomba;
+import Modelo.BombaExplosao.Explosao;
 import Modelo.Model;
 import Modelo.Blocos;
 import Modelo.BlocoMetal;
@@ -115,11 +115,11 @@ public void paint(Graphics gOld) {
         g2.setColor(java.awt.Color.WHITE);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-        String vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
-        String faseTxt = "FASE: " + (faseAtual != null ? faseAtual.getNumeroDaFase() : 1);
+        //String vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
+        //String faseTxt = "FASE: " + (faseAtual != null ? faseAtual.getNumeroDaFase() : 1);
 
-        g2.drawString(vidasTxt, 16, 28);
-        g2.drawString(faseTxt, 16, 52);
+        //g2.drawString(vidasTxt, 16, 28);
+        //g2.drawString(faseTxt, 16, 52);
 
     } catch (Exception e) {
         e.printStackTrace();

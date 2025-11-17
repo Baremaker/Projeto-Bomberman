@@ -2,15 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.BombaExplosao;
+import Modelo.BombaExplosao.Bomba;
 import Auxiliar.Consts;
 import java.io.Serializable;
 
 import Auxiliar.Desenho;
 import Auxiliar.Fase;
 import Auxiliar.Mapa;
+import Modelo.BlocoVazio;
+import Modelo.Blocos;
+import Modelo.Hero;
+import Modelo.Personagem;
 import Modelo.Power.BombaDarkPower;
+import Modelo.Power.BombaMinaPower;
 import Modelo.Power.MaisVida;
+import Modelo.Power.Powerup;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -78,6 +85,7 @@ public class Explosao extends Personagem implements Serializable {
     }
     
     public boolean validaPosicao(){
+        int contador = 0;
         //System.out.println("linha:"+pPosicao.getLinha()+"coluna:"+pPosicao.getColuna());
         if ((this.pPosicao.getLinha()) < 0 || (this.pPosicao.getLinha()) >= Auxiliar.Consts.MUNDO_ALTURA)return false;
         if ((this.pPosicao.getColuna()) < 0 || (this.pPosicao.getColuna()) >= Auxiliar.Consts.MUNDO_LARGURA)return false;
@@ -93,7 +101,7 @@ public class Explosao extends Personagem implements Serializable {
             // Colidiu com um bloco que não é vazio.
                 if(blocoAlvo.isbDestrutivel()){
                 // O bloco é destrutível (BlocoNormal '2'). Aplica dano.
-                    System.out.println("destrutivel");
+                    
                     blocoAlvo.danifica(); 
                     if(blocoAlvo.getVida() <= 0){
                     // Se a vida zerou, remove o bloco e substitui por BlocoVazio
@@ -108,24 +116,28 @@ public class Explosao extends Personagem implements Serializable {
                             fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
                         }else{
                             
-                            BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            System.out.println("powerup bomba");
-                            fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)   
-                        
+                            //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            //System.out.println("powerup bomba");
+                            //fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
+                            for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMinaPower)contador++;}
+                            if(contador ==0){
+                            BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                            fase.addPowerUp(novoPowerup);
+                            }
                         }
                     }
                         // 3. Se não spawnar Powerup, substitui por BlocoVazio (lógica original)
-                    //BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                    //fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA
+                    
                     return true;
                 }else{return false;}
                 // Permite que a explosão avance (já que destruiu o alvo)
                 } else {
                 // Colidiu com BlocoMetal ('1') - Não é destrutível
-                    System.out.println("metal");
+                    //System.out.println("metal");
                     return false; // A explosão não avança
                 }
             }
+            return true;
         }
         
     

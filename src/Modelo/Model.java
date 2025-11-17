@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
-import Modelo.Bomba;
-import Modelo.Explosao;
+import Modelo.BombaExplosao.Bomba;
+import Modelo.BombaExplosao.Explosao;
 import Auxiliar.Mapa;
 import Auxiliar.Fase;
 import Auxiliar.Consts;
