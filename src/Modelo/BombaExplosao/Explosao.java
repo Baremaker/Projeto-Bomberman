@@ -128,6 +128,7 @@ public class Explosao extends Personagem implements Serializable {
                             //BombaEletricaPower novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                             BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                             fase.addPowerUp(novoPowerup);
+                            
                             }
                         }
                     }
