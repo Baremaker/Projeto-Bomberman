@@ -156,7 +156,7 @@ public class VictoryScreen extends JFrame {
                 "<p>Agradecimentos especiais:</p>" +
                 "<P>Prof. José Fernando Rodrigues Júnior </P>" +
                 "<p>- Comunidade Java</p>" +
-                "<p>Obrigado por jogar!</p>" +
+                "<br><br><p>Obrigado por jogar!</p>" +
                 "</center></html>";
 
             JLabel creditos = new JLabel(creditosTexto);
@@ -187,7 +187,7 @@ public class VictoryScreen extends JFrame {
             painelCreditos.add(creditos, java.awt.BorderLayout.CENTER);
 
             // 4. Defina o tamanho e posição inicial do PAINEL (não mais do label)
-            painelCreditos.setBounds(0, getHeight(), getWidth(), 600);
+            painelCreditos.setBounds(0, getHeight(), getWidth(), 800);
             
             // 5. Adicione o PAINEL (e não o label) ao fundo
             labelFundo.add(painelCreditos);
@@ -205,7 +205,7 @@ public class VictoryScreen extends JFrame {
                 painelCreditos.setLocation(0, posY);
 
                 // Quando o texto sair completamente da tela, finalize o jogo
-                if (posY + 600 < 0) {
+                if (posY + 800 < 0) {
                     timer.stop();
                     System.exit(0);
                 }
