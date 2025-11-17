@@ -1,5 +1,6 @@
 package Controler;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -155,17 +156,41 @@ public class VictoryScreen extends JFrame {
                 "<p>Agradecimentos especiais:</p>" +
                 "<P>Prof. José Fernando Rodrigues Júnior </P>" +
                 "<p>- Comunidade Java</p>" +
-                "<br><br><p>Obrigado por jogar!</p>" +
+                "<p>Obrigado por jogar!</p>" +
                 "</center></html>";
 
             JLabel creditos = new JLabel(creditosTexto);
             creditos.setHorizontalAlignment(SwingConstants.CENTER);
-            creditos.setForeground(Color.BLACK);
+            creditos.setForeground(Color.WHITE); // O texto continua BRANCO
             creditos.setFont(new Font("Arial", Font.BOLD, 22));
 
-            // Define o tamanho e posição inicial (abaixo da tela)
-            creditos.setBounds(0, getHeight(), getWidth(), 600);
-            labelFundo.add(creditos);
+            // --- NOSSA CORREÇÃO COMEÇA AQUI ---
+            
+            // 1. Crie um painel com um método de "paint" customizado
+            JPanel painelCreditos = new JPanel(new java.awt.BorderLayout()) {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    // Primeiro, pinta o fundo semitransparente manualmente
+                    g.setColor(new Color(0, 0, 0, 180)); // Preto, 70% transparente
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                    
+                    // DEPOIS, chama o 'super' para desenhar os filhos (o texto) por cima
+                    super.paintComponent(g);
+                }
+            };
+
+            // 2. MUITO IMPORTANTE: Diga ao Swing que este painel NÃO é opaco
+            //    Isso avisa que a imagem de fundo (labelFundo) precisa ser desenhada
+            painelCreditos.setOpaque(false); 
+            
+            // 3. Adicione o label de texto DENTRO do painel
+            painelCreditos.add(creditos, java.awt.BorderLayout.CENTER);
+
+            // 4. Defina o tamanho e posição inicial do PAINEL (não mais do label)
+            painelCreditos.setBounds(0, getHeight(), getWidth(), 600);
+            
+            // 5. Adicione o PAINEL (e não o label) ao fundo
+            labelFundo.add(painelCreditos);
 
             // Timer para animação de subida
             Timer timer = new Timer(20, null);
@@ -175,7 +200,9 @@ public class VictoryScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 posY -= 1; // velocidade da subida
-                creditos.setLocation(0, posY);
+                
+                // 6. Anime a posição do PAINEL
+                painelCreditos.setLocation(0, posY);
 
                 // Quando o texto sair completamente da tela, finalize o jogo
                 if (posY + 600 < 0) {
