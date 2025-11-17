@@ -114,11 +114,9 @@ public void paint(Graphics gOld) {
         g2.setColor(java.awt.Color.WHITE);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-       /*tring vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
-        String faseTxt = "FASE: " + (faseAtual != null ? faseAtual.getNumeroDaFase() : 1);
-
-        g2.drawString(vidasTxt, 16, 28);
-        g2.drawString(faseTxt, 16, 52);*/
+        g2.drawString("Vida: " + hero.getVida(), 16, 28);
+        g2.drawString("Nro de Bombas: " + hero.getNumeroBombas(), 16, 52);
+        g2.drawString("Bomba: " + hero.getNomeTipoBomba(), 16, 76);
 
     } catch (Exception e) {
         e.printStackTrace();
