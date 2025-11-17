@@ -46,11 +46,4 @@ public class GameOverScreen extends JFrame {
         setLocationRelativeTo(null); // centraliza a janela
         setVisible(true);
     }
-
-    // ---------- TESTE RÁPIDO ----------
-    public static void main(String[] args) {
-        new GameOverScreen(() -> {
-            System.out.println("Reiniciar o jogo aqui!");
-        });
-    }
 }
