@@ -39,16 +39,6 @@ public class Bomba extends Personagem implements Serializable {
     public Bomba(String sNomeImagePNG, int linha, int coluna, Hero bomberman,TipoBomba tipo){
         //super(decodificaTipo(tipoBomba), linha, coluna);
         super(sNomeImagePNG, linha, coluna);
-        /*switch(tipoBomba){
-                case "Basica": 
-                    sNomeImagePNG = "bombaNormal.png";
-                    this.tamanhoBomba = 3;
-                    break;
-                default: 
-                    sNomeImagePNG = "bombaNormal.png";
-                    tamanhoBomba = 1;
-                    
-            }*/
         setiImage(sNomeImagePNG);
         this.bTransponivel = true;
         this.bMortal = false;
@@ -61,14 +51,7 @@ public class Bomba extends Personagem implements Serializable {
                 
     }
     
-    /*private static String decodificaTipo(String tipoBomba){
-        switch(tipoBomba){
-                case "Basica": 
-                    return "bombaNormal.png";
-                default:
-                    return "bombaNormal.png";
-        }
-    }*/
+    
 
     public void setiImage(String sNomeImagePNG) {
         try {

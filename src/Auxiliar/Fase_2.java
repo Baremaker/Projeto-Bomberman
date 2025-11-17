@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Auxiliar;
-import Modelo.Power.Powerup;
+
 /**
  *
  * @author aserr
  */
-public class GeraPowerup {
+public class Fase_2 {
     
 }

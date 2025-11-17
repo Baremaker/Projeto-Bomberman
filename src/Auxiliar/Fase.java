@@ -26,18 +26,47 @@ import java.io.Serializable;
  
 public class Fase implements Serializable{
    
-    private ArrayList<Personagem> fase;
-    private ArrayList<Powerup> powerups;
-    private Hero hero;
-    private Mapa mapaFase;
-
-    private boolean isEletricidadeAtiva = false;
-    //private ArrayList<Powerup> powerup;
+    protected ArrayList<Personagem> fase;
+    protected ArrayList<Powerup> powerups;
+    protected Hero hero;
+    protected Mapa mapaFase;
+    protected boolean isEletricidadeAtiva = false;
+    protected int numeroDaFase;
+    // Novo atributo para a Cadeia
+    protected Fase proximaFase;
+    
     public Fase() {
         this.fase = new ArrayList<>();
         this.powerups = new ArrayList<>();
+        
+    }
+    //novas funcoes
+    public Fase proximaFase(){
+        if (this.proximaFase != null) {
+            this.proximaFase.constroiFase();
+            return this.proximaFase;
+        }
+        return null;
+    
     }
 
+    public Fase getProximaFase() {
+        return proximaFase;
+    }
+
+    public void setProximaFase(Fase proximaFase) {
+        this.proximaFase = proximaFase;
+    }
+    
+    public boolean constroiFase() {
+        return false;
+    }
+    
+    
+    public int getNumeroDaFase() {
+       return this.numeroDaFase;
+    }
+    
     public ArrayList<Powerup> getPowerups() {
         return powerups;
     }
@@ -107,16 +136,16 @@ public class Fase implements Serializable{
         ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
         this.addPersonagem(zz);
 
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 3, 4);
+        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("Dir_inimigoTipo1.png", 3, 4);
         this.addPersonagem(bBichinhoH);
 
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 6,6);
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("Dir_inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("inimigoTipo2Frente.png", 10,10);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 10,10);
         this.addPersonagem(bVv);
 
-        Caveira bV = new Caveira("inimigoTipo2Dead.png", 9, 0);
+        Caveira bV = new Caveira("Frente_inimigoTipo2.png", 9, 0);
         this.addPersonagem(bV);
 
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
@@ -126,9 +155,9 @@ public class Fase implements Serializable{
         this.addPersonagem(es);    
     }
 
-    public String getNumeroDaFase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
+
+    
 
 
     

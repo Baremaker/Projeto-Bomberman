@@ -208,21 +208,11 @@ public void paint(Graphics gOld) {
                 //ArrayList<Personagem> novaFase = new ArrayList<Personagem>();
                 Fase novaFase = new Fase();
                 novaFase.fase1();
-                /*Cria faseAtual adiciona personagens*/
-               /*hero = new Hero("Robbo.png", 10, 10);
-                hero.setPosicao(10, 10);
-                novaFase.add(hero);
-                this.atualizaCamera();
-
-                ZigueZague zz = new ZigueZague("bomba.png", 0, 0);
-                novaFase.add(zz);
-
-                Esfera es = new Esfera("esfera.png", 4, 4);
-                novaFase.add(es);*/
+              
                 
                 faseAtual = novaFase;
                 hero = faseAtual.getHero();
-                this.atualizaCamera();
+                //this.atualizaCamera();
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 hero.moveUp();
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {

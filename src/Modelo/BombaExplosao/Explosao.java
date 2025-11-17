@@ -38,31 +38,11 @@ public class Explosao extends Personagem implements Serializable {
     
     public Explosao(String sNomeImagePNG, int linha, int coluna){
         //super(decodificaTipo(tipoExplosao), linha, coluna);
-        super(sNomeImagePNG, linha, coluna);
-//String sNomeImagePNG;
-        /*switch(tipoExplosao){
-                case "Basica": 
-                    sNomeImagePNG = "explosãoTipo1.png";
-                    this.duracaoExplosao = 1;
-                    this.dano = 3;
-                    break;
-                default:
-                    sNomeImagePNG = "explosãoTipo1.png";
-                    this.duracaoExplosao = 1;
-                    this.dano = 3;
-        }*/
-        
+        super(sNomeImagePNG, linha, coluna); 
         setiImage(sNomeImagePNG);
         this.bMortal = false;
     }
-    /*private static String decodificaTipo(String tipoExplosao){
-        switch(tipoExplosao){
-                case "Basica": 
-                    return "explosãoTipo1.png";
-                default:
-                    return "explosãoTipo1.png";
-        }
-    }*/
+   
     
     public void setiImage(String sNomeImagePNG) {
         try {

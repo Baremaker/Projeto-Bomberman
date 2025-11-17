@@ -7,12 +7,13 @@ package Modelo.BombaExplosao;
 import Auxiliar.Desenho;
 import Auxiliar.Posicao;
 import Modelo.Hero;
+import java.io.Serializable;
 
 /**
  *
  * @author aserr
  */
-public abstract class TipoBomba {
+public abstract class TipoBomba implements Serializable {
     private String IMAGEM_NOME_EXPLOSAO;
     private String IMAGEM_NOME_BOMBA;
     

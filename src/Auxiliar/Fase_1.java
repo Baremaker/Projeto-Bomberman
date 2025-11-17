@@ -26,6 +26,56 @@ import java.io.Serializable;
  *
  * @author aserr
  */
-public class Fase_1 extends Fase {
-    
+public class Fase_1 extends Fase implements Serializable {
+        public Fase_1() {
+            this.numeroDaFase = 1;
+        }
+        
+        @Override
+        public boolean constroiFase() {
+        System.out.println("Iniciando Fase 1...");
+        
+        // 1. Resetar ou Inicializar o Mapa
+        //this.mapaFase.getMapa().clear();
+        this.getPersonagens().clear();
+        this.powerups.clear();
+        
+        mapaFase = new Mapa("0000000000001"
+                            +"0000000000000"
+                            +"0000030300002"   
+                            +"0101010101010"
+                            +"0101010101010"
+                            +"0101010101010"
+                            +"0101010101010"
+                            +"0101010101010"
+                            +"0101010101010"
+                            +"0101010101010"
+                            +"0101010101010");
+        
+        hero = new Hero("heroDeFrente.png", 0, 7);
+        this.addPersonagem(hero);
+        //this.atualizaCamera();
+        
+        ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
+        this.addPersonagem(zz);
+
+        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 3, 4);
+        this.addPersonagem(bBichinhoH);
+
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 6,6);
+        this.addPersonagem(bBichinhoH2);
+
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("inimigoTipo2Frente.png", 10,10);
+        this.addPersonagem(bVv);
+
+        Caveira bV = new Caveira("inimigoTipo2Dead.png", 9, 0);
+        this.addPersonagem(bV);
+
+        Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
+        this.addPersonagem(chase);
+
+        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
+        this.addPersonagem(es);   
+        return true;
+    }
 }

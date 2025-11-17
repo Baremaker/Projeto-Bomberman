@@ -26,7 +26,7 @@ import java.io.Serializable;
  *
  * @author aserr
  */
-public class Mapa {
+public class Mapa implements Serializable {
    
    private ArrayList<Blocos> mapa;
    private GeraBlocoProMapa geradorBlocos;
