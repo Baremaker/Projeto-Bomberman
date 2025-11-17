@@ -1,5 +1,3 @@
-//Sempre que o jogador morrer, basta chamar: new GameOverScreen(() -> iniciarNovoJogo());
-//Onde iniciarNovoJogo() é o método que você já usa para reiniciar o mapa/estado do Bomberman.
 package Controler; 
 
 import javax.swing.*;

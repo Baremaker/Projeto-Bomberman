@@ -52,6 +52,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     private int cameraLinha = 0;
     private int cameraColuna = 0;
     private final Set<Integer> teclasPressionadas = new HashSet<>();
+    private int flagTryAgain = 0;
     public Tela() {
         Desenho.setCenario(this);
         initComponents();
@@ -187,8 +188,12 @@ public void paint(Graphics gOld) {
                 repaint();
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, Consts.PERIOD);
+        if(flagTryAgain == 0) {
+            Timer timer = new Timer();
+            timer.schedule(task, 0, Consts.PERIOD);
+            flagTryAgain = 1;
+        }
+        
     }
     
     public void keyPressed(KeyEvent e) {

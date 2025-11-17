@@ -170,10 +170,8 @@ public class Hero extends Personagem implements Serializable {
                     return; // Sai da função sem remover o personagem
                 }
             }
-            //System.out.println("vida:"+this.vida);
             // LÓGICA DE MORTE FINAL (GAME OVER)
-            Desenho.acessoATelaDoJogo().mostrarGameOver();
-            //Desenho.acessoATelaDoJogo().removePersonagem(this); 
+            Desenho.acessoATelaDoJogo().mostrarGameOver(); 
         }
     }
     
