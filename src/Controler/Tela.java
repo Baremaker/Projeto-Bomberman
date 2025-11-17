@@ -44,14 +44,15 @@ import javax.swing.JButton;
 
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
-    private static final int HUD_ALTURA = 80;
     private Hero hero;
     private Fase faseAtual;
+    private Timer gameTimer;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
     private int cameraLinha = 0;
     private int cameraColuna = 0;
     private final Set<Integer> teclasPressionadas = new HashSet<>();
+    private int flagTryAgain = 0;
     public Tela() {
         Desenho.setCenario(this);
         initComponents();
@@ -68,6 +69,26 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         hero = faseAtual.getHero();
     }
 
+    public void mostrarGameOver() {
+    if (this.gameTimer != null) {
+        this.gameTimer.cancel(); // Para o loop do jogo (o repaint)
+    }
+    this.setVisible(false); // Esconde a janela do jogo
+
+    // Agora sim, cria a tela de Game Over, passando ESTA tela (this)
+    new GameOverScreen(this); 
+    }
+    
+    public void resetGame() {
+    // Lógica de reiniciar a fase (copiada da sua tecla 'T')
+    this.faseAtual.getPersonagens().clear();
+    Fase novaFase = new Fase();
+    novaFase.fase1();
+    faseAtual = novaFase;
+    hero = faseAtual.getHero();
+    this.atualizaCamera();
+    }
+    
     public int getCameraLinha() {
         return cameraLinha;
     }
@@ -109,23 +130,22 @@ public void paint(Graphics gOld) {
 
     /* -------------------- DESENHA HUD -------------------- */
     try {
-        g2.setColor(java.awt.Color.DARK_GRAY);
+        
+        g2.setColor(new java.awt.Color(20, 20, 30));
         g2.fillRect(0, 0, getWidth(), HUD_ALTURA);
 
-        g2.setColor(java.awt.Color.WHITE);
+        g2.setColor(java.awt.Color.CYAN);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-        //String vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
-        //String faseTxt = "FASE: " + (faseAtual != null ? faseAtual.getNumeroDaFase() : 1);
-
-        //g2.drawString(vidasTxt, 16, 28);
-        //g2.drawString(faseTxt, 16, 52);
+        g2.drawString("Vida: " + hero.getVidas(), 16, 28);
+        g2.drawString("Nro de Bombas: " + hero.getNumeroBombas(), 16, 52);
+        g2.drawString("Bomba: " + hero.getNomeTipoBomba(), 16, 76);
 
     } catch (Exception e) {
         e.printStackTrace();
     }
 
-    /* -------------------- ÁREA DO JOGO -------------------- */
+    // ÁREA DO JOGO
     Graphics gGame = g2.create(0, HUD_ALTURA, getWidth(), getHeight() - HUD_ALTURA);
 
     // passa o graphics do jogo para o Desenho
@@ -168,8 +188,12 @@ public void paint(Graphics gOld) {
                 repaint();
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(task, 0, Consts.PERIOD);
+        if(flagTryAgain == 0) {
+            Timer timer = new Timer();
+            timer.schedule(task, 0, Consts.PERIOD);
+            flagTryAgain = 1;
+        }
+        
     }
     
     public void keyPressed(KeyEvent e) {

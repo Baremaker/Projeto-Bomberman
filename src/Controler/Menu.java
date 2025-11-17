@@ -2,8 +2,6 @@ package Controler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import Controler.Tela;
 
 public class Menu extends JFrame {
 
@@ -30,7 +28,7 @@ public class Menu extends JFrame {
 
         painel.setLayout(new GridBagLayout());
 
-        // Painel de botões (transparente)
+        // Painel de botões transparente
         JPanel painelBotoes = new JPanel();
         painelBotoes.setOpaque(false);
         painelBotoes.setLayout(new GridLayout(3, 1, 10, 10));
@@ -62,7 +60,7 @@ painel.add(painelBotoes, gbc);
         btnSair.addActionListener(e -> System.exit(0));
     }
 
-    private void iniciarJogo() {
+    public void iniciarJogo() {
         dispose();
         Tela tTela = new Tela();
         tTela.setVisible(true);

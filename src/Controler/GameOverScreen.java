@@ -1,5 +1,3 @@
-//Sempre que o jogador morrer, basta chamar: new GameOverScreen(() -> iniciarNovoJogo());
-//Onde iniciarNovoJogo() é o método que você já usa para reiniciar o mapa/estado do Bomberman.
 package Controler; 
 
 import javax.swing.*;
@@ -7,8 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GameOverScreen extends JFrame {
-
-    public GameOverScreen(Runnable onRetry) {
+    
+    private Tela telaPrincipalDoJogo;
+    
+    public GameOverScreen(Tela tTela) {
+        this.telaPrincipalDoJogo = tTela;
         setTitle("Game Over");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -31,12 +32,15 @@ public class GameOverScreen extends JFrame {
 
         add(painelBotoes, BorderLayout.SOUTH);
 
-        // ---------- AÇÕES DOS BOTÕES ----------
+        // AÇÕES DOS BOTÕES
         btnRetry.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();      // fecha a tela de game over
-                onRetry.run();  // chama a função que reinicia o jogo
+                telaPrincipalDoJogo.resetGame(); 
+                telaPrincipalDoJogo.setVisible(true);
+                telaPrincipalDoJogo.createBufferStrategy(2);
+                telaPrincipalDoJogo.go();  // chama a função que reinicia o jogo
             }
         });
 
@@ -45,12 +49,5 @@ public class GameOverScreen extends JFrame {
         pack();
         setLocationRelativeTo(null); // centraliza a janela
         setVisible(true);
-    }
-
-    // ---------- TESTE RÁPIDO ----------
-    public static void main(String[] args) {
-        new GameOverScreen(() -> {
-            System.out.println("Reiniciar o jogo aqui!");
-        });
     }
 }
