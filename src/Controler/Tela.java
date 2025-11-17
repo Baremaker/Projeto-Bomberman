@@ -51,7 +51,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
 
     private Hero hero;
     private Fase faseAtual,faseUm,faseDois,faseTres,faseQuatro,faseCinco;
-   
+    private VictoryScreen tWin;
     private Timer gameTimer;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
@@ -214,7 +214,7 @@ public void paint(Graphics gOld) {
         }
         
     }
-    public void avancarFase() {
+    /*public void avancarFase() {
         this.faseAtual.getPersonagens().clear();
         Fase proxima = this.faseAtual.proximaFase();
         if (proxima != null) {
@@ -226,15 +226,25 @@ public void paint(Graphics gOld) {
             System.out.println("Fim do Jogo! Todas as fases completadas.");
             // Lógica de Game Win
         }
-    }
+    }*/
    
+    public void setFaseAtual(Fase novaFase) {
+    this.faseAtual = novaFase;
+    this.hero = novaFase.getHero();
+    this.atualizaCamera(); // Garante que a câmera foque o herói na nova fase
+}
     
-    
-    
-    
-    
-    
-    
+    // Função que printa a tela de vitoria e avança de fase
+    public void vitoria() {
+    if (this.gameTimer != null) {
+        this.gameTimer.cancel(); // Para o loop do jogo (o repaint)
+    }
+    this.setVisible(false); // Esconde a janela do jogo
+
+    // Agora, cria a tela de Vitoria, passando a fase ATUAL e ESTA tela (this)
+    tWin = new VictoryScreen(this.faseAtual, this); 
+}
+
     public void keyPressed(KeyEvent e) {
         try {
             if (teclasPressionadas.contains(e.getKeyCode()))
@@ -243,7 +253,8 @@ public void paint(Graphics gOld) {
             teclasPressionadas.add(e.getKeyCode());
             
             if (e.getKeyCode() == KeyEvent.VK_T) {//cria nova fase
-                avancarFase();
+                vitoria();
+                //avancarFase();
                 
                 /*this.faseAtual.getPersonagens().clear();
                 Fase novaFase = new Fase();

@@ -4,21 +4,40 @@ import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Auxiliar.Fase;
+import Modelo.Hero;
 
 public class VictoryScreen extends JFrame {
 
+    private Hero hero;
     private static final int FASE_FINAL = 5;
-
     private String CAMINHO_IMAGEM;
-
-    private int faseAtual;
+    private Fase faseAtual;
+    private Tela telaPrincipal;
     
-    public VictoryScreen(int faseAtual) {
+    public VictoryScreen(Fase faseAtual, Tela tTela) {
         this.faseAtual = faseAtual;
+        this.hero = faseAtual.getHero();
+        this.telaPrincipal = tTela;
         initComponents();
     }
     
-    private void initComponents() {
+    public void avancarFase() {
+        this.faseAtual.getPersonagens().clear();
+        Fase proxima = this.faseAtual.proximaFase();
+        if (proxima != null) {
+            this.faseAtual = proxima;
+            this.hero = faseAtual.getHero();
+            // A lógica de construção e reset já está no iniciarProximaFase()
+            System.out.println("Fase avançada para: " + this.faseAtual.getNumeroDaFase());
+        } else {
+            System.out.println("Fim do Jogo! Todas as fases completadas.");
+            // Lógica de Game Win
+        }
+    }
+    
+    
+    public void initComponents() {
         
         //Configuração da Janela (JFrame)
         setTitle("Vitória!");
@@ -27,21 +46,19 @@ public class VictoryScreen extends JFrame {
 
         //Criação dos Botões --> Lógica Condicional do Botão "Próxima Fase"
         // Os botões "Próxima Fase" e "Sair do Jogo" só aparecem se a fase ATUAL não for a final
-        if (faseAtual < FASE_FINAL) {
-            CAMINHO_IMAGEM = "/imagens/victoryScreen.jpeg";
+        if (faseAtual.getNumeroDaFase() < FASE_FINAL) {
+            CAMINHO_IMAGEM = "/imagens/victoryScreen.png";
             //Carregamento da Imagem de Fundo
-            ImageIcon imagemDeFundo = new ImageIcon(CAMINHO_IMAGEM);
+            ImageIcon imagemDeFundo = new ImageIcon(getClass().getResource(CAMINHO_IMAGEM));
         
             // Cria um JLabel para guardar a imagem
             JLabel labelFundo = new JLabel(imagemDeFundo);
         
             // Define o tamanho da janela para ser exatamente o tamanho da imagem
-            if (imagemDeFundo.getIconWidth() > 0) {
-                setSize(imagemDeFundo.getIconWidth(), imagemDeFundo.getIconHeight());
-            } else {
-                // Fallback caso a imagem não seja encontrada
+            setSize(800, 700);
+            // Apenas checa se a imagem foi encontrada para logar o erro
+            if (imagemDeFundo.getIconWidth() <= 0) {
                 System.err.println("Erro: Imagem de vitória não encontrada em: " + CAMINHO_IMAGEM);
-                setSize(800, 600); // Tamanho padrão
             }
         
             // Define o layout como nulo (absolute layout) para posicionar os botões
@@ -61,17 +78,22 @@ public class VictoryScreen extends JFrame {
             
             // Ação do botão de proxima fase
             btnProximaFase.addActionListener(new ActionListener() {
-                @Override
+            @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Iniciando próxima fase: " + (faseAtual + 1));
-                    // Chame aqui o método do SEU JOGO para iniciar a próxima fase
-                    // Exemplo: 
-                    // seuControladorDeJogo.iniciarFase(faseAtual + 1);
-                    
-                    // ----- FIM DA ÁREA DE INTEGRAÇÃO -----
-                    
+                    avancarFase(); // Isso atualiza 'this.faseAtual' para a próxima
+
+                    // Devolve a fase nova para a tela principal
+                    telaPrincipal.setFaseAtual(faseAtual); 
+
+                    System.out.println("Iniciando próxima fase: " + faseAtual.getNumeroDaFase());
+
                     // Fecha esta janela de vitória
                     dispose(); 
+
+                    // Mostra a tela do jogo e reinicia o loop
+                    telaPrincipal.setVisible(true);
+                    telaPrincipal.createBufferStrategy(2);
+                    telaPrincipal.go();
                 }
             });
 
@@ -84,22 +106,21 @@ public class VictoryScreen extends JFrame {
                 }
             });
         }
-        //-------------------------------------------------------------------
-        if (faseAtual == FASE_FINAL){
-            CAMINHO_IMAGEM = "/imagens/victoryScreenFinal.jpeg";
+        
+        
+        if (faseAtual.getNumeroDaFase() == FASE_FINAL){
+            CAMINHO_IMAGEM = "/imagens/victoryScreenFinal.png";
             //Carregamento da Imagem de Fundo
-            ImageIcon imagemDeFundo = new ImageIcon(CAMINHO_IMAGEM);
+            ImageIcon imagemDeFundo = new ImageIcon(getClass().getResource(CAMINHO_IMAGEM));
         
             // Cria um JLabel para guardar a imagem
             JLabel labelFundo = new JLabel(imagemDeFundo);
         
-            // Define o tamanho da janela para ser exatamente o tamanho da imagem
-            if (imagemDeFundo.getIconWidth() > 0) {
-                setSize(imagemDeFundo.getIconWidth(), imagemDeFundo.getIconHeight());
-            } else {
-                // Fallback caso a imagem não seja encontrada
+            /// Define o tamanho da janela para ser exatamente o tamanho da imagem
+            setSize(800, 700);
+            // Apenas checa se a imagem foi encontrada para logar o erro
+            if (imagemDeFundo.getIconWidth() <= 0) {
                 System.err.println("Erro: Imagem de vitória não encontrada em: " + CAMINHO_IMAGEM);
-                setSize(800, 600); // Tamanho padrão
             }
         
             // Define o layout como nulo (absolute layout) para posicionar os botões
@@ -139,7 +160,7 @@ public class VictoryScreen extends JFrame {
 
             JLabel creditos = new JLabel(creditosTexto);
             creditos.setHorizontalAlignment(SwingConstants.CENTER);
-            creditos.setForeground(Color.WHITE);
+            creditos.setForeground(Color.BLACK);
             creditos.setFont(new Font("Arial", Font.BOLD, 22));
 
             // Define o tamanho e posição inicial (abaixo da tela)
