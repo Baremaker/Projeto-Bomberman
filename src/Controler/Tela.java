@@ -44,7 +44,6 @@ import javax.swing.JButton;
 
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
-    private static final int HUD_ALTURA = 80;
     private Hero hero;
     private Fase faseAtual;
     private ControleDeJogo cj = new ControleDeJogo();
@@ -115,17 +114,17 @@ public void paint(Graphics gOld) {
         g2.setColor(java.awt.Color.WHITE);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-        String vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
+       /*tring vidasTxt = "VIDAS: " + (hero != null ? hero.getVidas() : 0);
         String faseTxt = "FASE: " + (faseAtual != null ? faseAtual.getNumeroDaFase() : 1);
 
         g2.drawString(vidasTxt, 16, 28);
-        g2.drawString(faseTxt, 16, 52);
+        g2.drawString(faseTxt, 16, 52);*/
 
     } catch (Exception e) {
         e.printStackTrace();
     }
 
-    /* -------------------- ÁREA DO JOGO -------------------- */
+    // ÁREA DO JOGO
     Graphics gGame = g2.create(0, HUD_ALTURA, getWidth(), getHeight() - HUD_ALTURA);
 
     // passa o graphics do jogo para o Desenho

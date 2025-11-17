@@ -58,14 +58,11 @@ public class VictoryScreen extends JFrame {
             // Posição (x, y, largura, altura) 
             btnProximaFase.setBounds(200, 500, 150, 40); 
             labelFundo.add(btnProximaFase); // Adiciona o botão ao label de fundo
-
-            // --- 5. Ações dos Botões (Listeners) ---
             
+            // Ação do botão de proxima fase
             btnProximaFase.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // ----- INÍCIO DA ÁREA DE INTEGRAÇÃO -----
-                    
                     System.out.println("Iniciando próxima fase: " + (faseAtual + 1));
                     // Chame aqui o método do SEU JOGO para iniciar a próxima fase
                     // Exemplo: 
@@ -110,24 +107,24 @@ public class VictoryScreen extends JFrame {
             labelFundo.setLayout(null);
             setContentPane(labelFundo); // Define o JLabel como o conteúdo principal da janela
              // Texto dos créditos
-    String creditosTexto =
-            "<html><center>" +
-            "<h1>CRÉDITOS</h1>" +
-            "<p>Bomberman Game</p>" +
-            "<p>Desenvolvido por:</p>" +
-            "<p>Alexandre Coura Serravite</p>" +
-            "<p>Bruno Baremaker Moraes</p>" +
-            "<p>Matheus Watanabe de Vilhena</p>" +
-            "<p>Rafael O. Oliveira</p>" +
-            "<p>Arte: Bruno Moraes</p>" +
-            "<p>Código: Bruno Moraes</p>" +
-            "<p>Design de fases: Bruno Moraes</p>" +
-            "<p>Agradecimentos especiais:</p>" +
-            "<p>- Família</p>" +
-            "<p>- Amigos</p>" +
-            "<p>- Comunidade Java</p>" +
-            "<br><br><p>Obrigado por jogar!</p>" +
-            "</center></html>";
+            String creditosTexto =
+                "<html><center>" +
+                "<h1>CRÉDITOS</h1>" +
+                "<p>Bomberman Game</p>" +
+                "<p>Desenvolvido por:</p>" +
+                "<p>Alexandre Coura Serravite</p>" +
+                "<p>Bruno Baremaker Moraes</p>" +
+                "<p>Matheus Watanabe de Vilhena</p>" +
+                "<p>Rafael O. Oliveira</p>" +
+                "<p>Arte: Bruno Moraes</p>" +
+                "<p>Código: Bruno Moraes</p>" +
+                "<p>Design de fases: Bruno Moraes</p>" +
+                "<p>Agradecimentos especiais:</p>" +
+                "<p>- Família</p>" +
+                "<p>- Amigos</p>" +
+                "<p>- Comunidade Java</p>" +
+                "<br><br><p>Obrigado por jogar!</p>" +
+                "</center></html>";
 
             JLabel creditos = new JLabel(creditosTexto);
             creditos.setHorizontalAlignment(SwingConstants.CENTER);

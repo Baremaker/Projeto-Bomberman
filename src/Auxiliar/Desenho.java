@@ -20,27 +20,15 @@ public class Desenho implements Serializable {
         return jCenario;
     }
 
-    /**
-     * Retorna o Graphics que deve ser usado pelas chamadas de desenho.
-     * Se setGraphics foi chamado, retorna esse gráfico (com offset HUD).
-     * Caso contrário, cai para o comportamento antigo (retorna o buffer da tela).
-     */
     public static Graphics getGraphicsDaTela() {
         if (gGame != null) return gGame;
         return jCenario.getGraphicsBuffer();
     }
 
-    /**
-     * Permite ao código externo (Tela.paint) fornecer o Graphics que deve ser usado
-     * para desenhar o jogo. Esse Graphics normalmente já tem o offset (y) aplicado.
-     */
     public static void setGraphics(Graphics g) {
         gGame = g;
     }
 
-    /**
-     * Limpa a referência ao Graphics (usar quando terminar de desenhar).
-     */
     public static void clearGraphics() {
         gGame = null;
     }
@@ -57,7 +45,4 @@ public class Desenho implements Serializable {
             iImage.paintIcon(jCenario, g, telaX, telaY);
         }
     }
-
-    /* Se você tiver outras versões de desenhar que usam posições em pixels,
-       pode adaptar para usar getGraphicsDaTela() da mesma forma. */
 }

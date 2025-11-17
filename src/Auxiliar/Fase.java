@@ -30,7 +30,7 @@ public class Fase implements Serializable{
     private ArrayList<Powerup> powerups;
     private Hero hero;
     private Mapa mapaFase;
-    //private ArrayList<Powerup> powerup;
+
     public Fase() {
         this.fase = new ArrayList<>();
         this.powerups = new ArrayList<>();
@@ -74,8 +74,6 @@ public class Fase implements Serializable{
         return mapaFase;
     }
     
-    
-    
     public void fase1(){
          mapaFase = new Mapa("0000000000001"
                             +"0000000000000"
@@ -89,7 +87,7 @@ public class Fase implements Serializable{
                             +"0101010101010"
                             +"0101010101010");
         
-        hero = new Hero("heroDireita.png", 0, 7);
+        hero = new Hero("heroDeFrente.png", 0, 7);
         this.addPersonagem(hero);
         //this.atualizaCamera();
         
