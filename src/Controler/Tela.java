@@ -108,10 +108,11 @@ public void paint(Graphics gOld) {
 
     /* -------------------- DESENHA HUD -------------------- */
     try {
-        g2.setColor(java.awt.Color.DARK_GRAY);
+        
+        g2.setColor(new java.awt.Color(20, 20, 30));
         g2.fillRect(0, 0, getWidth(), HUD_ALTURA);
 
-        g2.setColor(java.awt.Color.WHITE);
+        g2.setColor(java.awt.Color.CYAN);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
         g2.drawString("Vida: " + hero.getVidas(), 16, 28);
