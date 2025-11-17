@@ -4,34 +4,34 @@
  */
 package Modelo.Power;
 
-import Modelo.BombaExplosao.BombaDark;
-import Modelo.Hero;
+import Modelo.BombaExplosao.BombaMega;
 import Modelo.BombaExplosao.TipoBomba;
+import Modelo.Hero;
 import java.io.Serializable;
 
 /**
  *
  * @author aserr
  */
-public class BombaDarkPower extends Powerup implements Serializable{
-        private TipoBomba tipoAnterior;
-    public BombaDarkPower(String sNomeImagePNG, int linha, int coluna) {
+public class BombaMegaPower extends Powerup implements Serializable{
+    private TipoBomba tipoAnterior;
+    public BombaMegaPower(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
     }
+    
     @Override
     public void aplicarEfeito(Hero h) {
-        // Salva o tipo atual
         this.tipoAnterior = h.getTipoBomba(); 
-        
-        // Aplica o novo tipo de bomba
-        h.setTipoBomba(new BombaDark());
-        System.out.println("Powerup BombaDark coletado! Nova bomba ativa.");
+        h.setTipoBomba(new BombaMega());
+        // Define o tamanho da bomba no Hero para 4
+        //h.setTamanhoBomba(4); 
+        System.out.println("Powerup BombaMega coletado! Raio de explosão: 4.");
     }
     
     @Override
     public void reverterEfeito(Hero h) {
-        // Se precisar reverter (ex: ao morrer ou expirar)
         h.setTipoBomba(this.tipoAnterior);
+        // Retorna o tamanho da bomba ao padrão (assumindo 1 como default)
+        
     }
 }
-

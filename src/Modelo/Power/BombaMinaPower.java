@@ -4,7 +4,7 @@
  */
 package Modelo.Power;
 
-import Modelo.BombaExplosao.BombaDark;
+import Modelo.BombaExplosao.BombaMina;
 import Modelo.Hero;
 import Modelo.BombaExplosao.TipoBomba;
 import java.io.Serializable;
@@ -13,25 +13,22 @@ import java.io.Serializable;
  *
  * @author aserr
  */
-public class BombaDarkPower extends Powerup implements Serializable{
-        private TipoBomba tipoAnterior;
-    public BombaDarkPower(String sNomeImagePNG, int linha, int coluna) {
+public class BombaMinaPower extends Powerup implements Serializable{
+    private TipoBomba tipoAnterior;
+    
+    public BombaMinaPower(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
     }
+    
     @Override
     public void aplicarEfeito(Hero h) {
-        // Salva o tipo atual
         this.tipoAnterior = h.getTipoBomba(); 
-        
-        // Aplica o novo tipo de bomba
-        h.setTipoBomba(new BombaDark());
-        System.out.println("Powerup BombaDark coletado! Nova bomba ativa.");
+        h.setTipoBomba(new BombaMina());
+        System.out.println("Powerup BombaMina coletado! Nova bomba ativa.");
     }
     
     @Override
     public void reverterEfeito(Hero h) {
-        // Se precisar reverter (ex: ao morrer ou expirar)
         h.setTipoBomba(this.tipoAnterior);
     }
 }
-

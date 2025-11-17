@@ -2,13 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.BombaExplosao;
 
+import Modelo.BombaExplosao.TipoBomba;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
+import Auxiliar.Fase;
 import Controler.ControleDeJogo;
 import Controler.Tela;
 import Auxiliar.Posicao;
+import Modelo.Hero;
+import Modelo.Personagem;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -52,6 +56,9 @@ public class Bomba extends Personagem implements Serializable {
         //this.tipoExplosao = tipoBomba;
         this.tipoEstrategia = tipo;
         this.tamanhoBomba=1;
+        if(tipoEstrategia instanceof BombaMega)this.tamanhoBomba=4;
+        
+                
     }
     
     /*private static String decodificaTipo(String tipoBomba){
@@ -79,23 +86,35 @@ public class Bomba extends Personagem implements Serializable {
     @Override
     public void autoDesenho() {
         super.autoDesenho();
-        if(contador == tempoDetonacao){
-            estouraBomba();
+        if(!(tipoEstrategia instanceof BombaMina)){
+            if(contador == tempoDetonacao){
+                estouraBomba();
+            }
         }
         contador++;
     }
 
     public void estouraBomba(){
+        if (tipoEstrategia instanceof BombaEletrica) {//para de paralisar personagens
+            Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+            // Desativa o estado de paralisia na fase
+            fase.setIsEletricidadeAtiva(false);
+            if(!fase.isIsEletricidadeAtiva())System.out.println("sem eletrico:");
+        }
         bomberman.setNumeroBombas(bomberman.getNumeroBombas() + 1);
         criaExplosoes();
         Desenho.acessoATelaDoJogo().removePersonagem(this);
     }
 
     public void criaExplosoes(){
-        this.tipoEstrategia.criaExplosoes(bomberman, pPosicao, tamanhoBomba);
-        
-       
-        
+        this.tipoEstrategia.criaExplosoes(bomberman, pPosicao, tamanhoBomba); 
     }
+    /*public void forcarExplosao() {
+        // Garante que só explode se for uma BombaMina
+        if (tipoEstrategia instanceof BombaMina) {
+            estouraBomba();
+        }
+    }*/
+    
 }
 

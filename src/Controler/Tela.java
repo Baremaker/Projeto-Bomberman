@@ -1,7 +1,7 @@
 package Controler;
 import Modelo.BlocoVazio;
-import Modelo.Bomba;
-import Modelo.Explosao;
+import Modelo.BombaExplosao.Bomba;
+import Modelo.BombaExplosao.Explosao;
 import Modelo.Model;
 import Modelo.Blocos;
 import Modelo.BlocoMetal;

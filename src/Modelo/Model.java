@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
-import Modelo.Bomba;
-import Modelo.Explosao;
+import Modelo.BombaExplosao.Bomba;
+import Modelo.BombaExplosao.Explosao;
 import Auxiliar.Mapa;
 import Auxiliar.Fase;
 import Auxiliar.Consts;
@@ -29,7 +29,7 @@ public abstract class Model implements Serializable {
     protected ImageIcon iImage; //Imagem do modelo
     public Posicao pPosicao; //Posicao do modelo
     protected boolean bTransponivel; //É transponivel?
-
+    
     protected Model(String sNomeImagePNG, int linha, int coluna) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
@@ -67,6 +67,7 @@ public abstract class Model implements Serializable {
     }
 
     public void autoDesenho() {
+        
         Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());
     }
     
@@ -112,5 +113,9 @@ public abstract class Model implements Serializable {
     public boolean voltaAUltimaPosicao(){
         return this.pPosicao.volta();
     }    
+    public boolean paralisia(){
+        Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+        return fase.isIsEletricidadeAtiva();
     
+    }
 }

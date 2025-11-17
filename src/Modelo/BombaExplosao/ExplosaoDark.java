@@ -2,11 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.BombaExplosao;
 
+import Modelo.BombaExplosao.Explosao;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Auxiliar.Fase;
+import Modelo.BlocoVazio;
+import Modelo.Blocos;
+import Modelo.Personagem;
 import Modelo.Power.MaisVida;
 import java.io.Serializable;
 import java.util.ArrayList;

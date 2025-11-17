@@ -34,6 +34,7 @@ public class Desenho implements Serializable {
     }
 
     public static void desenhar(ImageIcon iImage, int iColuna, int iLinha) {
+        
         int telaX = (iColuna - jCenario.getCameraColuna()) * Consts.CELL_SIDE;
         int telaY = (iLinha - jCenario.getCameraLinha()) * Consts.CELL_SIDE;
 

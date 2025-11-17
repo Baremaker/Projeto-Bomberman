@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.BombaExplosao;
 
 import Auxiliar.Desenho;
 import Auxiliar.Posicao;
+import Modelo.Hero;
 
 /**
  *
@@ -32,7 +33,7 @@ public abstract class TipoBomba {
             //Pra cima
             
             if(flagCima){
-                System.out.println("tenta em cima");
+                
                 Explosao cima = criarInstanciaExplosao(pPosicao.getLinha()-1-i, pPosicao.getColuna());
                 if(cima.validaPosicao()){
                     //System.out.println("valido acima");
@@ -87,6 +88,8 @@ public abstract class TipoBomba {
     public String getImagemBomba() {
         return IMAGEM_NOME_BOMBA;
     }
+
+   
 
    
   

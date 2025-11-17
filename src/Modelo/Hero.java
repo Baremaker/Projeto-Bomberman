@@ -1,11 +1,16 @@
  package Modelo;
 
+import Modelo.BombaExplosao.BombaMina;
+import Modelo.BombaExplosao.BombaNormal;
+import Modelo.BombaExplosao.Bomba;
+import Modelo.BombaExplosao.TipoBomba;
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
 import Auxiliar.Fase;
 import Auxiliar.Mapa;
 import Controler.ControleDeJogo;
 import Controler.Tela;
+import Modelo.BombaExplosao.BombaEletrica;
 import Modelo.Power.MaisVida;
 import Modelo.Power.Powerup;
 import java.awt.Graphics;
@@ -27,7 +32,7 @@ public class Hero extends Personagem implements Serializable {
     private int velocidade;
     private ArrayList<Powerup> powerups;
     private TipoBomba tipoBomba;
-    
+    private Bomba ultimaBombaPlantada = null;// pra checar mina
     public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
         vida = 1;
@@ -108,11 +113,33 @@ public class Hero extends Personagem implements Serializable {
     
     public void colocaBomba(){
         if(numeroBombas > 0){
+            System.out.println("bomba");
+            if (this.tipoBomba instanceof BombaMina && ultimaBombaPlantada != null) {
+                System.out.println("bomba ja plantada");
+                ultimaBombaPlantada.estouraBomba();
+                ultimaBombaPlantada = null;
+                return;
+            }
             String nomeSpriteBomba = this.tipoBomba.getImagemBomba();
             
             Bomba b = new Bomba(nomeSpriteBomba, this.pPosicao.getLinha(), this.pPosicao.getColuna(), this,this.tipoBomba);
             Desenho.acessoATelaDoJogo().adicionaModelo(b);
             numeroBombas--;
+            if (this.tipoBomba instanceof BombaMina) {
+                System.out.println("bomba mina");
+                ultimaBombaPlantada = b; //
+                numeroBombas++;
+            } else {
+                ultimaBombaPlantada = null;
+                
+            }
+            if (tipoBomba instanceof BombaEletrica) {
+            Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+            // Ativa o estado de paralisia na fase
+            fase.setIsEletricidadeAtiva(true);
+            
+            }
+            
         }
     }
     public void levaDano(int dano) {
@@ -121,7 +148,7 @@ public class Hero extends Personagem implements Serializable {
         if (this.vida <= 0) {
             if (this.possuiPowerup(MaisVida.class)) {
                 // LÓGICA: PERDER POWERUP AO INVÉS DE MORRER
-                System.out.println("tenho powerup");
+                //System.out.println("tenho powerup");
                 // Encontra e remove o powerup MaisVida (só o primeiro)
                 Powerup powerupPerdido = null;
                 for (Powerup p : powerups) {
@@ -137,11 +164,11 @@ public class Hero extends Personagem implements Serializable {
                     
                     // Retorna a vida ao máximo
                     this.vida = 1;
-                    System.out.println("Powerup MaisVida consumido. Vida restaurada.");
+                    //System.out.println("Powerup MaisVida consumido. Vida restaurada.");
                     return; // Sai da função sem remover o personagem
                 }
             }
-            System.out.println("vida:"+this.vida);
+            //System.out.println("vida:"+this.vida);
             // LÓGICA DE MORTE FINAL (GAME OVER)
             //Desenho.acessoATelaDoJogo().removePersonagem(this); 
         }
@@ -183,9 +210,17 @@ public class Hero extends Personagem implements Serializable {
     }
     */
 
+    /*public String getVidas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }*/
+
+    public ArrayList<Powerup> getPowerups() {
+        return powerups;
     public int getVidas() {
         return vida;
     }
+
+    
     
     
     

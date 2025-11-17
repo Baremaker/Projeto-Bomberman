@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.BombaExplosao;
 
+import Modelo.BombaExplosao.TipoBomba;
 import Auxiliar.Desenho;
 import Auxiliar.Posicao;
+import Modelo.Hero;
 import java.io.Serializable;
 
 /**
@@ -41,7 +43,7 @@ public class BombaDark extends TipoBomba implements Serializable {
             //Pra cima
             
             if(flagSupDireito){
-                System.out.println("tenta em cima");
+                
                 Explosao supdireito = criarInstanciaExplosao(pPosicao.getLinha()-1-i, pPosicao.getColuna()+1+i);
                 if(supdireito.validaPosicao()){
                     //System.out.println("valido acima");

@@ -28,17 +28,21 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
     }
 
     public void autoDesenho() {
-        if (iContador == 5) {
-            iContador = 0;
-            if (bRight) {
-                this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() + 1);
-            } else {
-                this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() - 1);
-            }
+        if(!paralisia()){
+            if (iContador == 5) {
+                iContador = 0;
+                if (bRight) {
+                    this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() + 1);
+                } else {
+                    this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() - 1);
+                }
 
-            bRight = !bRight;
-        }
-        super.autoDesenho();
+                bRight = !bRight;
+            }
         iContador++;
+        }
+        
+        super.autoDesenho();
+        //iContador++;
     }
 }
