@@ -39,6 +39,7 @@ public class Chaser extends Personagem implements Serializable {
         
         this.bTransponivel = true;
         this.counter = 0;
+        this.dano=3;
     }
 
     /**
