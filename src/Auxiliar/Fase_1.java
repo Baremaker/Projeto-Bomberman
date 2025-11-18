@@ -58,8 +58,8 @@ public class Fase_1 extends Fase implements Serializable {
         ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
         this.addPersonagem(zz);
 
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 3, 4);
-        this.addPersonagem(bBichinhoH);
+        /*BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 3, 4);
+        this.addPersonagem(bBichinhoH);*/
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
@@ -73,8 +73,8 @@ public class Fase_1 extends Fase implements Serializable {
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
         this.addPersonagem(chase);
 
-        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);   
+        /*Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
+        this.addPersonagem(es);*/ 
         return true;
     }
 }

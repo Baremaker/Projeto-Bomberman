@@ -44,8 +44,8 @@ public class Fase_3 extends Fase implements Serializable{
         ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
         this.addPersonagem(zz);
 
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 0, 4);
-        this.addPersonagem(bBichinhoH);
+        //BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 0, 4);
+        //this.addPersonagem(bBichinhoH);
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
         this.addPersonagem(bBichinhoH2);
@@ -53,14 +53,20 @@ public class Fase_3 extends Fase implements Serializable{
         BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 10,10);
         this.addPersonagem(bVv);
 
-        Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
-        this.addPersonagem(bV);
+        //Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
+        //this.addPersonagem(bV);
 
-        Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
-        this.addPersonagem(chase);
+        Chaser chase1 = new Chaser("inimigoTipo3Frente.png", 9, 12);
+        this.addPersonagem(chase1);
+        
+        Chaser chase2 = new Chaser("inimigoTipo3Frente.png", 6, 7);
+        this.addPersonagem(chase2);
+        
+        Chaser chase3 = new Chaser("inimigoTipo3Frente.png", 2, 3);
+        this.addPersonagem(chase3);
 
-        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);   
+        //Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
+        //this.addPersonagem(es);   
         return true;
     }
 }
