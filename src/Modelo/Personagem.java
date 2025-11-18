@@ -20,14 +20,12 @@ import javax.swing.JPanel;
 public abstract class Personagem extends Model implements Serializable {
     protected boolean bMortal;
     protected int vida;
-    protected int dano;
    
     protected Personagem(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
         setiImage(sNomeImagePNG);
         this.bMortal = true;
         this.vida = 3;
-        this.dano = 0;
     }
     @Override
     public String getsNomeImagePNG() {
@@ -90,13 +88,6 @@ public abstract class Personagem extends Model implements Serializable {
 
     public boolean isbMortal() {
         return bMortal;
-    }
-    public boolean ehInimigo(){
-        return false;
-    }
-
-    public int getDano() {
-        return dano;
     }
 
 

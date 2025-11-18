@@ -46,17 +46,4 @@ public class Desenho implements Serializable {
             iImage.paintIcon(jCenario, g, telaX, telaY);
         }
     }
-    public static void desenharHero(ImageIcon iImage, int iColuna, int iLinha, int stage, int paraHorizontal, int paraVertical) {
-        
-        int telaX = (iColuna - jCenario.getCameraColuna()) * Consts.CELL_SIDE + (int)((stage/3.0f)*Consts.CELL_SIDE*paraHorizontal);
-        int telaY = (iLinha - jCenario.getCameraLinha()) * Consts.CELL_SIDE + (int)((stage/3.0f)*Consts.CELL_SIDE*paraVertical);
-
-        Graphics g = getGraphicsDaTela();
-        if (g == null) return;
-
-        if (telaX >= 0 && telaX < Consts.RES * Consts.CELL_SIDE
-                && telaY >= 0 && telaY < Consts.RES * Consts.CELL_SIDE) {
-            iImage.paintIcon(jCenario, g, telaX, telaY);
-        }
-    }
 }
