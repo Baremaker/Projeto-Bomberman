@@ -175,31 +175,7 @@ public class Hero extends Personagem implements Serializable {
         }
     }
     
-    /*
-    public boolean moveUp() {
-        this.pPosicao.velocidadeY = -Consts.HERO_SPEED_PIXELS;
-        //this.pPosicao.velocidadeX = 0; 
-        return true; 
-    }
-
-    public boolean moveDown() {
-        this.pPosicao.velocidadeY = Consts.HERO_SPEED_PIXELS;
-        //this.pPosicao.velocidadeX = 0;
-        return true;
-    }
-
-    public boolean moveRight() {
-        this.pPosicao.velocidadeX = Consts.HERO_SPEED_PIXELS;
-        //this.pPosicao.velocidadeY = 0;
-        return true;
-    }
-
-    public boolean moveLeft() {
-        this.pPosicao.velocidadeX = -Consts.HERO_SPEED_PIXELS;
-        //this.pPosicao.velocidadeY = 0;
-        return true;
-    }
-    */
+   
 
     public ArrayList<Powerup> getPowerups() {
         return powerups;

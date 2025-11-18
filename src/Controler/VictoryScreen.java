@@ -7,8 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Auxiliar.Fase;
 import Modelo.Hero;
+import java.io.Serializable;
 
-public class VictoryScreen extends JFrame {
+public class VictoryScreen extends JFrame implements Serializable {
 
     private Hero hero;
     private static final int FASE_FINAL = 5;

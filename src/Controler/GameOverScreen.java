@@ -3,8 +3,9 @@ package Controler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serializable;
 
-public class GameOverScreen extends JFrame {
+public class GameOverScreen extends JFrame implements Serializable{
     
     private Tela telaPrincipalDoJogo;
     

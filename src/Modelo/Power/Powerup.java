@@ -38,7 +38,10 @@ public class Powerup extends Model implements Serializable {
             System.out.println(ex.getMessage());
         }
     }
-    
+    @Override
+    public String getsNomeImagePNG() {
+        return sNomeImagePNG;
+    }
     public void aplicarEfeito(Hero h) {
         // Nenhuma ação imediata. O efeito é passivo (checado em Hero.levaDano)
     }

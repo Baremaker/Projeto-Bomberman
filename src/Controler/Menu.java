@@ -2,8 +2,9 @@ package Controler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame implements Serializable{
 
     private Image backgroundImage;
 

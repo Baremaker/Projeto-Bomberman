@@ -4,8 +4,9 @@ import Modelo.BlocoForte;
 import Modelo.BlocoMetal;
 import Modelo.BlocoNormal;
 import Modelo.BlocoVazio;
+import java.io.Serializable;
 
-public class GeraBlocoProMapa {
+public class GeraBlocoProMapa implements Serializable{
     public void geraBloco(Mapa mapa, String mapeado, int i, int j){
         switch (mapeado.charAt(13*i + j)) {
             case '0':

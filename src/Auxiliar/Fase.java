@@ -157,9 +157,21 @@ public class Fase implements Serializable{
 
     
 
-    
-
-
-    
+    /*public void recarregarImagens() {
+    // Recarrega imagens dos personagens
+        for (Personagem per : fase) {
+            per.setiImage(per.getNomeImagePNG()); // O nome da imagem deve ser o único parâmetro
+        }
+    // Recarrega imagens dos powerups
+        for (Powerup p : powerups) {
+            p.setiImage(p.getNomeImagePNG());
+        }
+    // Recarrega imagens dos blocos (mapa)
+        if (mapaFase != null) {
+            for (Blocos b : mapaFase.getMapa()) {
+                b.setiImage(b.getsNomeImagePNG());
+            }
+        }
+    }*/ 
     
 }

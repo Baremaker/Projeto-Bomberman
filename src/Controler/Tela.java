@@ -36,6 +36,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +48,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import javax.swing.JButton;
 
-public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
+public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener, Serializable {
 
     private Hero hero;
     private Fase faseAtual,faseUm,faseDois,faseTres,faseQuatro,faseCinco;
@@ -271,17 +272,9 @@ public void paint(Graphics gOld) {
             } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 hero.moveRight();
             } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                File tanque = new File("POO.dat");
-                tanque.createNewFile();
-                FileOutputStream canoOut = new FileOutputStream(tanque);
-                ObjectOutputStream serializador = new ObjectOutputStream(canoOut);
-                serializador.writeObject(faseAtual);
+                salvarEstadoJogo();
             } else if (e.getKeyCode() == KeyEvent.VK_L) {
-                File tanque = new File("POO.dat");
-                FileInputStream canoOut = new FileInputStream(tanque);
-                ObjectInputStream serializador = new ObjectInputStream(canoOut);
-                faseAtual = (Fase)serializador.readObject();
-                hero = (Hero) faseAtual.getHero();
+                carregarEstadoJogo();
             } else if (e.getKeyCode() == KeyEvent.VK_B) {
                 System.out.println("Colocando bomba...");
                 hero.colocaBomba();
@@ -312,8 +305,81 @@ public void paint(Graphics gOld) {
 
         repaint();
     }
-
-
+    
+    
+    public void salvarEstadoJogo() {
+    String nomeArquivo = "savegame.ser"; 
+    
+    try (
+        // 1. Abre o FileOutputStream para o arquivo de destino
+        FileOutputStream fileOut = new FileOutputStream(nomeArquivo);
+        // 2. Opcional: Adiciona compressão GZIP
+        GZIPOutputStream zipOut = new GZIPOutputStream(fileOut);
+        // 3. Adiciona o ObjectOutputStream para serializar o objeto
+        ObjectOutputStream objectOut = new ObjectOutputStream(zipOut)
+    ) {
+        // Escreve o objeto 'faseAtual' no arquivo.
+        objectOut.writeObject(this.faseAtual); 
+        System.out.println("✅ Jogo salvo com sucesso em " + nomeArquivo);
+        
+    } catch (IOException i) {
+        i.printStackTrace();
+        System.err.println("❌ Erro ao salvar o jogo: " + i.getMessage());
+    }
+    
+    
+    }
+    
+    
+    public void carregarEstadoJogo() {
+       String nomeArquivo = "savegame.ser"; 
+    
+    // Verifica se o arquivo existe antes de tentar carregar
+    File saveFile = new File(nomeArquivo);
+        if (!saveFile.exists()) {
+            System.out.println("⚠️ Arquivo de salvamento (" + nomeArquivo + ") não encontrado.");
+            return;
+        }
+    
+        try (
+            // 1. Abre o FileInputStream para o arquivo de save
+            FileInputStream fileIn = new FileInputStream(nomeArquivo);
+            // 2. Opcional: Adiciona descompressão GZIP (deve corresponder ao Save)
+            GZIPInputStream zipIn = new GZIPInputStream(fileIn);
+            // 3. Adiciona o ObjectInputStream para desserializar o objeto
+            ObjectInputStream objectIn = new ObjectInputStream(zipIn)
+        ) {
+        // Lê o objeto do arquivo e faz o cast para Fase
+            this.faseAtual.getPersonagens().clear();
+            Fase faseCarregada = (Fase) objectIn.readObject();
+        
+        // --- Atualiza o estado do jogo ---
+        
+        // 1. Define a fase atual com o objeto carregado
+            this.setFaseAtual(faseCarregada);
+            //faseCarregada.recarregarImagens();
+           
+            System.out.println("⬆️ Jogo carregado com sucesso! Fase: " + faseCarregada.getNumeroDaFase());
+        
+        } catch (IOException | ClassNotFoundException i) {
+        i.printStackTrace();
+        System.err.println("❌ Erro ao carregar o jogo: " + i.getMessage());
+        } 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

@@ -1,9 +1,10 @@
 package Modelo;
 
 import Auxiliar.Desenho;
+import java.io.Serializable;
 import java.util.Random;
 
-public class ZigueZague extends Personagem{
+public class ZigueZague extends Personagem implements Serializable{
     
     public ZigueZague(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG,linha, coluna);

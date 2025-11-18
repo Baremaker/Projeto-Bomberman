@@ -29,12 +29,13 @@ public abstract class Model implements Serializable {
     protected ImageIcon iImage; //Imagem do modelo
     public Posicao pPosicao; //Posicao do modelo
     protected boolean bTransponivel; //É transponivel?
-    
+    public String sNomeImagePNG;//novo
     protected Model(String sNomeImagePNG, int linha, int coluna) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
         //setiImage(sNomeImagePNG);
         this.setPosicao(linha, coluna);
+        this.sNomeImagePNG = sNomeImagePNG;//novo
     }
 
     public abstract void setiImage(String sNomeImagePNG);/*{
@@ -49,6 +50,10 @@ public abstract class Model implements Serializable {
             System.out.println(ex.getMessage());
         }
     }*/
+
+    public String getsNomeImagePNG() {
+        return sNomeImagePNG;
+    }
 
     public Posicao getpPosicao() {
         return pPosicao;

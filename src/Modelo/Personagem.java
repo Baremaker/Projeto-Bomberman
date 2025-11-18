@@ -27,7 +27,10 @@ public abstract class Personagem extends Model implements Serializable {
         this.bMortal = true;
         this.vida = 3;
     }
-
+    @Override
+    public String getsNomeImagePNG() {
+        return sNomeImagePNG;
+    }
    
     public void setiImage(String sNomeImagePNG) {
         try {

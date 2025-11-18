@@ -15,7 +15,8 @@ import Modelo.BombaExplosao.Bomba;
 import Modelo.BombaExplosao.Explosao;
 import Modelo.Power.Powerup;
 import java.awt.Rectangle;
-public class ControleDeJogo {
+import java.io.Serializable;
+public class ControleDeJogo implements Serializable{
     
     public void desenhaTudo(Fase faseAtual) {
         Mapa map = faseAtual.getMapaFase();
