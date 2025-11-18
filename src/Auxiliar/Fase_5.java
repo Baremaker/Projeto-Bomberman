@@ -26,17 +26,17 @@ public class Fase_5 extends Fase implements Serializable{
         
     mapaFase = new Mapa("0000000000000"
     /*linha1*/         +"0101010101010"
-    /*linha2*/         +"3332332003023"   
-    /*linha3*/         +"2101010101010"
+    /*linha2*/         +"0000000000000"   
+    /*linha3*/         +"0101010101010"
     /*linha4*/         +"0000000000000"
-    /*linha5*/         +"0131010101010"
+    /*linha5*/         +"0101010101010"
     /*linha6*/         +"0000000000000"
     /*linha7*/         +"0101010101010"
     /*linha8*/         +"0000000000000"
-    /*linha9*/         +"0101010131010"
+    /*linha9*/         +"0101010101010"
     /*linha10*/        +"0000000000000", this.numeroDaFase);
         
-        hero = new Hero("heroDeFrente.png", 0, 7);
+        hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
         //this.atualizaCamera();
         
