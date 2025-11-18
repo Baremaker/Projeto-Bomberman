@@ -197,40 +197,48 @@ public class Hero extends Personagem implements Serializable {
         return 1;
     }
     public boolean moveUp() {
-        if(this.pPosicao.moveUp()){
-            if(validaPosicao()){
-                this.movDirecao = "UP";
-                return true;
+        if(this.movStage == 0){
+            if(this.pPosicao.moveUp()){
+                if(validaPosicao()){
+                    this.movDirecao = "UP";
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public boolean moveDown() {
-        if(this.pPosicao.moveDown()){
-            if(validaPosicao()){
-                this.movDirecao = "DOWN";
-                return true;
+        if(this.movStage == 0){
+            if(this.pPosicao.moveDown()){
+                if(validaPosicao()){
+                    this.movDirecao = "DOWN";
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public boolean moveRight() {
-        if(this.pPosicao.moveRight()){
-            if(validaPosicao()){
-                this.movDirecao = "RIGHT";
-                return true;
+        if(this.movStage == 0){
+            if(this.pPosicao.moveRight()){
+                if(validaPosicao()){
+                    this.movDirecao = "RIGHT";
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public boolean moveLeft() {
-        if(this.pPosicao.moveLeft()){
-            if(validaPosicao()){
-                this.movDirecao = "LEFT";
-                return true;
+        if(this.movStage == 0){
+            if(this.pPosicao.moveLeft()){
+                if(validaPosicao()){
+                    this.movDirecao = "LEFT";
+                    return true;
+                }
             }
         }
         return false;
