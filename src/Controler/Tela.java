@@ -17,6 +17,11 @@ import Modelo.Esfera;
 import Modelo.ZigueZague;
 import Auxiliar.Posicao;
 import Auxiliar.Fase;
+import Auxiliar.Fase_1;
+import Auxiliar.Fase_2;
+import Auxiliar.Fase_3;
+import Auxiliar.Fase_4;
+import Auxiliar.Fase_5;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -45,7 +50,8 @@ import javax.swing.JButton;
 public class Tela extends javax.swing.JFrame implements MouseListener, KeyListener {
 
     private Hero hero;
-    private Fase faseAtual;
+    private Fase faseAtual,faseUm,faseDois,faseTres,faseQuatro,faseCinco;
+   
     private Timer gameTimer;
     private ControleDeJogo cj = new ControleDeJogo();
     private Graphics g2;
@@ -63,10 +69,22 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
  /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
         //this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 //Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
-
+      /*          
         faseAtual = new Fase();
         faseAtual.fase1();
-        hero = faseAtual.getHero();
+        hero = faseAtual.getHero();*/
+      faseUm = new Fase_1();
+      faseDois = new  Fase_2();
+      faseTres = new Fase_3();
+      faseQuatro = new Fase_4();
+      faseCinco = new Fase_5();
+      faseUm.setProximaFase(faseDois);
+      faseDois.setProximaFase(faseTres);
+      faseTres.setProximaFase(faseQuatro);
+      faseQuatro.setProximaFase(faseCinco);
+      this.faseAtual = faseUm; // Começa na primeira fase
+      this.faseAtual.constroiFase(); // Chama a construção da primeira fase
+      this.hero = faseAtual.getHero();
     }
 
     public void mostrarGameOver() {
@@ -82,9 +100,10 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     public void resetGame() {
     // Lógica de reiniciar a fase (copiada da sua tecla 'T')
     this.faseAtual.getPersonagens().clear();
-    Fase novaFase = new Fase();
-    novaFase.fase1();
-    faseAtual = novaFase;
+    //Fase novaFase = new Fase_1();
+    //faseUm =novaFase;
+    faseUm.constroiFase();
+    faseAtual = faseUm;
     hero = faseAtual.getHero();
     this.atualizaCamera();
     }
@@ -195,6 +214,26 @@ public void paint(Graphics gOld) {
         }
         
     }
+    public void avancarFase() {
+        this.faseAtual.getPersonagens().clear();
+        Fase proxima = this.faseAtual.proximaFase();
+        if (proxima != null) {
+            this.faseAtual = proxima;
+            this.hero = faseAtual.getHero();
+            // A lógica de construção e reset já está no iniciarProximaFase()
+            System.out.println("Fase avançada para: " + this.faseAtual.getNumeroDaFase());
+        } else {
+            System.out.println("Fim do Jogo! Todas as fases completadas.");
+            // Lógica de Game Win
+        }
+    }
+   
+    
+    
+    
+    
+    
+    
     
     public void keyPressed(KeyEvent e) {
         try {
@@ -204,14 +243,13 @@ public void paint(Graphics gOld) {
             teclasPressionadas.add(e.getKeyCode());
             
             if (e.getKeyCode() == KeyEvent.VK_T) {//cria nova fase
-                this.faseAtual.getPersonagens().clear();
-                //ArrayList<Personagem> novaFase = new ArrayList<Personagem>();
+                avancarFase();
+                
+                /*this.faseAtual.getPersonagens().clear();
                 Fase novaFase = new Fase();
                 novaFase.fase1();
-              
-                
                 faseAtual = novaFase;
-                hero = faseAtual.getHero();
+                hero = faseAtual.getHero();*/
                 //this.atualizaCamera();
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                 hero.moveUp();

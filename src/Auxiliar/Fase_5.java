@@ -4,50 +4,37 @@
  */
 package Auxiliar;
 
-
-import Auxiliar.Mapa;
-import Modelo.Blocos;
-import Modelo.BlocoMetal;
-import java.util.ArrayList;
-import Modelo.Model;
-import Modelo.Personagem;
-import Modelo.Caveira;
-import Modelo.Hero;
-import Modelo.Chaser;
 import Modelo.BichinhoVaiVemHorizontal;
-import Auxiliar.Consts;
-import Auxiliar.Desenho;
-import Controler.ControleDeJogo;
 import Modelo.BichinhoVaiVemVertical;
+import Modelo.Caveira;
+import Modelo.Chaser;
 import Modelo.Esfera;
+import Modelo.Hero;
 import Modelo.ZigueZague;
-import Auxiliar.Posicao;
-import Modelo.Power.Powerup;
 import java.io.Serializable;
 
 /**
  *
  * @author aserr
  */
-public class Fase_2 extends Fase implements Serializable {
-    public Fase_2() {
-        this.numeroDaFase = 2;
+public class Fase_5 extends Fase implements Serializable{
+    public Fase_5() {
+        this.numeroDaFase = 5;
     }
-    
     public boolean constroiFase(){
     this.powerups.clear();
         
-    mapaFase = new Mapa("0000000000303"
+    mapaFase = new Mapa("0000000000000"
     /*linha1*/         +"0101010101010"
-    /*linha2*/         +"2000000000303"   
+    /*linha2*/         +"3332332003023"   
     /*linha3*/         +"2101010101010"
-    /*linha4*/         +"3000020002000"
+    /*linha4*/         +"0000000000000"
     /*linha5*/         +"0131010101010"
-    /*linha6*/         +"0003003320000"
+    /*linha6*/         +"0000000000000"
     /*linha7*/         +"0101010101010"
-    /*linha8*/         +"0000300000030"
+    /*linha8*/         +"0000000000000"
     /*linha9*/         +"0101010131010"
-    /*linha10*/        +"0000000000020");
+    /*linha10*/        +"0000000000000");
         
         hero = new Hero("heroDeFrente.png", 0, 7);
         this.addPersonagem(hero);
@@ -75,6 +62,4 @@ public class Fase_2 extends Fase implements Serializable {
         this.addPersonagem(es);   
         return true;
     }
-    
-    
 }

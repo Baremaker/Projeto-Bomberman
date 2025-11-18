@@ -92,23 +92,63 @@ public class Explosao extends Personagem implements Serializable {
                     fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA;
                     
                     if (Math.random() < Consts.CHANCE_POWERUP) {
-                        if(Math.random() < Consts.CHANCE_VIDA){
+                        double bombaOUvida = Consts.CHANCE_VIDA;
+                        for(Powerup pow: fase.getHero().getPowerups()){if(!(pow instanceof MaisVida))bombaOUvida=1.00;}
+                        System.out.println("bomba ou vida:"+bombaOUvida);
+                        if(Math.random() < bombaOUvida){
                             MaisVida novoPowerup = new MaisVida("coracao.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                             
                             fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
                         }else{
+                            Powerup novoPowerup = null;
+                            switch(fase.getNumeroDaFase()){
+                                case 2:
+                                    for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMegaPower)contador++;}
+                                    if(contador ==0){
+                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                        
+                                    novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                    fase.addPowerUp(novoPowerup);
                             
-                            //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            //System.out.println("powerup bomba");
-                            //fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
-                            for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMegaPower)contador++;}
-                            if(contador ==0){
-                            //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            //BombaEletricaPower novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                            fase.addPowerUp(novoPowerup);
+                                    }
+                                    break;
+                                case 3:
+                                    for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaDarkPower)contador++;}
+                                    if(contador ==0){
+                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                    novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                        
+                                    
+                                    fase.addPowerUp(novoPowerup);
                             
+                                    }
+                                    break;
+                                case 4:
+                                    for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaEletricaPower)contador++;}
+                                    if(contador ==0){
+                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                        novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                //BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                    fase.addPowerUp(novoPowerup);
+                            
+                                    }
+                                case 5:
+                                    for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMinaPower)contador++;}
+                                    if(contador ==0){
+                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                        novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                //BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                    fase.addPowerUp(novoPowerup);
+                            
+                                    }
+                                default:
+                                    //System.out.println("fase invalida:"+fase.getNumeroDaFase());
+                                    novoPowerup = new MaisVida("coracao.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                    fase.addPowerUp(novoPowerup);
+                                    break;
                             }
                         }
                     }

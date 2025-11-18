@@ -33,24 +33,23 @@ public class Fase_1 extends Fase implements Serializable {
         
         @Override
         public boolean constroiFase() {
-        System.out.println("Iniciando Fase 1...");
         
         // 1. Resetar ou Inicializar o Mapa
         //this.mapaFase.getMapa().clear();
-        this.getPersonagens().clear();
+        //this.getPersonagens().clear();
         this.powerups.clear();
         
-        mapaFase = new Mapa("0000000000001"
-                            +"0000000000000"
-                            +"0000030300002"   
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010");
+        mapaFase = new Mapa("0000000000002"
+                           +"0101010101012"
+                           +"0030032300002"   
+                           +"0101010101010"
+                           +"0000000000030"
+                           +"0101010101010"
+                           +"0000000000030"
+                           +"0101010101010"
+                           +"0000000000000"
+                           +"0101010101010"
+                           +"0000000000000");
         
         hero = new Hero("heroDeFrente.png", 0, 7);
         this.addPersonagem(hero);
@@ -59,16 +58,16 @@ public class Fase_1 extends Fase implements Serializable {
         ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
         this.addPersonagem(zz);
 
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 3, 4);
+        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("Dir_inimigoTipo1.png", 3, 4);
         this.addPersonagem(bBichinhoH);
 
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1Anda1.png", 6,6);
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("Dir_inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("inimigoTipo2Frente.png", 10,10);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 10,10);
         this.addPersonagem(bVv);
 
-        Caveira bV = new Caveira("inimigoTipo2Dead.png", 9, 0);
+        Caveira bV = new Caveira("Frente_inimigoTipo2.png", 9, 0);
         this.addPersonagem(bV);
 
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
