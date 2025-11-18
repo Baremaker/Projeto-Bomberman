@@ -20,7 +20,7 @@ public class Caveira extends Personagem implements Serializable{
     public Caveira(String sNomeImagePNG, int linha, int coluna, String movDirecao, String projDirecao, int timer) {
         super(processaNomeImagem(sNomeImagePNG,projDirecao), linha, coluna);
         this.bTransponivel = false;
-        this.bMortal = false;
+        this.bMortal = true;
         this.intervaloMove = 0;
         this.intervaloTiro = 0;
         this.movDirecao = movDirecao;

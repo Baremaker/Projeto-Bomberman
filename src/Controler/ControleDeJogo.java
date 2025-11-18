@@ -1,5 +1,6 @@
 package Controler;
 import Auxiliar.Consts;
+import Auxiliar.Desenho;
 import Modelo.Model;
 import Modelo.Chaser;
 import Modelo.Personagem;
@@ -13,6 +14,7 @@ import Modelo.BlocoMetal;
 import Modelo.BlocoVazio;
 import Modelo.BombaExplosao.Bomba;
 import Modelo.BombaExplosao.Explosao;
+import Modelo.Portal;
 import Modelo.Power.Powerup;
 import java.awt.Rectangle;
 import java.io.Serializable;
@@ -46,21 +48,36 @@ public class ControleDeJogo implements Serializable{
         ArrayList<Personagem> umaFase = FaseAtual.getPersonagens();
         ArrayList<Blocos> mapa = FaseAtual.getMapaFase().getMapa();
         ArrayList<Powerup> power =FaseAtual.getPowerups();
+        int inimigosVivos = 0;
         for(Personagem p : umaFase){
             //Lida com casos de posição do personagem igual a do heroi
-            /*if(hero.getpPosicao().igual(p.getpPosicao())){
-                if(p.isbMortal()){
-                    //Fazer função para heroi tomar dano e ficar invencivel por algum tempo
-                    if(p instanceof Explosao){
-                        hero.levaDano(((Explosao) p).getVida());
-                    }
-                }
-            }*/
-            //Lida com cada caso de instância do personagem
+            if (!(p instanceof Hero) && !(p instanceof Bomba) && !(p instanceof Explosao)) {
+                inimigosVivos++;
+            }
             if(p instanceof Chaser){
                 ((Chaser) p).atualizarPHeroi(hero.getpPosicao());
             }
         }
+        
+        if (inimigosVivos == 0 ) {
+            
+            int linhaPortal = 0;
+            int colunaPortal = 1;
+            Portal p = new Portal(linhaPortal, colunaPortal);
+            Blocos b =FaseAtual.getMapaFase().getBlocoNaPosicao(p.getpPosicao());
+            if (b instanceof Blocos) {
+                FaseAtual.getMapaFase().removerBloco(b);
+                FaseAtual.getMapaFase().adicionarBloco(p);
+            
+            }
+        }
+        Blocos blocoHeroi = FaseAtual.getMapaFase().getBlocoNaPosicao(hero.getpPosicao());
+        if (blocoHeroi instanceof Portal) {
+            // O herói pisou no Portal!
+            Desenho.acessoATelaDoJogo().vitoria(); // Chama o método de progressão de fase
+            return; // Encerra o processamento para evitar movimentos adicionais
+        }
+        
         for(Powerup pow:power){
             if(hero.getpPosicao().igual(pow.getpPosicao())){
               hero.coletarPowerup(pow);
