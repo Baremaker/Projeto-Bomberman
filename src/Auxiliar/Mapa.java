@@ -30,13 +30,14 @@ public class Mapa implements Serializable {
    
    private ArrayList<Blocos> mapa;
    private GeraBlocoProMapa geradorBlocos;
+   private Fase faseAtual = new Fase();
 
-    public Mapa(String mapeado) {
+    public Mapa(String mapeado, int numeroDaFase) {
         mapa = new ArrayList<>();
         geradorBlocos = new GeraBlocoProMapa();
         for(int i=0; i<11; i++){
             for(int j=0; j<13; j++){
-                geradorBlocos.geraBloco(this, mapeado, i, j);
+                geradorBlocos.geraBloco(this, mapeado, i, j, numeroDaFase);
             }
         }
     }

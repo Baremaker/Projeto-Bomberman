@@ -35,7 +35,7 @@ public class Fase_3 extends Fase implements Serializable{
     /*linha7*/         +"0101010101210"
     /*linha8*/         +"0000300000000"
     /*linha9*/         +"0101010131010"
-    /*linha10*/        +"0000000000000");
+    /*linha10*/        +"0000000000000", this.numeroDaFase);
         
         hero = new Hero("heroDeFrente.png", 0, 7);
         this.addPersonagem(hero);

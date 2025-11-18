@@ -116,7 +116,7 @@ public class Fase implements Serializable{
         return mapaFase;
     }
     
-    public void fase1(){
+    /*public void fase1(){
          mapaFase = new Mapa("0000000000001"
                             +"0000000000000"
                             +"0000030300002"   
@@ -153,7 +153,7 @@ public class Fase implements Serializable{
 
         Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
         this.addPersonagem(es);    
-    }
+    }*/
 
     
 
