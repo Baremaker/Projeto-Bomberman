@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 //Utiliza os atributos da classe mãe Model, além disso, tem os atributos:
 //É mortal? bMortal, Vida: vida
 public abstract class Personagem extends Model implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected boolean bMortal;
     protected int vida;
     protected int dano;
