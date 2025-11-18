@@ -64,13 +64,13 @@ public class Fase_1 extends Fase implements Serializable {
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo1.png", 10,10);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Frente_inimigoTipo1.png", 10,10);
         this.addPersonagem(bVv);
 
         Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
         this.addPersonagem(bV);
 
-        Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
+        Chaser chase = new Chaser("inimigoTipo3.png", 9, 12);
         this.addPersonagem(chase);
 
         Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);

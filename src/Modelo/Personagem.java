@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,8 @@ public abstract class Personagem extends Model implements Serializable {
     protected boolean bMortal;
     protected int vida;
     protected int dano;
+    protected int timerMorte;
+    protected String nomeImagem;
    
     protected Personagem(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG, linha, coluna);
@@ -28,6 +31,8 @@ public abstract class Personagem extends Model implements Serializable {
         this.bMortal = true;
         this.vida = 3;
         this.dano = 0;
+        this.nomeImagem = sNomeImagePNG;
+        this.timerMorte = -1;
     }
     @Override
     public String getsNomeImagePNG() {
@@ -57,6 +62,8 @@ public abstract class Personagem extends Model implements Serializable {
 
     public void levaDano(int dano) {
         this.vida -= dano;
+        if(this.vida <=0)
+            this.timerMorte = 2;
         System.out.println("vida perdidaPersonagem:"+this.vida);
     }
 
@@ -99,6 +106,15 @@ public abstract class Personagem extends Model implements Serializable {
         return dano;
     }
 
-
+    public int getTimerMorte() {
+        return timerMorte;
+    }
+    public void autoDesenho() {
+        if(this.timerMorte>0){
+            this.timerMorte--;
+            this.setiImage("Dead_"+this.nomeImagem);            
+        }
+        Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());
+    }
 
 }

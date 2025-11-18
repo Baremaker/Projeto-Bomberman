@@ -184,15 +184,6 @@ public class Explosao extends Personagem implements Serializable {
                     if(alvo.isbMortal() ){
                         //System.out.println("dano");
                         alvo.levaDano(this.dano); // Aplica o dano da explosão (valor vindo da Bomba)
-                
-                        if (alvo.getVida() <= 0) {
-                    // Remove o personagem se a vida zerar
-                            fase.removerPersonagem(alvo); // Usa o método de Fase para remoção
-                    
-                        // Se o Hero morrer, a lógica de Game Over deve ser implementada aqui
-                            if (alvo instanceof Hero) {
-                       // LOGICA DE GAME OVER AQUI
-                            }
                         }
                     }
                 
@@ -201,6 +192,5 @@ public class Explosao extends Personagem implements Serializable {
     
     
     
-    }
 
 }

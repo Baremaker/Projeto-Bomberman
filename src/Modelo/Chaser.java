@@ -32,7 +32,7 @@ public class Chaser extends Personagem implements Serializable {
     private Posicao PHero;
 
     public Chaser(String sNomeImagePNG, int linha, int coluna) {
-        super(sNomeImagePNG, linha, coluna);
+        super("Frente_"+sNomeImagePNG, linha, coluna);
         
         // Inicializamos a lista de caminho. É melhor começar com uma lista vazia do que com null.
         this.caminhoAtual = new ArrayList<>(); 
@@ -40,6 +40,7 @@ public class Chaser extends Personagem implements Serializable {
         this.bTransponivel = true;
         this.counter = 0;
         this.dano = 3;
+        this.nomeImagem = sNomeImagePNG;
     }
 
     /**
@@ -108,9 +109,25 @@ public class Chaser extends Personagem implements Serializable {
         return null; // Nenhum caminho encontrado
     }
 
-    /**
-     * Função auxiliar para seguir o "mapa" 'veioDe' de volta ao início.
-     */
+     /**
+ * Determina a direção do movimento (Dir, Esq, Frente, Tras)
+ * e carrega o sprite correspondente.
+ */
+private void setSpriteMovimento(Posicao posAnterior, Posicao posNova) {
+    String direcao;
+    
+    if (posNova.getColuna() > posAnterior.getColuna()) {
+        // Moveu para DIREITA (Coluna aumenta)
+        direcao = "Dir_";
+    } else if (posNova.getColuna() < posAnterior.getColuna()) {
+        // Moveu para ESQUERDA (Coluna diminui)
+        direcao = "Esq_";
+    }else direcao = "Frente_"; 
+    
+    if (!direcao.isEmpty()) {
+        this.setiImage(direcao + this.nomeImagem); 
+    }
+}
     private ArrayList<Posicao> reconstruirCaminho(Map<Posicao, Posicao> veioDe, Posicao fim) {
         ArrayList<Posicao> caminho = new ArrayList<>();
         Posicao atual = fim;
@@ -149,6 +166,7 @@ public class Chaser extends Personagem implements Serializable {
                 // Move-se DIRETAMENTE para essa posição
                 // Não precisamos de validação (mergulho), pois o findPath JÁ GARANTIU
                 // que o "proximoPasso" é uma casa válida e livre.
+                this.setSpriteMovimento(this.getpPosicao(), proximoPasso);
                 this.setPosicao(proximoPasso.getLinha(), proximoPasso.getColuna());
             }
             // Se o caminho for null (herói inalcançável), o Chaser simplesmente não se move.

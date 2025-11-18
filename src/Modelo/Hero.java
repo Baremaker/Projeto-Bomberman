@@ -38,7 +38,6 @@ public class Hero extends Personagem implements Serializable {
     private Bomba ultimaBombaPlantada = null;// pra checar mina
     private String movDirecao;
     private int movStage;
-    private String nomeImageBase;
     
     public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG+"Frente.png", linha, coluna);
@@ -48,7 +47,8 @@ public class Hero extends Personagem implements Serializable {
         this.tipoBomba = new BombaNormal();
         this.movDirecao = null;
         this.movStage = 0;
-        this.nomeImageBase = sNomeImagePNG;
+        this.nomeImagem = sNomeImagePNG;
+        //this.bMortal = false;//godMode
     }
     
     
@@ -178,8 +178,9 @@ public class Hero extends Personagem implements Serializable {
                     return; // Sai da função sem remover o personagem
                 }
             }
-            // LÓGICA DE MORTE FINAL (GAME OVER)
-            Desenho.acessoATelaDoJogo().mostrarGameOver(); 
+            //Começa a sequencia de morte do heroi
+            this.bMortal = false;
+            this.timerMorte = 6;
         }
     }
     
@@ -248,51 +249,58 @@ public class Hero extends Personagem implements Serializable {
         int linha = this.pPosicao.getLinha();
         int paraHorizontal = 0;
         int paraVertical = 0;
-        if(this.movStage == 2){
-            switch(this.movDirecao){
-                case "UP": 
-                    this.setiImage(this.nomeImageBase + "Atras.png");
-                    break;
-                case "DOWN": 
-                    this.setiImage(this.nomeImageBase + "Frente.png");
-                    break;
-                case "RIGHT": 
-                    this.setiImage(this.nomeImageBase + "Direita.png");
-                    break;
-                case "LEFT": 
-                    this.setiImage(this.nomeImageBase + "Esquerda.png");
-                    break;
+        if(this.timerMorte == -1){
+            if(this.movStage == 2){
+                switch(this.movDirecao){
+                    case "UP": 
+                        this.setiImage(this.nomeImagem + "Atras.png");
+                        break;
+                    case "DOWN": 
+                        this.setiImage(this.nomeImagem + "Frente.png");
+                        break;
+                    case "RIGHT": 
+                        this.setiImage(this.nomeImagem + "Direita.png");
+                        break;
+                    case "LEFT": 
+                        this.setiImage(this.nomeImagem + "Esquerda.png");
+                        break;
+                }
+                this.movDirecao = null;
+                this.movStage = 0;          
             }
-            this.movDirecao = null;
-            this.movStage = 0;          
-        }
-        if(this.movDirecao != null){
-            this.movStage++;
-            switch(this.movDirecao){
-                case "UP": 
-                    this.setiImage(this.nomeImageBase + "AndaAtras" + this.movStage + ".png");
-                    paraVertical = -1;
-                    linha++;
-                    break;
-                case "DOWN":
-                    this.setiImage(this.nomeImageBase + "AndaFrente1.png");
-                    paraVertical = 1;
-                    linha--;
-                    break;
-                case "RIGHT":
-                    this.setiImage(this.nomeImageBase + "AndaDir" + this.movStage + ".png");
-                    paraHorizontal = 1;
-                    coluna--;
-                    break;
-                case "LEFT":
-                    this.setiImage(this.nomeImageBase + "AndaEsq" + this.movStage + ".png");
-                    paraHorizontal = -1;
-                    coluna++;
-                    break;
+            if(this.movDirecao != null){
+                this.movStage++;
+                switch(this.movDirecao){
+                    case "UP": 
+                        this.setiImage(this.nomeImagem + "AndaAtras" + this.movStage + ".png");
+                        paraVertical = -1;
+                        linha++;
+                        break;
+                    case "DOWN":
+                        this.setiImage(this.nomeImagem + "AndaFrente1.png");
+                        paraVertical = 1;
+                        linha--;
+                        break;
+                    case "RIGHT":
+                        this.setiImage(this.nomeImagem + "AndaDir" + this.movStage + ".png");
+                        paraHorizontal = 1;
+                        coluna--;
+                        break;
+                    case "LEFT":
+                        this.setiImage(this.nomeImagem + "AndaEsq" + this.movStage + ".png");
+                        paraHorizontal = -1;
+                        coluna++;
+                        break;
+                }
             }
+        }else{
+            if(this.timerMorte == 0)
+                // LÓGICA DE MORTE FINAL (GAME OVER)
+                Desenho.acessoATelaDoJogo().mostrarGameOver(); 
+            this.setiImage(this.nomeImagem + "Dead" + this.timerMorte + ".png");
+            this.timerMorte--;
         }
         Desenho.desenharHero(this.iImage, coluna, linha,this.movStage, paraHorizontal, paraVertical);
         return;
     }
-    
 }
