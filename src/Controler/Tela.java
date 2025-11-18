@@ -470,12 +470,95 @@ public void paint(Graphics gOld) {
     public void dragOver(DropTargetDragEvent dtde) {
     }
     
-    @Override
-    public void dragExit(DropTargetEvent dte) {
-    }
+    public void drop(DropTargetDropEvent event) {
+        event.acceptDrop(DnDConstants.ACTION_COPY);
 
-    @Override
-    public void dropActionChanged(DropTargetDragEvent dtde) {
+        Point ponto = event.getLocation();
+        System.out.println("Posicao do drop: x: " + ponto.x + " y: " + ponto.y);
+        int tileX = ponto.y - 110, tileY = ponto.x;
+
+        Transferable t = event.getTransferable();
+
+        try {
+            List<File> arquivos = new java.util.ArrayList<>();
+
+            // TENTATIVA 1: Padrão (FileList)
+            if (t.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                try {
+                    arquivos = (List<File>) t.getTransferData(DataFlavor.javaFileListFlavor);
+                } catch (Exception e) {
+                    System.out.println("FileList falhou, tentando Plano B (URI)...");
+                }
+            }
+
+            // TENTATIVA 2: Plano B (URI/Texto) - Caso a 1 falhe ou retorne vazio
+            if (arquivos.isEmpty()) {
+                System.out.println("Arquivo vazio");
+                // Tenta pegar sabores de texto/uri que apareceram no seu log
+                DataFlavor uriFlavor = null;
+                
+                // Procura por um sabor de texto compatível
+                for (DataFlavor f : t.getTransferDataFlavors()) {
+                    if (f.isRepresentationClassReader() || f.isRepresentationClassCharBuffer() || String.class.equals(f.getRepresentationClass())) {
+                        // Prioriza uri-list se existir
+                        if (f.getMimeType().contains("uri-list")) {
+                            uriFlavor = f;
+                            break;
+                        }
+                    }
+                }
+
+                if (uriFlavor != null) {
+                    try {
+                        // Lê os dados como String (ex: file:///C:/Users/Docs/arquivo.zip)
+                        Object data = t.getTransferData(uriFlavor);
+                        String rawUri = "";
+                        
+                        if (data instanceof String) rawUri = (String) data;
+                        else if (data instanceof java.io.Reader) {
+                            // Se vier como Reader (comum no Linux/Mac)
+                            java.io.BufferedReader reader = new java.io.BufferedReader((java.io.Reader) data);
+                            StringBuilder sb = new StringBuilder();
+                            String line;
+                            while ((line = reader.readLine()) != null) sb.append(line).append("\n");
+                            rawUri = sb.toString();
+                        }
+
+                        // Converte as URIs em Arquivos
+                        String[] lines = rawUri.split("\\r?\\n");
+                        for (String line : lines) {
+                            if (line.startsWith("file:")) {
+                                // Remove o protocolo "file://" e limpa espaços codificados (%20)
+                                java.net.URI uri = new java.net.URI(line.trim());
+                                arquivos.add(new File(uri));
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            // --- AGORA PROCESSA OS ARQUIVOS ENCONTRADOS ---
+            if (!arquivos.isEmpty()) {
+                File arquivoZip = arquivos.get(0);
+                System.out.println("Arquivo capturado com sucesso: " + arquivoZip.getAbsolutePath());
+                
+                // CHAMA SEU MÉTODO DE LER O ZIP AQUI
+                Personagem p = gerenciadorDrops.carregaPersonagemZIP(arquivoZip);
+                p.setPosicao(tileX / Consts.CELL_SIDE, tileY / Consts.CELL_SIDE);
+                Desenho.acessoATelaDoJogo().getFaseAtual().addPersonagem(p);
+                
+                event.dropComplete(true);
+            } else {
+                System.err.println("Nenhum arquivo pôde ser extraído do drop.");
+                event.dropComplete(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            event.dropComplete(false);
+        }
     }
     
     public void dragExit(DropTargetEvent dte) {
