@@ -17,32 +17,38 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
 
     private boolean bRight;
     int iContador;
+    private String nomeImagem; 
 
     public BichinhoVaiVemHorizontal(String sNomeImagePNG, int linha, int coluna) {
-        super(sNomeImagePNG, linha, coluna);
+        super("Dir_" + sNomeImagePNG, linha, coluna);
         //setiImage(sNomeImagePNG);
         bRight = true;
         iContador = 0;
         this.bTransponivel = true;
-        this.bMortal = true;     
+        this.bMortal = true;  
+        this.vida = 6;
+        this.nomeImagem = sNomeImagePNG;
     }
 
     public void autoDesenho() {
         if(!paralisia()){
             if (iContador == 5) {
                 iContador = 0;
-                if (bRight) {
-                    this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() + 1);
-                } else {
-                    this.setPosicao(pPosicao.getLinha(), pPosicao.getColuna() - 1);
+                if(bRight){
+                    if(!this.moveRight()){
+                        bRight = false;
+                        this.setiImage("Esq_"+this.nomeImagem);
+                    }    
+                } else { 
+                    if(!this.moveLeft()){ 
+                        bRight = true;
+                        this.setiImage("Dir_"+this.nomeImagem);
+                    }
                 }
-
-                bRight = !bRight;
             }
         iContador++;
         }
         
         super.autoDesenho();
-        //iContador++;
     }
-}
+}   
