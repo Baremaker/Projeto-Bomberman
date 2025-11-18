@@ -18,7 +18,6 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
 
     private boolean bRight;
     int iContador;
-    private String nomeImagem; 
 
     public BichinhoVaiVemHorizontal(String sNomeImagePNG, int linha, int coluna) {
         super("Dir_" + sNomeImagePNG, linha, coluna);
