@@ -123,47 +123,7 @@ public class ControleDeJogo implements Serializable{
         
     }*/
     
-    public boolean checarColisaoAABB(Fase faseAtual, Hero hero, float novaX, float novaY) {
-        
-        Rectangle heroFutureBounds = new Rectangle(
-            (int) novaX, 
-            (int) novaY, 
-            Consts.CELL_SIDE, 
-            Consts.CELL_SIDE
-        );
-
-        // 2. Checa Colisão com BORDAS DO MUNDO
-        float mundoLarguraPixel = Consts.MUNDO_LARGURA * Consts.CELL_SIDE;
-        float mundoAlturaPixel = Consts.MUNDO_ALTURA * Consts.CELL_SIDE;
-        
-        if (novaX < 0 || novaX + Consts.CELL_SIDE > mundoLarguraPixel || 
-            novaY < 0 || novaY + Consts.CELL_SIDE > mundoAlturaPixel) {
-            return false;
-        }
-        
-        // 3. Checa Colisão com PERSONAGENS
-        for (int i = 1; i < faseAtual.getPersonagens().size(); i++) {
-            Personagem p = faseAtual.getPersonagens().get(i);
-            if (!p.isbTransponivel()) { 
-                if (heroFutureBounds.intersects(p.getHitbox())) { 
-                    return false;
-                }
-            }
-        }
-        
-        // 4. Checa Colisão com BLOCOS
-        if (faseAtual.getMapaFase() != null) {
-            for (Blocos bloco : faseAtual.getMapaFase().getMapa()) {
-                if (!bloco.isbTransponivel()) { 
-                    if (heroFutureBounds.intersects(bloco.getHitbox())) { 
-                        return false; 
-                    }
-                }
-            }
-        }
-
-        return true; 
-    }
+    
     
     
     

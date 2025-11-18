@@ -5,6 +5,7 @@
 package Modelo.BombaExplosao;
 
 import Auxiliar.Desenho;
+import Auxiliar.Fase;
 import Auxiliar.Posicao;
 import Modelo.Hero;
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public abstract class TipoBomba implements Serializable {
         boolean flagDireita=true;
         
         Explosao meio = criarInstanciaExplosao(pPosicao.getLinha(), pPosicao.getColuna());
-        //Desenho.acessoATelaDoJogo().addPersonagem(meio);
+       
         meio.validaPosicao();
         Desenho.acessoATelaDoJogo().adicionaModelo(meio);
         for(int i=0; i<tamanhoBomba; i++){
@@ -59,7 +60,7 @@ public abstract class TipoBomba implements Serializable {
                 
                 Explosao baixo = criarInstanciaExplosao(pPosicao.getLinha()+1+i, pPosicao.getColuna());
                 if(baixo.validaPosicao()){
-                    //Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(baixo);
                 }
                 else flagBaixo = false;
@@ -69,7 +70,7 @@ public abstract class TipoBomba implements Serializable {
                 
                 Explosao esquerda = criarInstanciaExplosao(pPosicao.getLinha(), pPosicao.getColuna()-1-i);
                 if(esquerda.validaPosicao()){
-                    //Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(esquerda);
                 }
                 else flagEsquerda = false;
@@ -94,8 +95,6 @@ public abstract class TipoBomba implements Serializable {
     public String getIMAGEM_INTERMEDIARIA_BOMBA() {
         return IMAGEM_INTERMEDIARIA_BOMBA;
     }
-   
-  
     
     
 }

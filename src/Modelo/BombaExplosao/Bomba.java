@@ -88,7 +88,9 @@ public class Bomba extends Personagem implements Serializable {
 
     public void estouraBomba(){
         if (tipoEstrategia instanceof BombaEletrica) {//para de paralisar personagens
+            
             Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
+            
             // Desativa o estado de paralisia na fase
             fase.setIsEletricidadeAtiva(false);
             if(!fase.isIsEletricidadeAtiva())System.out.println("sem eletrico:");

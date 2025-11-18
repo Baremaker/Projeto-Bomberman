@@ -140,6 +140,8 @@ public class Hero extends Personagem implements Serializable {
             // Ativa o estado de paralisia na fase
             fase.setIsEletricidadeAtiva(true);
             
+            
+            
             }
             
         }
@@ -162,8 +164,7 @@ public class Hero extends Personagem implements Serializable {
                 
                 if (powerupPerdido != null) {
                     this.powerups.remove(powerupPerdido);
-                    //powerupPerdido.reverterEfeito(this); // Reverte o efeito (aqui não faz nada)
-                    
+                                        
                     // Retorna a vida ao máximo
                     this.vida = 1;
                     //System.out.println("Powerup MaisVida consumido. Vida restaurada.");
