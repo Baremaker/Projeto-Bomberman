@@ -36,16 +36,21 @@ public class Fase_5 extends Fase implements Serializable{
     /*linha9*/         +"0101010131010"
     /*linha10*/        +"0333000003333", this.numeroDaFase);
         
-        hero = new Hero("hero", 0, 7);
+        hero = new Hero("hero", 2, 7);
         this.addPersonagem(hero);
+        //this.atualizaCamera();
+        
+        
+
+        
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
         this.addPersonagem(bBichinhoH2);
 
         BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 8,12);
         this.addPersonagem(bVv);
-        Caveira bV = new Caveira("inimigoTipo2.png", 10, 0, "Vertical", "Direita", 20);
-      
+        Caveira bV = new Caveira("inimigoTipo2.png", 0, 0, "Horizontal", "Baixo", 20);
+        
         this.addPersonagem(bV);
 
         Chaser chase1 = new Chaser("inimigoTipo3Frente.png", 0, 0);

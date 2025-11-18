@@ -26,6 +26,7 @@ import Auxiliar.GerenciaDnD;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
@@ -78,6 +79,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.addMouseListener(this);
         /*mouse*/
         this.addKeyListener(this);
+        new DropTarget(this, this);
         /*teclado*/
         new DropTarget(this, this);
  /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
@@ -476,7 +478,11 @@ public void paint(Graphics gOld) {
     public void dropActionChanged(DropTargetDragEvent dtde) {
     }
     
-    
+    public void dragExit(DropTargetEvent dte) {
+    }
+
+    public void dropActionChanged(DropTargetDragEvent dtde) {
+    }
     
     
     
