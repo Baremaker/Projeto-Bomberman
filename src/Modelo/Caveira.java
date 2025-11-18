@@ -29,6 +29,7 @@ public class Caveira extends Personagem implements Serializable{
         this.bRight = true;
         this.bUp = true;
         this.nomeImagem = sNomeImagePNG;
+        this.dano=3;
     }
     
     private static String processaNomeImagem(String nomeBase, String projDirecao){
@@ -62,9 +63,20 @@ public class Caveira extends Personagem implements Serializable{
             }
             if(this.intervaloTiro == timer){
                 this.intervaloTiro = 0;
-                Fogo f = new Fogo("fire.png", pPosicao.getLinha(), pPosicao.getColuna(), projDirecao);
-                Desenho.acessoATelaDoJogo().adicionaModelo(f);
+                int linhaFogo = pPosicao.getLinha();
+                int colunaFogo = pPosicao.getColuna();
+                switch(projDirecao){
+                    case "Direita": colunaFogo++; break;
+                    case "Esquerda": colunaFogo--; break;
+                    case "Cima": linhaFogo--; break;
+                    case "Baixo": linhaFogo++; break;
+                }
 
+                Posicao pFogo = new Posicao(linhaFogo, colunaFogo);
+                if(this.ehPosicaoValida(pFogo)) {
+                    Fogo f = new Fogo("fire.png", linhaFogo, colunaFogo, projDirecao);
+                    Desenho.acessoATelaDoJogo().adicionaModelo(f);
+                }
                 this.setiImage("Dead_"+this.nomeImagem);
             }else if (this.intervaloTiro == 5) { 
                  if(this.movDirecao.equals("Horizontal")){
@@ -82,7 +94,7 @@ public class Caveira extends Personagem implements Serializable{
                  }
             }
         }
-    }
+    } 
     public boolean ehInimigo(){
         return true;
     }

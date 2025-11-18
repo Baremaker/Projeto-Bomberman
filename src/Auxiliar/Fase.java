@@ -23,6 +23,7 @@ import Modelo.ZigueZague;
 import Auxiliar.Posicao;
 import Modelo.Power.Powerup;
 import java.io.Serializable;
+import Modelo.BombaExplosao.RaioEletrico;
  
 public class Fase implements Serializable{
    
@@ -34,6 +35,7 @@ public class Fase implements Serializable{
     protected int numeroDaFase;
     // Novo atributo para a Cadeia
     protected Fase proximaFase;
+    
     
     public Fase() {
         this.fase = new ArrayList<>();
@@ -101,6 +103,8 @@ public class Fase implements Serializable{
         this.isEletricidadeAtiva = isEletricidadeAtiva;
         
     }
+
+
     
     
     

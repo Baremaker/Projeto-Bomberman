@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class BombaEletrica extends TipoBomba implements Serializable{
     private  String IMAGEM_NOME_EXPLOSAO = "explosaoEletrica.png"; 
     private  String IMAGEM_NOME_BOMBA = "bombaEletrizante.png"; // Nova imagem da bomba
-
+    private String IMAGEM_INTERMEDIARIA_BOMBA = "bombaEletrizanteAzul.png";
     @Override
     public Explosao criarInstanciaExplosao(int linha, int coluna) {
         return new ExplosaoEletrica(IMAGEM_NOME_EXPLOSAO,linha, coluna);
@@ -27,5 +27,8 @@ public class BombaEletrica extends TipoBomba implements Serializable{
     @Override
     public String getImagemBomba() {
         return IMAGEM_NOME_BOMBA;
+    }
+    public String getIMAGEM_INTERMEDIARIA_BOMBA() {
+        return IMAGEM_INTERMEDIARIA_BOMBA;
     }
 }

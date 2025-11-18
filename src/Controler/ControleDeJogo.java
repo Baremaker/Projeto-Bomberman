@@ -1,5 +1,6 @@
 package Controler;
 import Auxiliar.Consts;
+import Auxiliar.Desenho;
 import Modelo.Model;
 import Modelo.Chaser;
 import Modelo.Personagem;
@@ -13,6 +14,7 @@ import Modelo.BlocoMetal;
 import Modelo.BlocoVazio;
 import Modelo.BombaExplosao.Bomba;
 import Modelo.BombaExplosao.Explosao;
+import Modelo.Portal;
 import Modelo.Power.Powerup;
 import java.awt.Rectangle;
 import java.io.Serializable;
@@ -48,11 +50,21 @@ public class ControleDeJogo implements Serializable{
         ArrayList<Personagem> umaFase = FaseAtual.getPersonagens();
         ArrayList<Blocos> mapa = FaseAtual.getMapaFase().getMapa();
         ArrayList<Powerup> power =FaseAtual.getPowerups();
+        int inimigosVivos = 0;
         for(Personagem p : umaFase){
             //Lida com casos de posição do personagem igual a do heroi
             if(p.isbMortal()&&p.getTimerMorte()==0){
                 FaseAtual.removerPersonagem(p);
                 continue;
+            }
+            if (!(p instanceof Hero) && !(p instanceof Bomba) && !(p instanceof Explosao)) {
+                inimigosVivos++;
+            }
+            if(hero.getpPosicao().igual(p.getpPosicao())){
+                if(p.ehInimigo()){
+                    //Fazer função para heroi tomar dano e ficar invencivel por algum tempo
+                    hero.levaDano(p.getDano());
+                }
             }
             if(hero.isbMortal())
                 if(hero.getpPosicao().igual(p.getpPosicao())){
@@ -66,6 +78,26 @@ public class ControleDeJogo implements Serializable{
                 ((Chaser) p).atualizarPHeroi(hero.getpPosicao());
             }
         }
+        
+        if (inimigosVivos == 0 ) {
+            
+            int linhaPortal = 0;
+            int colunaPortal = 1;
+            Portal p = new Portal(linhaPortal, colunaPortal);
+            Blocos b =FaseAtual.getMapaFase().getBlocoNaPosicao(p.getpPosicao());
+            if (b instanceof Blocos) {
+                FaseAtual.getMapaFase().removerBloco(b);
+                FaseAtual.getMapaFase().adicionarBloco(p);
+            
+            }
+        }
+        Blocos blocoHeroi = FaseAtual.getMapaFase().getBlocoNaPosicao(hero.getpPosicao());
+        if (blocoHeroi instanceof Portal) {
+            // O herói pisou no Portal!
+            Desenho.acessoATelaDoJogo().vitoria(); // Chama o método de progressão de fase
+            return; // Encerra o processamento para evitar movimentos adicionais
+        }
+        
         for(Powerup pow:power){
             if(hero.getpPosicao().igual(pow.getpPosicao())){
               hero.coletarPowerup(pow);
@@ -111,47 +143,7 @@ public class ControleDeJogo implements Serializable{
         
     }*/
     
-    public boolean checarColisaoAABB(Fase faseAtual, Hero hero, float novaX, float novaY) {
-        
-        Rectangle heroFutureBounds = new Rectangle(
-            (int) novaX, 
-            (int) novaY, 
-            Consts.CELL_SIDE, 
-            Consts.CELL_SIDE
-        );
-
-        // 2. Checa Colisão com BORDAS DO MUNDO
-        float mundoLarguraPixel = Consts.MUNDO_LARGURA * Consts.CELL_SIDE;
-        float mundoAlturaPixel = Consts.MUNDO_ALTURA * Consts.CELL_SIDE;
-        
-        if (novaX < 0 || novaX + Consts.CELL_SIDE > mundoLarguraPixel || 
-            novaY < 0 || novaY + Consts.CELL_SIDE > mundoAlturaPixel) {
-            return false;
-        }
-        
-        // 3. Checa Colisão com PERSONAGENS
-        for (int i = 1; i < faseAtual.getPersonagens().size(); i++) {
-            Personagem p = faseAtual.getPersonagens().get(i);
-            if (!p.isbTransponivel()) { 
-                if (heroFutureBounds.intersects(p.getHitbox())) { 
-                    return false;
-                }
-            }
-        }
-        
-        // 4. Checa Colisão com BLOCOS
-        if (faseAtual.getMapaFase() != null) {
-            for (Blocos bloco : faseAtual.getMapaFase().getMapa()) {
-                if (!bloco.isbTransponivel()) { 
-                    if (heroFutureBounds.intersects(bloco.getHitbox())) { 
-                        return false; 
-                    }
-                }
-            }
-        }
-
-        return true; 
-    }
+    
     
     
     

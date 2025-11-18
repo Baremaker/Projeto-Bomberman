@@ -26,40 +26,42 @@ public class Fase_5 extends Fase implements Serializable{
         
     mapaFase = new Mapa("0000000000000"
     /*linha1*/         +"0101010101010"
-    /*linha2*/         +"3332332003023"   
-    /*linha3*/         +"2101010101010"
-    /*linha4*/         +"0000000000000"
+    /*linha2*/         +"0332332003023"   
+    /*linha3*/         +"0101010101010"
+    /*linha4*/         +"0333000002220"
     /*linha5*/         +"0131010101010"
-    /*linha6*/         +"0000000000000"
+    /*linha6*/         +"0333300022220"
     /*linha7*/         +"0101010101010"
-    /*linha8*/         +"0000000000000"
+    /*linha8*/         +"0323230323230"
     /*linha9*/         +"0101010131010"
-    /*linha10*/        +"0000000000000", this.numeroDaFase);
+    /*linha10*/        +"0333000003333", this.numeroDaFase);
         
-        hero = new Hero("heroDeFrente.png", 0, 7);
+        hero = new Hero("hero", 2, 7);
         this.addPersonagem(hero);
         //this.atualizaCamera();
         
-        ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
-        this.addPersonagem(zz);
+        
 
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 0, 4);
-        this.addPersonagem(bBichinhoH);
+        
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 10,10);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 8,12);
         this.addPersonagem(bVv);
-        Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
+        Caveira bV = new Caveira("inimigoTipo2.png", 0, 0, "Horizontal", "Baixo", 20);
         
         this.addPersonagem(bV);
 
-        Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
-        this.addPersonagem(chase);
+        Chaser chase1 = new Chaser("inimigoTipo3Frente.png", 0, 0);
+        this.addPersonagem(chase1);
+        
+        Chaser chase2 = new Chaser("inimigoTipo3Frente.png", 10, 6);
+        this.addPersonagem(chase2);
+        
+        Chaser chase3 = new Chaser("inimigoTipo3Frente.png", 5, 12);
+        this.addPersonagem(chase3);
 
-        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);   
         return true;
     }
 }

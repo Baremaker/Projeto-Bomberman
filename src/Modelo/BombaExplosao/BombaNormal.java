@@ -13,9 +13,9 @@ import java.io.Serializable;
  * @author aserr
  */
 public class BombaNormal extends TipoBomba implements Serializable {
-        String IMAGEM_NOME_EXPLOSAO = "explosaoTipo3.png";
-        String IMAGEM_NOME_BOMBA = "bombaNormal.png";
-   
+        private String IMAGEM_NOME_EXPLOSAO = "explosaoTipo3.png";
+        private String IMAGEM_NOME_BOMBA = "bombaNormal.png";
+        private String IMAGEM_INTERMEDIARIA_BOMBA = "bombaVermelha.png";
     
     public String getImagemExplosao() {
         System.out.println("nome:"+IMAGEM_NOME_EXPLOSAO);
@@ -31,7 +31,9 @@ public class BombaNormal extends TipoBomba implements Serializable {
         return new Explosao(IMAGEM_NOME_EXPLOSAO, linha, coluna);
     }
 
-       
+    public String getIMAGEM_INTERMEDIARIA_BOMBA() {
+        return IMAGEM_INTERMEDIARIA_BOMBA;
+    }   
     
 
 

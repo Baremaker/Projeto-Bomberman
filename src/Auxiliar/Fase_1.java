@@ -43,38 +43,34 @@ public class Fase_1 extends Fase implements Serializable {
                            +"0101010101012"
                            +"0030032300002"   
                            +"0101010101010"
-                           +"0000000000030"
+                           +"3000300000030"
+                           +"0101310101010"
+                           +"0220000000030"
+                           +"0131010121010"
+                           +"0200220220000"
                            +"0101010101010"
-                           +"0000000000030"
-                           +"0101010101010"
-                           +"0000000000000"
-                           +"0101010101010"
-                           +"0000000000000", this.numeroDaFase);
+                           +"2222000000030", this.numeroDaFase);
         
         hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
         //this.atualizaCamera();
-        
-        ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
-        this.addPersonagem(zz);
-
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 3, 4);
-        this.addPersonagem(bBichinhoH);
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
 
         BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Frente_inimigoTipo1.png", 10,10);
         this.addPersonagem(bVv);
+        Desenho.acessoATelaDoJogo().getGerenciadorDrops().salvaPersonagemZIP(bVv);
 
         Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
         this.addPersonagem(bV);
+        Desenho.acessoATelaDoJogo().getGerenciadorDrops().salvaPersonagemZIP(bV);
 
         Chaser chase = new Chaser("inimigoTipo3.png", 9, 12);
         this.addPersonagem(chase);
+        Desenho.acessoATelaDoJogo().getGerenciadorDrops().salvaPersonagemZIP(chase);
 
-        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);   
+         
         return true;
     }
 }

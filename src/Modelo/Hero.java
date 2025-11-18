@@ -22,7 +22,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,10 +38,12 @@ public class Hero extends Personagem implements Serializable {
     private String movDirecao;
     private int movStage;
     
+    
+    
     public Hero(String sNomeImagePNG, int linha, int coluna) {
         super(sNomeImagePNG+"Frente.png", linha, coluna);
         vida = 1;
-        setiImage(sNomeImagePNG + "Frente.png");
+        setiImage(sNomeImagePNG+ "Frente.png");
         this.powerups = new ArrayList<>();
         this.tipoBomba = new BombaNormal();
         this.movDirecao = null;
@@ -148,6 +149,8 @@ public class Hero extends Personagem implements Serializable {
             // Ativa o estado de paralisia na fase
             fase.setIsEletricidadeAtiva(true);
             
+            
+            
             }
             
         }
@@ -170,8 +173,7 @@ public class Hero extends Personagem implements Serializable {
                 
                 if (powerupPerdido != null) {
                     this.powerups.remove(powerupPerdido);
-                    //powerupPerdido.reverterEfeito(this); // Reverte o efeito (aqui não faz nada)
-                    
+                                        
                     // Retorna a vida ao máximo
                     this.vida = 1;
                     //System.out.println("Powerup MaisVida consumido. Vida restaurada.");
@@ -195,8 +197,15 @@ public class Hero extends Personagem implements Serializable {
     }
     
     public int getNumeroPowerupsVida() {
-        return 1;
+        int numero =0;
+        for(Powerup pow:this.powerups){
+            if(pow instanceof MaisVida)numero++;
+        
+        }
+        
+        return numero;
     }
+    
     public boolean moveUp() {
         if(this.movStage == 0){
             if(this.pPosicao.moveUp()){

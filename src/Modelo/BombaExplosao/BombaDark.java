@@ -15,8 +15,9 @@ import java.io.Serializable;
  * @author aserr
  */
 public class BombaDark extends TipoBomba implements Serializable {
-    String IMAGEM_NOME_EXPLOSAO = "explosãoDarkness.png";
-    String IMAGEM_NOME_BOMBA = "bombaDarknessTrevoso.png";
+    private String IMAGEM_NOME_EXPLOSAO = "explosãoDarkness.png";
+    private String IMAGEM_NOME_BOMBA = "bombaDarknessTrevoso.png";
+    
     @Override
     
     
