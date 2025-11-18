@@ -19,6 +19,4 @@ public class ExplosaoEletrica extends Explosao implements Serializable {
     
         return super.validaPosicao();
     }
-    
-    
 }

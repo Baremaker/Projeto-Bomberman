@@ -70,27 +70,16 @@ public class Bomba extends Personagem implements Serializable {
     public void autoDesenho() {
         super.autoDesenho();
         if(!(tipoEstrategia instanceof BombaMina)){
-            
-            
-            if(!(tipoEstrategia instanceof BombaDark)){
-                if(contador%2==0){
-                    this.setiImage(tipoEstrategia.getImagemBomba());
-                
-                }else{this.setiImage(tipoEstrategia.getIMAGEM_INTERMEDIARIA_BOMBA());}
-            }
             if(contador == tempoDetonacao){
                 estouraBomba();
             }
-            
         }
         contador++;
     }
 
     public void estouraBomba(){
         if (tipoEstrategia instanceof BombaEletrica) {//para de paralisar personagens
-            
             Fase fase = Desenho.acessoATelaDoJogo().getFaseAtual();
-            
             // Desativa o estado de paralisia na fase
             fase.setIsEletricidadeAtiva(false);
             if(!fase.isIsEletricidadeAtiva())System.out.println("sem eletrico:");

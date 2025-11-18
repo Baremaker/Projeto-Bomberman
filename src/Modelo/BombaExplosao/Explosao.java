@@ -88,27 +88,10 @@ public class Explosao extends Personagem implements Serializable {
                     if(blocoAlvo.getVida() <= 0){
                     // Se a vida zerou, remove o bloco e substitui por BlocoVazio
                     fase.getMapaFase().removerBloco(blocoAlvo); // NOVO MÉTODO NECESSÁRIO NO MAPA
-                    BlocoVazio bv;
-                    switch(fase.getNumeroDaFase()){
-                        case 1:
-                             bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 2:
-                             bv = new BlocoVazio("background2Circuito.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 3:
-                             bv = new BlocoVazio("background3Azulejo.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 4:
-                             bv = new BlocoVazio("background4Ferro.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 5:
-                             bv = new BlocoVazio("background5Final.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        default:
-                            bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
+                    
+                            BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
                             
-                    }      
+                          
                     fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA;
                     
                     if (Math.random() < Consts.CHANCE_POWERUP) {

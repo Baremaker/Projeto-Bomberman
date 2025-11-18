@@ -39,6 +39,7 @@ public class Chaser extends Personagem implements Serializable {
         
         this.bTransponivel = true;
         this.counter = 0;
+        this.dano = 3;
     }
 
     /**
@@ -156,5 +157,8 @@ public class Chaser extends Personagem implements Serializable {
       }   
         
         super.autoDesenho();
+    }
+    public boolean ehInimigo(){
+        return true;
     }
 }

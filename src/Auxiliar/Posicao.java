@@ -9,7 +9,11 @@ public class Posicao implements Serializable {
     private int linhaAnterior;
     private int colunaAnterior;
     
+    private float pixel_x;
+    private float pixel_y;
     
+    public float velocidadeX = 0;
+    public float velocidadeY = 0;
 
     public Posicao(int linha, int coluna) {
         this.setPosicao(linha, coluna);
@@ -32,7 +36,22 @@ public class Posicao implements Serializable {
     }
         
     
+    public void updatePixelPosition() {//funcao pra andar liso
+        // Aplica o movimento
+        this.pixel_x += this.velocidadeX;
+        this.pixel_y += this.velocidadeY;
+
+        // Sincroniza a grade (linha/coluna) com o pixel (para lógica de jogo)
+        this.linhaAnterior = this.linha;
+        this.colunaAnterior = this.coluna;
+        this.linha = (int) (this.pixel_y / Consts.CELL_SIDE);
+        this.coluna = (int) (this.pixel_x / Consts.CELL_SIDE);
+    }
     
+    public float getX() { return pixel_x; }
+    public float getY() { return pixel_y; }
+    public void setX(float x) { this.pixel_x = x; }
+    public void setY(float y) { this.pixel_y = y; }
     
     
     

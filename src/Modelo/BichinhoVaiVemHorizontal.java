@@ -2,7 +2,6 @@ package Modelo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
-import Modelo.BombaExplosao.RaioEletrico;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -29,12 +28,11 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
         this.bMortal = true;  
         this.vida = 6;
         this.nomeImagem = sNomeImagePNG;
+        this.dano = 3;
     }
 
     public void autoDesenho() {
-        //RaioEletrico raio = new RaioEletrico("raioNoInimigo.png",this.getpPosicao().getLinha(),this.getpPosicao().getColuna());
         if(!paralisia()){
-            
             if (iContador == 5) {
                 iContador = 0;
                 if(bRight){
@@ -50,13 +48,11 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
                 }
             }
         iContador++;
-        }else{
-            
-            //Desenho.acessoATelaDoJogo().adicionaModelo(raio);
-            
-            
         }
         
         super.autoDesenho();
+    }
+    public boolean ehInimigo(){
+        return true;
     }
 }   

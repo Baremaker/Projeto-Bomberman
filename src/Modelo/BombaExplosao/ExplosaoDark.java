@@ -46,27 +46,7 @@ public class ExplosaoDark extends Explosao implements Serializable {
              blocoAlvo.danifica(); 
              if(blocoAlvo.getVida() <= 0){
                 fase.getMapaFase().removerBloco(blocoAlvo);
-                BlocoVazio bv;
-                switch(fase.getNumeroDaFase()){
-                        case 1:
-                             bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 2:
-                             bv = new BlocoVazio("background2Circuito.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 3:
-                             bv = new BlocoVazio("background3Azulejo.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 4:
-                             bv = new BlocoVazio("background4Ferro.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        case 5:
-                             bv = new BlocoVazio("background5Final.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            break;
-                        default:
-                            bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
-                            
-                    }      
+                BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
                 fase.getMapaFase().adicionarBloco(bv);
                 
                 if (Math.random() < Consts.CHANCE_POWERUP) {

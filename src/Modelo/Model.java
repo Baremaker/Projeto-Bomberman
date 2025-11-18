@@ -76,7 +76,10 @@ public abstract class Model implements Serializable {
         Desenho.desenhar(this.iImage, this.pPosicao.getColuna(), this.pPosicao.getLinha());
     }
     
-   
+    public Rectangle getHitbox() {
+        // Usa as coordenadas de pixel (float x, y) da Posicao para a checagem AABB
+        return new Rectangle((int)pPosicao.getX(), (int)pPosicao.getY(), Consts.CELL_SIDE, Consts.CELL_SIDE);
+    }
         //Essa função valida a posição APÓS a movimentação: se a posição não for válida ele retorna para a posição anterior
     //Função para validar a posição do modelo considerando o mapa, os personagens e se esta fora ou não da tela
     public boolean validaPosicao(){
