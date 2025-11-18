@@ -47,7 +47,7 @@ public class Fase_5 extends Fase implements Serializable{
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo1.png", 8,12);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 8,12);
         this.addPersonagem(bVv);
         Caveira bV = new Caveira("inimigoTipo2.png", 0, 0, "Horizontal", "Baixo", 20);
         
@@ -61,7 +61,7 @@ public class Fase_5 extends Fase implements Serializable{
         
         Chaser chase3 = new Chaser("inimigoTipo3Frente.png", 5, 12);
         this.addPersonagem(chase3);
-           
+
         return true;
     }
 }

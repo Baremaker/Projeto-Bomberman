@@ -56,8 +56,7 @@ public class Fase_3 extends Fase implements Serializable{
 
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
         this.addPersonagem(chase);
-
-          
+ 
         return true;
     }
 }

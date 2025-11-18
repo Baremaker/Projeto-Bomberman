@@ -28,6 +28,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
@@ -80,6 +81,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.addKeyListener(this);
         new DropTarget(this, this);
         /*teclado*/
+        new DropTarget(this, this);
  /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
         //this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 //Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
@@ -171,7 +173,7 @@ public void paint(Graphics gOld) {
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
         g2.drawString("Vida: " + (hero.getNumeroPowerupsVida()+1), 16, 28);
-        g2.drawString("Nro de Bombas: " + hero.getNumeroBombas(), 16, 52);
+        g2.drawString("Fase: " + faseAtual.getNumeroDaFase(), 16, 52);
         g2.drawString("Bomba: " + hero.getNomeTipoBomba(), 16, 76);
 
     } catch (Exception e) {
@@ -302,7 +304,7 @@ public void paint(Graphics gOld) {
         this.setTitle("X: " + x + ", Y: " + y
                 + " -> Cell: " + (y / Consts.CELL_SIDE) + ", " + (x / Consts.CELL_SIDE));
 
-        this.hero.getpPosicao().setPosicao(y / Consts.CELL_SIDE, x / Consts.CELL_SIDE);
+        this.hero.getpPosicao().setPosicao((y - 110) / Consts.CELL_SIDE, x / Consts.CELL_SIDE);
 
         repaint();
     }
@@ -368,7 +370,7 @@ public void paint(Graphics gOld) {
         } 
     }
     
-    
+    @Override
     public void drop(DropTargetDropEvent event) {
         event.acceptDrop(DnDConstants.ACTION_COPY);
 
@@ -459,12 +461,18 @@ public void paint(Graphics gOld) {
             event.dropComplete(false);
         }
     }
-    
+
+    @Override
     public void dragEnter(DropTargetDragEvent dtde) {
     }
 
+    @Override
     public void dragOver(DropTargetDragEvent dtde) {
     }
+    
+    
+
+         
     
     public void dragExit(DropTargetEvent dte) {
     }
@@ -535,8 +543,9 @@ public void paint(Graphics gOld) {
     public Fase getFaseAtual() {
         return faseAtual;
     }
-    
+
     public GerenciaDnD getGerenciadorDrops() {
         return gerenciadorDrops;
     }
+
 }

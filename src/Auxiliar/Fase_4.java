@@ -23,7 +23,7 @@ public class Fase_4 extends Fase implements Serializable{
     }
     public boolean constroiFase(){
     this.powerups.clear();
-        
+        //        coluna:0123456789...
     mapaFase = new Mapa("0022000003330"
     /*linha1*/         +"0101010101010"
     /*linha2*/         +"2000333000303"   
@@ -38,28 +38,19 @@ public class Fase_4 extends Fase implements Serializable{
         
         hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
-        //this.atualizaCamera();
-        
-        ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
-        this.addPersonagem(zz);
 
-        
-
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 8,6);
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,8);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv1 = new BichinhoVaiVemVertical("Esq_inimigoTipo1.png", 9,10);
+        BichinhoVaiVemVertical bVv1 = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 9,10);
         this.addPersonagem(bVv1);
-        BichinhoVaiVemVertical bVv2 = new BichinhoVaiVemVertical("Esq_inimigoTipo1.png", 7,12);
-        this.addPersonagem(bVv2);
 
-        Caveira bV = new Caveira("inimigoTipo2.png", 6, 7, "Horizontal", "Cima", 20);
-        this.addPersonagem(bV);
+        BichinhoVaiVemVertical bVv2 = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 7,12);
+        this.addPersonagem(bVv2);
 
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 6, 0);
         this.addPersonagem(chase);
-
-           
+   
         return true;
     }
 }
