@@ -186,7 +186,13 @@ public class Hero extends Personagem implements Serializable {
     }
     
     public int getNumeroPowerupsVida() {
-        return 1;
+        int numero =0;
+        for(Powerup pow:this.powerups){
+            if(pow instanceof MaisVida)numero++;
+        
+        }
+        
+        return numero;
     }
     
     

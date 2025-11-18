@@ -16,7 +16,7 @@ import java.io.Serializable;
 public abstract class TipoBomba implements Serializable {
     private String IMAGEM_NOME_EXPLOSAO;
     private String IMAGEM_NOME_BOMBA;
-    
+    private String IMAGEM_INTERMEDIARIA_BOMBA;
     public abstract Explosao criarInstanciaExplosao(int linha, int coluna);
     
     
@@ -91,7 +91,9 @@ public abstract class TipoBomba implements Serializable {
     }
 
    
-
+    public String getIMAGEM_INTERMEDIARIA_BOMBA() {
+        return IMAGEM_INTERMEDIARIA_BOMBA;
+    }
    
   
     

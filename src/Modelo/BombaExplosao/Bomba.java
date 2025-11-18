@@ -70,9 +70,18 @@ public class Bomba extends Personagem implements Serializable {
     public void autoDesenho() {
         super.autoDesenho();
         if(!(tipoEstrategia instanceof BombaMina)){
+            
+            
+            if(!(tipoEstrategia instanceof BombaDark)){
+                if(contador%2==0){
+                    this.setiImage(tipoEstrategia.getImagemBomba());
+                
+                }else{this.setiImage(tipoEstrategia.getIMAGEM_INTERMEDIARIA_BOMBA());}
+            }
             if(contador == tempoDetonacao){
                 estouraBomba();
             }
+            
         }
         contador++;
     }
