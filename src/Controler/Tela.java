@@ -23,7 +23,6 @@ import Auxiliar.Fase_3;
 import Auxiliar.Fase_4;
 import Auxiliar.Fase_5;
 import Auxiliar.GerenciaDnD;
-
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -171,7 +170,7 @@ public void paint(Graphics gOld) {
         g2.setColor(java.awt.Color.CYAN);
         g2.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
 
-        g2.drawString("Vida: " + hero.getVidas(), 16, 28);
+        g2.drawString("Vida: " + (hero.getNumeroPowerupsVida()+1), 16, 28);
         g2.drawString("Nro de Bombas: " + hero.getNumeroBombas(), 16, 52);
         g2.drawString("Bomba: " + hero.getNomeTipoBomba(), 16, 76);
 
@@ -301,7 +300,7 @@ public void paint(Graphics gOld) {
         int y = e.getY();
 
         this.setTitle("X: " + x + ", Y: " + y
-                + " -> Cell: " + ((y - 110) / Consts.CELL_SIDE) + ", " + (x / Consts.CELL_SIDE));
+                + " -> Cell: " + (y / Consts.CELL_SIDE) + ", " + (x / Consts.CELL_SIDE));
 
         this.hero.getpPosicao().setPosicao((y - 110) / Consts.CELL_SIDE, x / Consts.CELL_SIDE);
 
@@ -460,7 +459,7 @@ public void paint(Graphics gOld) {
             event.dropComplete(false);
         }
     }
-    
+
     @Override
     public void dragEnter(DropTargetDragEvent dtde) {
     }
@@ -477,7 +476,15 @@ public void paint(Graphics gOld) {
     public void dropActionChanged(DropTargetDragEvent dtde) {
     }
     
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -538,4 +545,5 @@ public void paint(Graphics gOld) {
     public GerenciaDnD getGerenciadorDrops() {
         return gerenciadorDrops;
     }
+
 }
