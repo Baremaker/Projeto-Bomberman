@@ -215,19 +215,7 @@ public void paint(Graphics gOld) {
         }
         
     }
-    /*public void avancarFase() {
-        this.faseAtual.getPersonagens().clear();
-        Fase proxima = this.faseAtual.proximaFase();
-        if (proxima != null) {
-            this.faseAtual = proxima;
-            this.hero = faseAtual.getHero();
-            // A lógica de construção e reset já está no iniciarProximaFase()
-            System.out.println("Fase avançada para: " + this.faseAtual.getNumeroDaFase());
-        } else {
-            System.out.println("Fim do Jogo! Todas as fases completadas.");
-            // Lógica de Game Win
-        }
-    }*/
+    
    
     public void setFaseAtual(Fase novaFase) {
     this.faseAtual = novaFase;
@@ -311,20 +299,20 @@ public void paint(Graphics gOld) {
     String nomeArquivo = "savegame.ser"; 
     
     try (
-        // 1. Abre o FileOutputStream para o arquivo de destino
+        
         FileOutputStream fileOut = new FileOutputStream(nomeArquivo);
-        // 2. Opcional: Adiciona compressão GZIP
+        // 2. Opcional: Adiciona compressão GZIP, pesquisei e dizia que diminuia o espaço ocupado
         GZIPOutputStream zipOut = new GZIPOutputStream(fileOut);
         // 3. Adiciona o ObjectOutputStream para serializar o objeto
         ObjectOutputStream objectOut = new ObjectOutputStream(zipOut)
     ) {
         // Escreve o objeto 'faseAtual' no arquivo.
         objectOut.writeObject(this.faseAtual); 
-        System.out.println("✅ Jogo salvo com sucesso em " + nomeArquivo);
+        System.out.println("Jogo salvo " + nomeArquivo);
         
     } catch (IOException i) {
         i.printStackTrace();
-        System.err.println("❌ Erro ao salvar o jogo: " + i.getMessage());
+        System.err.println("Erro ao salvar : " + i.getMessage());
     }
     
     
@@ -337,14 +325,14 @@ public void paint(Graphics gOld) {
     // Verifica se o arquivo existe antes de tentar carregar
     File saveFile = new File(nomeArquivo);
         if (!saveFile.exists()) {
-            System.out.println("⚠️ Arquivo de salvamento (" + nomeArquivo + ") não encontrado.");
+            System.out.println("️ Arquivo de salve (" + nomeArquivo + ") não encontrado.");
             return;
         }
     
         try (
-            // 1. Abre o FileInputStream para o arquivo de save
+           
             FileInputStream fileIn = new FileInputStream(nomeArquivo);
-            // 2. Opcional: Adiciona descompressão GZIP (deve corresponder ao Save)
+ 
             GZIPInputStream zipIn = new GZIPInputStream(fileIn);
             // 3. Adiciona o ObjectInputStream para desserializar o objeto
             ObjectInputStream objectIn = new ObjectInputStream(zipIn)
@@ -359,11 +347,11 @@ public void paint(Graphics gOld) {
             this.setFaseAtual(faseCarregada);
             //faseCarregada.recarregarImagens();
            
-            System.out.println("⬆️ Jogo carregado com sucesso! Fase: " + faseCarregada.getNumeroDaFase());
+            System.out.println(" Jogo carregado, Fase: " + faseCarregada.getNumeroDaFase());
         
         } catch (IOException | ClassNotFoundException i) {
         i.printStackTrace();
-        System.err.println("❌ Erro ao carregar o jogo: " + i.getMessage());
+        System.err.println("Erro ao carregar o jogo: " + i.getMessage());
         } 
     }
     

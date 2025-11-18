@@ -116,62 +116,6 @@ public class Fase implements Serializable{
         return mapaFase;
     }
     
-    /*public void fase1(){
-         mapaFase = new Mapa("0000000000001"
-                            +"0000000000000"
-                            +"0000030300002"   
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010"
-                            +"0101010101010");
-        
-        hero = new Hero("heroDeFrente.png", 0, 7);
-        this.addPersonagem(hero);
-        //this.atualizaCamera();
-        
-        ZigueZague zz = new ZigueZague("skoot.png", 5, 6);
-        this.addPersonagem(zz);
-
-        BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 3, 4);
-        this.addPersonagem(bBichinhoH);
-
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,6);
-        this.addPersonagem(bBichinhoH2);
-
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Frente_inimigoTipo2.png", 10,10);
-        this.addPersonagem(bVv);
-
-        Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
-        this.addPersonagem(bV);
-
-        Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
-        this.addPersonagem(chase);
-
-        Esfera es = new Esfera("inimigoTipo3Dead.png", 10, 12);
-        this.addPersonagem(es);    
-    }*/
-
     
-
-    /*public void recarregarImagens() {
-    // Recarrega imagens dos personagens
-        for (Personagem per : fase) {
-            per.setiImage(per.getNomeImagePNG()); // O nome da imagem deve ser o único parâmetro
-        }
-    // Recarrega imagens dos powerups
-        for (Powerup p : powerups) {
-            p.setiImage(p.getNomeImagePNG());
-        }
-    // Recarrega imagens dos blocos (mapa)
-        if (mapaFase != null) {
-            for (Blocos b : mapaFase.getMapa()) {
-                b.setiImage(b.getsNomeImagePNG());
-            }
-        }
-    }*/ 
     
 }
