@@ -81,7 +81,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         this.addKeyListener(this);
         new DropTarget(this, this);
         /*teclado*/
-        new DropTarget(this, this);
+        
  /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
         //this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
                 //Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);

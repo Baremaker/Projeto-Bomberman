@@ -307,6 +307,7 @@ public class Hero extends Personagem implements Serializable {
                 // LÓGICA DE MORTE FINAL (GAME OVER)
                 Desenho.acessoATelaDoJogo().mostrarGameOver(); 
             this.setiImage(this.nomeImagem + "Dead" + this.timerMorte + ".png");
+            System.out.println("morte:"+this.timerMorte);
             this.timerMorte--;
         }
         Desenho.desenharHero(this.iImage, coluna, linha,this.movStage, paraHorizontal, paraVertical);
