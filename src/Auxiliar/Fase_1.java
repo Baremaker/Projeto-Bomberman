@@ -53,6 +53,9 @@ public class Fase_1 extends Fase implements Serializable {
         
         hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
+        //this.atualizaCamera();
+        
+        
 
         BichinhoVaiVemHorizontal bBichinhoH = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 3, 4);
         this.addPersonagem(bBichinhoH);
@@ -72,7 +75,8 @@ public class Fase_1 extends Fase implements Serializable {
         Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
         this.addPersonagem(chase);
         Desenho.acessoATelaDoJogo().getGerenciadorDrops().salvaPersonagemZIP(chase);
-  
+
+         
         return true;
     }
 }
