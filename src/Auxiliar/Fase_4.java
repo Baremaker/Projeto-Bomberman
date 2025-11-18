@@ -23,18 +23,18 @@ public class Fase_4 extends Fase implements Serializable{
     }
     public boolean constroiFase(){
     this.powerups.clear();
-        
-    mapaFase = new Mapa("0000000000000"
+        //        coluna:0123456789...
+    mapaFase = new Mapa("0022000003330"
     /*linha1*/         +"0101010101010"
     /*linha2*/         +"2000333000303"   
     /*linha3*/         +"2101310101010"
-    /*linha4*/         +"3000033002000"
+    /*linha4*/         +"3011033002000"
     /*linha5*/         +"0131013101010"
     /*linha6*/         +"0003330000000"
     /*linha7*/         +"0101010101010"
-    /*linha8*/         +"0000300000030"
+    /*linha8*/         +"1110300033330"
     /*linha9*/         +"0101010131010"
-    /*linha10*/        +"0000000000020", this.numeroDaFase);
+    /*linha10*/        +"3030303030320", this.numeroDaFase);
         
         hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
@@ -42,7 +42,7 @@ public class Fase_4 extends Fase implements Serializable{
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 10,10);
+        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 9,10);
         this.addPersonagem(bVv);
 
         Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
