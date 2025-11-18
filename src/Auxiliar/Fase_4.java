@@ -32,23 +32,23 @@ public class Fase_4 extends Fase implements Serializable{
     /*linha5*/         +"0131013101010"
     /*linha6*/         +"0003330000000"
     /*linha7*/         +"0101010101010"
-    /*linha8*/         +"1110300033330"
+    /*linha8*/         +"1110300033030"
     /*linha9*/         +"0101010131010"
-    /*linha10*/        +"3030303030320", this.numeroDaFase);
+    /*linha10*/        +"3030303030300", this.numeroDaFase);
         
         hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
 
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,8);
         this.addPersonagem(bBichinhoH2);
 
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 9,10);
-        this.addPersonagem(bVv);
+        BichinhoVaiVemVertical bVv1 = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 9,10);
+        this.addPersonagem(bVv1);
 
-        Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
-        this.addPersonagem(bV);
+        BichinhoVaiVemVertical bVv2 = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 7,12);
+        this.addPersonagem(bVv2);
 
-        Chaser chase = new Chaser("inimigoTipo3Frente.png", 9, 12);
+        Chaser chase = new Chaser("inimigoTipo3Frente.png", 6, 0);
         this.addPersonagem(chase);
    
         return true;

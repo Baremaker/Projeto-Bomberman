@@ -32,7 +32,7 @@ public class Fase_3 extends Fase implements Serializable{
     /*linha4*/         +"3000020002000"
     /*linha5*/         +"0131010101010"
     /*linha6*/         +"2222222222222"
-    /*linha7*/         +"0101010101210"
+    /*linha7*/         +"0101010101010"
     /*linha8*/         +"0000300000000"
     /*linha9*/         +"0101010131010"
     /*linha10*/        +"0020202020000", this.numeroDaFase);
@@ -40,11 +40,11 @@ public class Fase_3 extends Fase implements Serializable{
         hero = new Hero("hero", 0, 7);
         this.addPersonagem(hero);
 
-        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 4,4);
+        BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 8,8);
         this.addPersonagem(bBichinhoH2);
-
-        BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 10,10);
-        this.addPersonagem(bVv);
+        
+        BichinhoVaiVemVertical bVv1 = new BichinhoVaiVemVertical("Esq_inimigoTipo2.png", 5,8);
+        this.addPersonagem(bVv1);
 
         Caveira bV = new Caveira("inimigoTipo2.png", 9, 0, "Vertical", "Direita", 20);
         this.addPersonagem(bV);
