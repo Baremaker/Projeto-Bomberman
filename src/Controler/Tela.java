@@ -188,6 +188,7 @@ public void paint(Graphics gOld) {
 
     try {
         if (!this.faseAtual.getPersonagens().isEmpty()) {
+            this.processarMovimentoContinua();
             this.cj.desenhaTudo(faseAtual);
             this.cj.processaTudo(faseAtual);
         }
@@ -258,22 +259,6 @@ public void paint(Graphics gOld) {
             
             if (e.getKeyCode() == KeyEvent.VK_T) {//cria nova fase
                 vitoria();
-                //avancarFase();
-                
-                /*this.faseAtual.getPersonagens().clear();
-                Fase novaFase = new Fase();
-                novaFase.fase1();
-                faseAtual = novaFase;
-                hero = faseAtual.getHero();*/
-                //this.atualizaCamera();
-            } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                hero.moveUp();
-            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                hero.moveDown();
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                hero.moveLeft();
-            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                hero.moveRight();
             } else if (e.getKeyCode() == KeyEvent.VK_S) {
                 salvarEstadoJogo();
             } else if (e.getKeyCode() == KeyEvent.VK_L) {
@@ -480,7 +465,27 @@ public void paint(Graphics gOld) {
     public void dropActionChanged(DropTargetDragEvent dtde) {
     }
     
+    private void processarMovimentoContinua() {
     
+        if (teclasPressionadas.contains(KeyEvent.VK_UP)) {
+            hero.moveUp();
+        } else if (teclasPressionadas.contains(KeyEvent.VK_DOWN)) {
+            hero.moveDown();
+        }
+
+    
+        if (teclasPressionadas.contains(KeyEvent.VK_LEFT)) {
+            hero.moveLeft();
+        } else if (teclasPressionadas.contains(KeyEvent.VK_RIGHT)) {
+            hero.moveRight();
+        }
+    
+    // Se o herói se moveu, atualizamos a câmera
+        if (!teclasPressionadas.isEmpty()) {
+            this.atualizaCamera();
+            // O repaint() será chamado logo em seguida pelo loop principal (go())
+        }
+    }
     
     
     
