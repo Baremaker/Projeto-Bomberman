@@ -29,6 +29,7 @@ public class Caveira extends Personagem implements Serializable{
         this.bRight = true;
         this.bUp = true;
         this.nomeImagem = sNomeImagePNG;
+        this.dano=3;
     }
     
     private static String processaNomeImagem(String nomeBase, String projDirecao){
@@ -93,5 +94,8 @@ public class Caveira extends Personagem implements Serializable{
                  }
             }
         }
-    }    
+    } 
+    public boolean ehInimigo(){
+        return true;
+    }
 }

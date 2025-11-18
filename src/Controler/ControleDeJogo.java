@@ -54,6 +54,14 @@ public class ControleDeJogo implements Serializable{
             if (!(p instanceof Hero) && !(p instanceof Bomba) && !(p instanceof Explosao)) {
                 inimigosVivos++;
             }
+            if(hero.getpPosicao().igual(p.getpPosicao())){
+                if(p.ehInimigo()){
+                    //Fazer função para heroi tomar dano e ficar invencivel por algum tempo
+                    hero.levaDano(p.getDano());
+                }
+            }
+            
+            
             if(p instanceof Chaser){
                 ((Chaser) p).atualizarPHeroi(hero.getpPosicao());
             }

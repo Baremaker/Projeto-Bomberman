@@ -1,6 +1,7 @@
 package Modelo;
 
 import Auxiliar.Desenho;
+import Auxiliar.Posicao;
 import Controler.Tela;
 import java.awt.Graphics;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ public class Fogo extends Personagem implements Serializable{
         this.bMortal = false;
         this.bTransponivel = true;
         this.projDirecao = projDirecao;
+        this.dano = 3;
     }
 
     @Override
@@ -35,5 +37,16 @@ public class Fogo extends Personagem implements Serializable{
             Desenho.acessoATelaDoJogo().removePersonagem(this);
         super.autoDesenho();
     }
-    
+    public boolean ehPosicaoValida(Posicao p){
+        if(p.getLinha() < 0 || p.getLinha() >= Auxiliar.Consts.MUNDO_ALTURA){
+            return false;
+        }
+        if(p.getColuna() < 0 || p.getColuna() >= Auxiliar.Consts.MUNDO_LARGURA){
+            return false;
+        }
+        return true;
+    }
+    public boolean ehInimigo(){
+        return true;
+    }
 }

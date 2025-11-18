@@ -35,12 +35,21 @@ public class Hero extends Personagem implements Serializable {
     private ArrayList<Powerup> powerups;
     private TipoBomba tipoBomba;
     private Bomba ultimaBombaPlantada = null;// pra checar mina
+    private String movDirecao;
+    private int movStage;
+    private String nomeImageBase;
+    
+    
+    
     public Hero(String sNomeImagePNG, int linha, int coluna) {
-        super(sNomeImagePNG, linha, coluna);
+        super(sNomeImagePNG+"Frente.png", linha, coluna);
         vida = 1;
-        setiImage(sNomeImagePNG);
+        setiImage(sNomeImagePNG+ "Frente.png");
         this.powerups = new ArrayList<>();
         this.tipoBomba = new BombaNormal();
+        this.movDirecao = null;
+        this.movStage = 0;
+        this.nomeImageBase = sNomeImagePNG;
     }
     
     
@@ -196,7 +205,103 @@ public class Hero extends Personagem implements Serializable {
         return numero;
     }
     
-    
-    
+    public boolean moveUp() {
+        if(this.movStage == 0){
+            if(this.pPosicao.moveUp()){
+                if(validaPosicao()){
+                    this.movDirecao = "UP";
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean moveDown() {
+        if(this.movStage == 0){
+            if(this.pPosicao.moveDown()){
+                if(validaPosicao()){
+                    this.movDirecao = "DOWN";
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean moveRight() {
+        if(this.movStage == 0){
+            if(this.pPosicao.moveRight()){
+                if(validaPosicao()){
+                    this.movDirecao = "RIGHT";
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean moveLeft() {
+        if(this.movStage == 0){
+            if(this.pPosicao.moveLeft()){
+                if(validaPosicao()){
+                    this.movDirecao = "LEFT";
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public void autoDesenho() {
+        int coluna = this.pPosicao.getColuna();
+        int linha = this.pPosicao.getLinha();
+        int paraHorizontal = 0;
+        int paraVertical = 0;
+        if(this.movStage == 2){
+            switch(this.movDirecao){
+                case "UP": 
+                    this.setiImage(this.nomeImageBase + "Atras.png");
+                    break;
+                case "DOWN": 
+                    this.setiImage(this.nomeImageBase + "Frente.png");
+                    break;
+                case "RIGHT": 
+                    this.setiImage(this.nomeImageBase + "Direita.png");
+                    break;
+                case "LEFT": 
+                    this.setiImage(this.nomeImageBase + "Esquerda.png");
+                    break;
+            }
+            this.movDirecao = null;
+            this.movStage = 0;          
+        }
+        if(this.movDirecao != null){
+            this.movStage++;
+            switch(this.movDirecao){
+                case "UP": 
+                    this.setiImage(this.nomeImageBase + "AndaAtras" + this.movStage + ".png");
+                    paraVertical = -1;
+                    linha++;
+                    break;
+                case "DOWN":
+                    this.setiImage(this.nomeImageBase + "AndaFrente1.png");
+                    paraVertical = 1;
+                    linha--;
+                    break;
+                case "RIGHT":
+                    this.setiImage(this.nomeImageBase + "AndaDir" + this.movStage + ".png");
+                    paraHorizontal = 1;
+                    coluna--;
+                    break;
+                case "LEFT":
+                    this.setiImage(this.nomeImageBase + "AndaEsq" + this.movStage + ".png");
+                    paraHorizontal = -1;
+                    coluna++;
+                    break;
+            }
+        }
+        Desenho.desenharHero(this.iImage, coluna, linha,this.movStage, paraHorizontal, paraVertical);
+        return;
+    }
     
 }

@@ -157,4 +157,7 @@ public class Chaser extends Personagem implements Serializable {
         
         super.autoDesenho();
     }
+    public boolean ehInimigo(){
+        return true;
+    }
 }

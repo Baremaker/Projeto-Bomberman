@@ -29,6 +29,7 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
         this.bMortal = true;  
         this.vida = 6;
         this.nomeImagem = sNomeImagePNG;
+        this.dano = 3;
     }
 
     public void autoDesenho() {
@@ -58,5 +59,8 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
         }
         
         super.autoDesenho();
+    }
+    public boolean ehInimigo(){
+        return true;
     }
 }   
