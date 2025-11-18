@@ -184,7 +184,10 @@ public class Hero extends Personagem implements Serializable {
     public int getVidas() {
         return vida;
     }
-
+    
+    public int getNumeroPowerupsVida() {
+        return 1;
+    }
     
     
     

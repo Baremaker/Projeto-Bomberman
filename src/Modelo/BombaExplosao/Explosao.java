@@ -88,7 +88,10 @@ public class Explosao extends Personagem implements Serializable {
                     if(blocoAlvo.getVida() <= 0){
                     // Se a vida zerou, remove o bloco e substitui por BlocoVazio
                     fase.getMapaFase().removerBloco(blocoAlvo); // NOVO MÉTODO NECESSÁRIO NO MAPA
-                    BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
+                    
+                            BlocoVazio bv = new BlocoVazio("background1Grama.png", blocoAlvo.getpPosicao().getLinha(), blocoAlvo.getpPosicao().getColuna());
+                            
+                          
                     fase.getMapaFase().adicionarBloco(bv); // NOVO MÉTODO NECESSÁRIO NO MAPA;
                     
                     if (Math.random() < Consts.CHANCE_POWERUP) {
@@ -123,7 +126,7 @@ public class Explosao extends Personagem implements Serializable {
                                     fase.addPowerUp(novoPowerup);
                             
                                     }
-                                    break;
+                                     break;
                                 case 4:
                                     for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaEletricaPower)contador++;}
                                     if(contador ==0){
@@ -131,18 +134,18 @@ public class Explosao extends Personagem implements Serializable {
                                 //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                         novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                 //BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                    fase.addPowerUp(novoPowerup);
-                            
+                                        fase.addPowerUp(novoPowerup);
+                                        break;
                                     }
                                 case 5:
                                     for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMinaPower)contador++;}
                                     if(contador ==0){
-                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                 novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                 //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                        novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                        //novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                 //BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                     fase.addPowerUp(novoPowerup);
-                            
+                                        break;
                                     }
                                 default:
                                     //System.out.println("fase invalida:"+fase.getNumeroDaFase());
@@ -150,6 +153,7 @@ public class Explosao extends Personagem implements Serializable {
                                     fase.addPowerUp(novoPowerup);
                                     break;
                             }
+                            contador = 0;
                         }
                     }
                         // 3. Se não spawnar Powerup, substitui por BlocoVazio (lógica original)

@@ -130,6 +130,8 @@ public class Chaser extends Personagem implements Serializable {
      */
     @Override
     public void autoDesenho() {
+      if(!paralisia()){  
+        
         if (counter == 10) { 
             counter = 0; // Reseta o contador
             
@@ -150,8 +152,9 @@ public class Chaser extends Personagem implements Serializable {
             }
             // Se o caminho for null (herói inalcançável), o Chaser simplesmente não se move.
         }
-        
         counter++;
+      }   
+        
         super.autoDesenho();
     }
 }
