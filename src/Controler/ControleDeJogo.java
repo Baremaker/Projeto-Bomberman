@@ -58,7 +58,7 @@ public class ControleDeJogo implements Serializable{
                 inimigosVivos++;
             }
             
-            if(p.isbMortal()&&p.getTimerMorte()==0){
+            if(p.isbMortal()&&p.getTimerMorte()==0 && !(p instanceof Hero)){
                 FaseAtual.removerPersonagem(p);
                 continue;
             }

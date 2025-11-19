@@ -37,7 +37,7 @@ public class Hero extends Personagem implements Serializable {
     private Bomba ultimaBombaPlantada = null;// pra checar mina
     private String movDirecao;
     private int movStage;
-    
+     private int timerDano;
     
     
     public Hero(String sNomeImagePNG, int linha, int coluna) {
@@ -49,6 +49,7 @@ public class Hero extends Personagem implements Serializable {
         this.movDirecao = null;
         this.movStage = 0;
         this.nomeImagem = sNomeImagePNG;
+        this.timerDano = 0;
         //this.bMortal = false;//godMode
     }
     
@@ -157,7 +158,8 @@ public class Hero extends Personagem implements Serializable {
     }
     public void levaDano(int dano) {
         this.vida -= dano; // Reduz a vida
-
+        if(this.timerDano!=0)return;
+        this.timerDano = 10;
         if (this.vida <= 0) {
             if (this.possuiPowerup(MaisVida.class)) {
                 // LÓGICA: PERDER POWERUP AO INVÉS DE MORRER
@@ -258,6 +260,7 @@ public class Hero extends Personagem implements Serializable {
         int linha = this.pPosicao.getLinha();
         int paraHorizontal = 0;
         int paraVertical = 0;
+        if(this.timerDano!=0)this.timerDano--;
         if(this.timerMorte == -1){
             if(this.movStage == 2){
                 switch(this.movDirecao){
