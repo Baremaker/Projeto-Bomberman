@@ -82,13 +82,7 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
         new DropTarget(this, this);
         /*teclado*/
         
- /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
-        //this.setSize(Consts.RES * Consts.CELL_SIDE + getInsets().left + getInsets().right,
-                //Consts.RES * Consts.CELL_SIDE + getInsets().top + getInsets().bottom);
-      /*          
-        faseAtual = new Fase();
-        faseAtual.fase1();
-        hero = faseAtual.getHero();*/
+ 
       faseUm = new Fase_1();
       faseDois = new  Fase_2();
       faseTres = new Fase_3();
@@ -116,11 +110,11 @@ public class Tela extends javax.swing.JFrame implements MouseListener, KeyListen
     public void resetGame() {
     // Lógica de reiniciar a fase (copiada da sua tecla 'T')
     this.faseAtual.getPersonagens().clear();
-    //Fase novaFase = new Fase_1();
-    //faseUm =novaFase;
+    
     faseUm.constroiFase();
     faseAtual = faseUm;
     hero = faseAtual.getHero();
+    this.limparTeclasPressionadas();
     this.atualizaCamera();
     }
     
@@ -236,6 +230,7 @@ public void paint(Graphics gOld) {
     public void setFaseAtual(Fase novaFase) {
     this.faseAtual = novaFase;
     this.hero = novaFase.getHero();
+    this.limparTeclasPressionadas();
     this.atualizaCamera(); // Garante que a câmera foque o herói na nova fase
 }
     
@@ -487,6 +482,9 @@ public void paint(Graphics gOld) {
         }
     }
     
+    public void limparTeclasPressionadas() {
+    this.teclasPressionadas.clear();
+    }
     
     
     

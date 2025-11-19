@@ -27,7 +27,7 @@ public class ExplosaoDark extends Explosao implements Serializable {
     
 
 @Override
-    public boolean validaPosicao(){
+    public boolean validaPosicao(){// repete o valida posição pois ela passa pelas paredes
         // Esta explosão IGNORA a checagem de Blocos/Colisão para poder atravessar paredes.
         // Reutilizamos a lógica de dano de Explosao, mas removemos a checagem de bloqueio.
         

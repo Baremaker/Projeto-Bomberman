@@ -34,9 +34,7 @@ public class Fase_1 extends Fase implements Serializable {
         @Override
         public boolean constroiFase() {
         
-        // 1. Resetar ou Inicializar o Mapa
-        //this.mapaFase.getMapa().clear();
-        //this.getPersonagens().clear();
+        
         this.powerups.clear();
         
         mapaFase = new Mapa("0000000000002"
@@ -57,7 +55,7 @@ public class Fase_1 extends Fase implements Serializable {
 
         BichinhoVaiVemHorizontal bBichinhoH2 = new BichinhoVaiVemHorizontal("inimigoTipo1.png", 6,6);
         this.addPersonagem(bBichinhoH2);
-
+        Desenho.acessoATelaDoJogo().getGerenciadorDrops().salvaPersonagemZIP(bBichinhoH2);
         BichinhoVaiVemVertical bVv = new BichinhoVaiVemVertical("Frente_inimigoTipo1.png", 10,10);
         this.addPersonagem(bVv);
         Desenho.acessoATelaDoJogo().getGerenciadorDrops().salvaPersonagemZIP(bVv);

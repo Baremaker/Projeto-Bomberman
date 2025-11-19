@@ -208,7 +208,12 @@ public class VictoryScreen extends JFrame implements Serializable {
                 // Quando o texto sair completamente da tela, finalize o jogo
                 if (posY + 800 < 0) {
                     timer.stop();
-                    System.exit(0);
+                    //System.exit(0);
+                    dispose();      // fecha a tela de vitoria
+                    java.awt.EventQueue.invokeLater(() -> {
+                    Menu menu = new Menu();
+                    menu.setVisible(true);
+                    });
                 }
             }
         });

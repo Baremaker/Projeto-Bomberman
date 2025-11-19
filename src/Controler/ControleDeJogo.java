@@ -51,15 +51,18 @@ public class ControleDeJogo implements Serializable{
         ArrayList<Blocos> mapa = FaseAtual.getMapaFase().getMapa();
         ArrayList<Powerup> power =FaseAtual.getPowerups();
         int inimigosVivos = 0;
-        for(Personagem p : umaFase){
-            //Lida com casos de posição do personagem igual a do heroi
+        
+        for(int i =0;i<umaFase.size();i++){
+            Personagem p = umaFase.get(i);
+            if (!(p instanceof Hero) && !(p instanceof Bomba) && !(p instanceof Explosao)) {
+                inimigosVivos++;
+            }
+            
             if(p.isbMortal()&&p.getTimerMorte()==0){
                 FaseAtual.removerPersonagem(p);
                 continue;
             }
-            if (!(p instanceof Hero) && !(p instanceof Bomba) && !(p instanceof Explosao)) {
-                inimigosVivos++;
-            }
+            
             
             if(hero.isbMortal()){
                 if(hero.getpPosicao().igual(p.getpPosicao())){

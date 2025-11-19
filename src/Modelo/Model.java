@@ -33,23 +33,12 @@ public abstract class Model implements Serializable {
     protected Model(String sNomeImagePNG, int linha, int coluna) {
         this.pPosicao = new Posicao(1, 1);
         this.bTransponivel = true;
-        //setiImage(sNomeImagePNG);
+       
         this.setPosicao(linha, coluna);
         this.sNomeImagePNG = sNomeImagePNG;//novo
     }
 
-    public abstract void setiImage(String sNomeImagePNG);/*{
-        try {
-            iImage = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + sNomeImagePNG);
-            Image img = iImage.getImage();
-            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-            Graphics g = bi.createGraphics();
-            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            iImage = new ImageIcon(bi);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }*/
+    public abstract void setiImage(String sNomeImagePNG);
 
     public String getsNomeImagePNG() {
         return sNomeImagePNG;

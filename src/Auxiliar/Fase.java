@@ -23,7 +23,7 @@ import Modelo.ZigueZague;
 import Auxiliar.Posicao;
 import Modelo.Power.Powerup;
 import java.io.Serializable;
-import Modelo.BombaExplosao.RaioEletrico;
+
  
 public class Fase implements Serializable{
    

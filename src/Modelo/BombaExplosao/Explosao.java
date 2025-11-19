@@ -66,7 +66,7 @@ public class Explosao extends Personagem implements Serializable {
         contador++;
     }
     
-    public boolean validaPosicao(){
+    public boolean validaPosicao(){//define a interação da bomba com o resto do mapa
         int contador = 0;
         //System.out.println("linha:"+pPosicao.getLinha()+"coluna:"+pPosicao.getColuna());
         if ((this.pPosicao.getLinha()) < 0 || (this.pPosicao.getLinha()) >= Auxiliar.Consts.MUNDO_ALTURA)return false;
@@ -76,7 +76,7 @@ public class Explosao extends Personagem implements Serializable {
         ArrayList<Personagem> listaPersonagens = fase.getPersonagens();
     // 2. Busca o bloco na posição da Explosão.
         
-        aplicadano(listaPersonagens,fase);
+        aplicadano(listaPersonagens,fase);// aplica dano nos personagens
         // para destruir blocos
         if(blocoAlvo != null){
             if(!blocoAlvo.isbTransponivel()){
@@ -115,18 +115,17 @@ public class Explosao extends Personagem implements Serializable {
                         double bombaOUvida = Consts.CHANCE_VIDA;
                         for(Powerup pow: fase.getHero().getPowerups()){if(!(pow instanceof MaisVida))bombaOUvida=1.00;}
                         System.out.println("bomba ou vida:"+bombaOUvida);
-                        if(Math.random() < bombaOUvida){
+                        if(Math.random() < bombaOUvida){//garante que apos pegar o powerup da bomba, só pode spawnar mais vida
                             MaisVida novoPowerup = new MaisVida("coracao.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                             
                             fase.addPowerUp(novoPowerup); // Adiciona o Powerup ao mapa (lista de Personagens)
                         }else{
                             Powerup novoPowerup = null;
-                            switch(fase.getNumeroDaFase()){
+                            switch(fase.getNumeroDaFase()){//garante que o pwerup dropa na parte certa
                                 case 2:
                                     for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMegaPower)contador++;}
                                     if(contador ==0){
-                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                
                                         
                                     novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                     fase.addPowerUp(novoPowerup);
@@ -136,7 +135,7 @@ public class Explosao extends Personagem implements Serializable {
                                 case 3:
                                     for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaDarkPower)contador++;}
                                     if(contador ==0){
-                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                
                                     novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
                                         
                                     
@@ -147,20 +146,17 @@ public class Explosao extends Personagem implements Serializable {
                                 case 4:
                                     for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaEletricaPower)contador++;}
                                     if(contador ==0){
-                                //BombaMinaPower novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                
                                         novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                //BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                
                                         fase.addPowerUp(novoPowerup);
                                         break;
                                     }
                                 case 5:
                                     for(Powerup pow: fase.getHero().getPowerups()){if(pow instanceof BombaMinaPower)contador++;}
                                     if(contador ==0){
-                                 novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                //BombaDarkPower novoPowerup = new BombaDarkPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                        //novoPowerup = new BombaEletricaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
-                                //BombaMegaPower novoPowerup = new BombaMegaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                    novoPowerup = new BombaMinaPower("bomba.png",blocoAlvo.getpPosicao().getLinha(),blocoAlvo.getpPosicao().getColuna());
+                                
                                     fase.addPowerUp(novoPowerup);
                                         break;
                                     }

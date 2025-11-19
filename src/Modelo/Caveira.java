@@ -65,18 +65,10 @@ public class Caveira extends Personagem implements Serializable{
                 this.intervaloTiro = 0;
                 int linhaFogo = pPosicao.getLinha();
                 int colunaFogo = pPosicao.getColuna();
-                switch(projDirecao){
-                    case "Direita": colunaFogo++; break;
-                    case "Esquerda": colunaFogo--; break;
-                    case "Cima": linhaFogo--; break;
-                    case "Baixo": linhaFogo++; break;
-                }
-
-                Posicao pFogo = new Posicao(linhaFogo, colunaFogo);
-                if(this.ehPosicaoValida(pFogo)) {
-                    Fogo f = new Fogo("fire.png", linhaFogo, colunaFogo, projDirecao);
-                    Desenho.acessoATelaDoJogo().adicionaModelo(f);
-                }
+               
+                Fogo f = new Fogo("fire.png", linhaFogo, colunaFogo, projDirecao);
+                Desenho.acessoATelaDoJogo().adicionaModelo(f);
+                
                 this.setiImage("Dead_"+this.nomeImagem);
             }else if (this.intervaloTiro == 5) { 
                  if(this.movDirecao.equals("Horizontal")){

@@ -2,7 +2,7 @@ package Modelo;
 
 import Auxiliar.Consts;
 import Auxiliar.Desenho;
-import Modelo.BombaExplosao.RaioEletrico;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -50,11 +50,6 @@ public class BichinhoVaiVemHorizontal extends Personagem implements Serializable
                 }
             }
         iContador++;
-        }else{
-            
-            //Desenho.acessoATelaDoJogo().adicionaModelo(raio);
-            
-            
         }
         
         super.autoDesenho();

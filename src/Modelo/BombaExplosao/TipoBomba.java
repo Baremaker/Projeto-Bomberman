@@ -38,8 +38,8 @@ public abstract class TipoBomba implements Serializable {
                 
                 Explosao cima = criarInstanciaExplosao(pPosicao.getLinha()-1-i, pPosicao.getColuna());
                 if(cima.validaPosicao()){
-                    //System.out.println("valido acima");
-                    //Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
+                    
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(cima);
                 }
                 else flagCima = false;
@@ -50,7 +50,7 @@ public abstract class TipoBomba implements Serializable {
                 Explosao direita = criarInstanciaExplosao( pPosicao.getLinha(), pPosicao.getColuna()+1+i);
             
                 if(direita.validaPosicao()){
-                    //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(direita);
                 }
                 else flagDireita = false;

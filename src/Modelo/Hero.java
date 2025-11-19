@@ -124,9 +124,9 @@ public class Hero extends Personagem implements Serializable {
     
     public void colocaBomba(){
         if(numeroBombas > 0){
-            System.out.println("bomba");
+            //System.out.println("bomba");
             if (this.tipoBomba instanceof BombaMina && ultimaBombaPlantada != null) {
-                System.out.println("bomba ja plantada");
+                //System.out.println("bomba ja plantada");
                 ultimaBombaPlantada.estouraBomba();
                 ultimaBombaPlantada = null;
                 return;
@@ -137,7 +137,7 @@ public class Hero extends Personagem implements Serializable {
             Desenho.acessoATelaDoJogo().adicionaModelo(b);
             numeroBombas--;
             if (this.tipoBomba instanceof BombaMina) {
-                System.out.println("bomba mina");
+                //System.out.println("bomba mina");
                 ultimaBombaPlantada = b; //
                 numeroBombas++;
             } else {

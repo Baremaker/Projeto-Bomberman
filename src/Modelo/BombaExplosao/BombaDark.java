@@ -47,8 +47,7 @@ public class BombaDark extends TipoBomba implements Serializable {
                 
                 Explosao supdireito = criarInstanciaExplosao(pPosicao.getLinha()-1-i, pPosicao.getColuna()+1+i);
                 if(supdireito.validaPosicao()){
-                    //System.out.println("valido acima");
-                    //Explosao cima = new Explosao("fire.png", pPosicao.getLinha()-1-i, pPosicao.getColuna(),danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(supdireito);
                 }
                 else flagSupDireito = false;
@@ -59,7 +58,7 @@ public class BombaDark extends TipoBomba implements Serializable {
                 Explosao supesquerdo = criarInstanciaExplosao( pPosicao.getLinha()-1-i, pPosicao.getColuna()-1-i);
             
                 if(supesquerdo.validaPosicao()){
-                    //Explosao direita = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()+1+i,danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(supesquerdo);
                 }
                 else flagSupEsquerdo = false;
@@ -69,7 +68,7 @@ public class BombaDark extends TipoBomba implements Serializable {
                 
                 Explosao infdireito = criarInstanciaExplosao(pPosicao.getLinha()+1+i, pPosicao.getColuna()+1+i);
                 if(infdireito.validaPosicao()){
-                    //Explosao baixo = new Explosao("fire.png", pPosicao.getLinha()+1+i, pPosicao.getColuna(),danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(infdireito);
                 }
                 else flagInfDireito = false;
@@ -79,7 +78,7 @@ public class BombaDark extends TipoBomba implements Serializable {
                 
                 Explosao infesquerdo = criarInstanciaExplosao(pPosicao.getLinha()+1+i, pPosicao.getColuna()-1-i);
                 if(infesquerdo.validaPosicao()){
-                    //Explosao esquerda = new Explosao("fire.png", pPosicao.getLinha(), pPosicao.getColuna()-1-i,danoBomba);
+                    
                     Desenho.acessoATelaDoJogo().adicionaModelo(infesquerdo);
                 }
                 else flagInfesquerdo = false;
